@@ -1,0 +1,148 @@
+ERROR HANDLING / PROCESSING
+- [Windows] SetLastError(); GetLastError(); FormatMessage(); // DWORD
+- Use WinError.h codes if same exists.
+- [C Run-Time] _set_errno(); _get_errno(); perror(); strerror(); // errno_t
+- [Structured Exception Handling] try-except, try-finally (__try, __except, __finally, __leave)
+- Think about do / undo, register / unregister, install / uninstall always.
+
+DATA TYPES
+- Use Windows only data types (BYTE, WORD, DWORD, WCHAR, ...);
+
+TEXT ENCODING
+- Unicode only (UTF-16 by default);
+- #define UNICODE // Windows
+- #define _UNICODE // C run-time
+
+IDE
+- Task List [TODO, DEFECT, FUTURE]
+
+COM
+- Compiler COM Support Classes (_com_error, ...)
+
+STRINGS MANIPULATION
+- #include <StrSafe.h> // and Windows string management functions like CompareString();
+- Use secure string functions only;
+- CCH (Count of Characters) use _countof() / CB (Count of Bytes) use sizeof();
+
+KERNEL / USER / GDI OBJECTS
+- Use GUID to name objects.
+- HINSTANCE and HMODULE - is the same datatypes and it means the same - __ImageBase (address) of module in process virtual address-space (excluding 16-bit Windows).
+
+MEMORY MANAGEMENT
+- Virtual // appropriate for operations with big arrays of objects and structures.
+- Mapped  // useful for big data streams (usually files) and sharing data between processes.
+- Heap    // most situable for work with a lot of small objects.
+
+FILE SYSTEM
+- fsutil file createnew .\empty.bin 1058337388
+- subst
+
+REGISTRY
+- export >regedit /e "C:\Temp\Test.reg" "HKEY_CURRENT_USER\Test"
+- import >regedit "C:\Temp\Test.reg"
+
+DLLs
+- DLL_PROCESS_DETACH, DLL_THREAD_DETACH - operating system terminates process or thread after all DLLs processed this notification only.
+- call of DllMain is SERIALIZABLE!
+- make sure that GetModuleHandle(NULL) returns library handle.
+
+BUILD SPEED UP
+#define VC_EXTRALEAN // MFC
+#define WIN32_LEAN_AND_MEAN
+//#define WIN32_EXTRA_LEAN
+
+MFC
+- CWaitCursor
+
+SOURCE TEXT MARKS:
+ - TODO, DEFECT, FUTURE (MVS Tools -> Options -> Environment -> Task List + Tools -> Options -> Text Editor -> * -> Formatting)
+ - [OPTIMIZE] - if code needs further optimization;
+ - [WARNING]  - if code contains some dangerous alteration;
+ - [UNKNOWN] - function call for unknown reason, research needed.
+
+DUMP
+- Cscript.exe
+- Wscript.exe
+>adplus -crash -pn Sandbox.exe -o C:\Temp\Dump\Sandbox 
+
+MANIFEST
+#define <identifier> <value>
+Example: #define ID_MANIFEST 1
+
+- Resource.rc
+<identifier>|<value> RT_MANIFEST "application.manifest"
+
+Example:
+/////////////////////////////////////////////////////////////////////////////
+//
+// RT_MANIFEST
+//
+
+ID_MANIFEST                       RT_MANIFEST             "res\\shell.manifest"
+
+- application.manifest
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+ <assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+ <assemblyIdentity
+  version="1.0.0.0"
+  processorArchitecture="x86"
+  name="Microsoft.Windows.LeoBackup"
+  type="Win32"
+ />
+ <description>Leo Backup User Interface</description>
+ <dependency>
+  <dependentAssembly>
+   <assemblyIdentity
+    type="Win32"
+	name="Microsoft.Windows.Common-Controls"
+	version="6.0.0.0"
+	processorArchitecture="x86"
+	publicKeyToken="6595b64144ccf1df"
+	language="*"
+   />
+  </dependentAssembly>
+ </dependency>
+</assembly>
+
+OTHER WAY: #pragma comment(linker, "/manifestdependency:\"type='Win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='x86' publicKeyToken='6595b64144ccf1df' language='*'\"")
+ALTERNATIVE WAY: MVS 2008\Configuration Properties\Linker\Manifest File\Additional Manifest Dependencies = type='Win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='x86' publicKeyToken='6595b64144ccf1df' language='*'
+
+LAYOUT
+MSDN: Guidelines -> Visuals -> Layout
+http://msdn.microsoft.com/en-us/library/windows/desktop/aa511279.aspx
+
+WINDOWS API
+- Windows Networking (WNet)
+- Windows Sockets [Winsock]
+- Tool Help Library
+- Process Status API (PSAPI) (EnumProcesses(); GetProcessMemoryInfo(); ...)
+- Threads, reference [Process and Thread Reference]
+- Synchronization, reference [Synchronization Reference]
+- File Management Functions (Create File(); ...)
+- Thread Pools
+- I/O Completion Ports (CreateIoCompletionPort(); ...)
+- Memory Management (VirtualAlloc(); ...)
+- System Information (GetSystemInfo(); ...) [IsOS();]
+- Messages and Message Queues (RegisterWindowMessage(); ...)
+- Dynamic-Link Library Functions (LoadLibrary(); ...)
+- Registry (RegCreateKeyEx(); ...)
+- Process Functions for Debugging (ReadProcessMemory(); ...)
+- DbgHelp Functions (ImageDirectoryEntryToData(); ...)
+- Image Help Library (ReBaseImage(); ...)
+- Structured Exception Handling (AbnormalTermination(); ...)
+- Timers (SetTimer(); ...)
+- Window Classes (RegisterClass(); GetWindowLong(); ...)
+- Windows (GetWindow(); ...)
+- Dialog Boxes  (GetDlgItem(); ...)
+- Menus (LoadMenu(); TrackPopupMenu(), SetMenuItemInfo(); ...)
+- Windows Error Reporting (WerSetFlags(); ...)
+- System Shutdown Functions (ExitWindows(); ...)
+- Application Recovery (RegisterApplicationRestart(); ...)
+- Volume Shadow Copy (CreateVssBackupComponents(); ...)
+- System Shutdown Functions (ExitWindows(); ...)
+- Power Management Functions (SetSuspendState(); ...)
+- Service Functions (StartService(); ...)
+- Network Management (NetUseAdd(); ...)
+- DLLs (DllMain(); ...)
+- Cryptography (CryptoAPI: CryptEncrypt(); ...) / Encrypted File System (EFS)
+- Shell32 (SHBrowseForFolder();, SHFileOperation(); ...)

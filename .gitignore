@@ -243,3 +243,6 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/KAA/genuine
+/KAA/documents/general/S5 Developer Notes.txt
+/KAA/documents/Примеры преобразование структуры кода.cpp

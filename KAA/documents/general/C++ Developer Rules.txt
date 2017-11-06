@@ -1,0 +1,158 @@
+ТЕСТИРОВАНИЕ:
+- процедурное программирование: dummy-функции (заглушка - функция, выдающая константу или случайную величину из допустимого диапазона значений)
+- объектно-ориентированное программирование: stub/fake/mock-объект (имитация - фиктивная реализация интерфейса),
+
+Воздействия распространяются в коде тремя основными путями.
+1. Возвращаемые значения, используемые в вызывающей части программы.
+2. Видоизменение объектов, передаваемых в качестве параметров, используемых в дальнейшем. 
+3. Видоизменение статических или глобальных данных, используемых в дальнейшем.
+
+В некоторых языках программирования доступны и другие пути распространения воздействий в коде. Например, программирующие на аспектно-ориентированных языках могут составлять конструкции, называемые аспектами и оказывающие воздействие на поведение кода в других частях системы.
+
+Процедура эвристического анализа, для обнаружения воздействий в коде.
+1. Выявить метод, который подлежит изменению.
+2. Если метод возвращает значение, то проанализировать в коде те места, откуда он вызывается.
+3. Проверить, видоизменяет ли метод какие-либо значения. Если видоизменяет, то проанализировать методы, использующие эти значения, а также методы, вызывающие эти методы.
+4. Непременно проверить суперклассы и подклассы, которые бывают пользователями переменных экземпляров и методов, выявленных в ходе данного анализа.
+5. Проанализировать параметры, передаваемые методам, выявленным в ходе данного анализа. Проверить, используются ли эти параметры или любые объекты, возвращаемые их методами, в коде, который требуется изменить.
+6. Найти глобальные переменные и статические данные, видоизменяемые в любом из методов, выявленных в ходе данного анализа.
+
+
+
+
+xUnit
+- пробуем создать объект в средстве тестирования
+TEST(CObject, Create)
+{
+	CObject object(<parameters>);
+}
+
+ПРИНЦИПЫ:
+- DRY (Don’t Repeat Yourself):
+- KISS (Keep It Simple Stupid / Keep It Short and Simple)
+- YAGNI (You Ain't Gonna Need It)
+- RAII (Resource Acquisition Is Initialization)
+- SOLID
+  * SRP (Single Responsibility Principle) - каждый объект должен иметь одну обязанность и эта обязанность должна быть полностью инкапсулирована в класс.
+  * OCP (Open/Closed Principle) - «программные сущности (классы, модули, функции и т. п.) должны быть открыты для расширения, но закрыты для изменения»;[1] это означает, что такие сущности могут позволять менять свое поведение без изменения их исходного кода.
+  * LSP (Liskov Substitution Principle) - Функции, которые используют базовый тип, должны иметь возможность использовать подтипы базового типа не зная об этом.
+  * ISP (Interface Segregation Principle) - клиенты не должны зависеть от методов, которые они не используют.
+  * DIP (Dependency Inversion Principle) - модули верхних уровней не должны зависеть от модулей нижних уровней. Оба типа модулей должны зависеть от абстракций. / абстракции не должны зависеть от деталей. Детали должны зависеть от абстракций.
+- The Rule of Five (destructor, copy constructor, move constructor, copy assignment operator, move assignment operator)
+- Transactional Programming ...
+
+- Разделение команд и запросов: метод может быть либо командным, либо запросным, но не тем и не другим одновременно.
+  * Командным называется такой метод, который видоизменяет состояние объекта, но не возвращает значение.
+  * Запросным называется метод, возвращающий значение, но не видоизменяющий объект.
+
+- "Технический долг"
+- Принцип самурая
+- Robustness principle ("Be conservative in what you send, be liberal in what you accept").
+
+- следить за чистотой функций!
+- упрощение (максимально локализовать данные) - только интерфейс, только инкапсуляция!
+- нет глобальным переменным, только понятный и прозрачный код ("Анализируя код, мы должны понять, как и на что он действует". Без дополнительного изучения или углуюления во внутренние детали.).
+
+
+- Safe Code
+  * программа не использует неинициализированную память
+  * // SAFE GUARANTEE: < basic | strong | [nofail | nothrow] >
+  * RAII + Transactional Programming + SRP
+
+C:\Users\akatentsev\VirtualBox VMs
+V:\akatentsev\VM
+
+КОД:
+- модуль (например BasicConstants.h / null.h) в котором определены константы нуля всех базовых типов.
+{
+	const int nZero = 0;
+	const float fZero = 0.0f;
+	...
+
+#if !defined(C++11)
+	const void* nullptr = 0;
+#endif
+
+	...
+
+	или
+
+	template <class T> inline T zero(void) { return 0; }
+}
+- работай с существующим кодом так, чтобы ошибки помогали определять цепочку зависимостей
+
+namespace // internal processing
+{
+	void GetData(void);
+} // internal processing
+
+namespace // static data
+{
+	const int nData = 1;
+} // // static data
+
+- избегать статических и глобальных объектов (пример: исключение при конструировании)
+- try
+  {
+   последовательность();
+   вызова();
+   функций();
+   имеет();
+   значение();
+  }
+- ...
+
+- порядок #include
+{
+The ordering principles are:
+•	“stdafx.h” (source files only):
+First because VC++ needs it.
+stdafx.h should only be considered a performance optimization as files used in more than one project may be compiled with stdafx.h files from different, hard to predict, directories. Ideally, files will compile correctly (if slowly) with an empty stdafx.h file.
+•	The associated header file (e.g. “Thing.h” for “Thing.cpp” (source files only):
+By including this before other headers, this ensure it does not depend on other headers being included before it, so it should be safe to include anywhere.
+•	<system headers> in alphabetical order by file name.
+Some system headers must be included early and can be macro setting sensitive, so be to include them here.
+Including alphabetically reduces the possibility of surprises for unexpected dependencies.
+Ignoring the path avoids different include orders in different projects.
+•	“project headers” in alphabetical order by file name.
+Including alphabetically reduces the possibility of surprises for unexpected dependencies.
+Ignoring the path avoids different include orders in different projects.
+
+Header files should include all other files they depend on, rather than relying on transitive inclusion (“say what you use”). The change to C++11 broke much code because the library now (may) have fewer transitive includes, e.g. <iostream> may no longer  #include <string>.
+
+Source files should include all other files they depend on, rather than relying on transitive inclusion (“say what you use”).  The exception to this is that a source file need not include files required to be included in its associated header file.
+}
+
+C++:
+- prefere use a += b; instead of a = a + b; this might be more effective.
+
+Effective C++:
+- Good rule to follow when designing classes is "when in doubt, do as the ints do".
+
+- Class members are initialized "in the order of their declaration in the class".
+If you hope to understand what is really going on when your objects are initialized, be sure to list the members in an initialization list in the order in which those members are declared in the class.
+
+- Member function defined within the class declaration is implicitly inline.
+- inline int Function(int& n); // declaration
+- inline int Function(int& n){ return n++; } // definition
+
+- Clients should prefer prefix increment to postfix increment unless they really need the behavior of postfix increment.
+When dealing with user-defined types, prefix increment should be used whenever possible, because it's inherently more efficient.
+- Principle is that postfix increment and decrement should be implemented "in terms of" their prefix counterparts.
+You then need only maintain the prefix versions, because the postfix versions will automatically behave in a consistent fashion.
+- Prefix form of increment operator: "increment and fetch" (++i);
+- Postfix form of increment operator: "fetch and increment" (i++);
+
+- Like C, C++ employs short-circuit evaluation of boolean expressions.
+This means that once the truth or falsehood of an expression has been determined, evaluation of the expression ceases, even if some parts of the expression haven't yet been examined.
+
+- void Function(void) throw(); it is the equivalent to void __declspec(nothrow) Function(void);
+- void Function(void) throw(); - the function does not throw an exception.
+- void Function(void) throw(...); - the function can throw an exception.
+- void Function(void) throw(typename); - the function can throw an exception of type 'typename'.
+
+OPTIMIZATION:
+- If you know that no part of your program uses try, throw, or catch, and you also know that no library with which you'll link uses try, throw, or catch, you might as well compile without exception-handling support and save yourself the size and speed penalty you'd otherwise probably be assessed for a feature you're not using.
+
+DEVELOPMENT
+- Run-Time Routines by Category (_access(), atexit(), _vscprintf(), ...) [C run-time]

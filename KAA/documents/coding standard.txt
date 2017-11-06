@@ -1,0 +1,81 @@
+[MODULE HEADER]
+
+//
+// File: coding standard.txt
+// Description: text
+// Created: May 22, 2013
+// Author: Andrey A. Katentsev
+//
+// Copyright © Andrey A. Katentsev, 2013
+//
+
+#pragma once
+
+RULE: forward declarations should be preferred.
+
+RULE: All source code files (.h, .cpp, ...) must contain all required (used types) include directives.
+// DISCARD: REMARK: .cpp file must contains all required (used types) include directives regarding to corresponding .h file uses (includes) it or not.
+
+#include "module_header.h"
+
+#include <std::header> // sort by ABC
+#include <c::header.h> // sort by ABC
+
+#include "sdk::header.h" // sort by ASC
+
+#include "../project::header.h" // sort by ASC
+
+#include <windows::header.h> // sort by ABC
+#include "resource.h"
+
+#undef WindowsAPI // when necessary
+
+namespace KAA // standard namespace (like std)
+{
+}
+
+[FILE]
+
+Use CRT path convention:
+- drive : 'A:'
+- directory : '/directory/sub-directory/'
+- filename : 'filename'
+- extension : '.ext'
+
+// TYPEDEF
+typedef int data_t; // _t suffix
+
+// NAMES
+namespace // static data
+{
+	int s_data; // s_ prefix (static)
+}
+
+namespace // internal processing
+{
+	void function(void) { return; }
+}
+
+namespace KAA
+{
+	int g_data; // g_ prefix (general, global)
+}
+
+enum data_t
+{
+	D_CONSTANT_1,
+	D_CONSTANT_2,
+};
+
+[CLASS/FUNCTION HEADER]
+
+// THROWS:
+// SAFE GUARANTEE: <basic | strong | no throw>
+// SIDE EFFECTS:
+// [RETURN VALUE:]
+// [REMARKS:]
+
+[CODE]
+Win32 API call should be provided with scope operator ( ::RegQueryValueExW )
+
+>fsutil file createnew KiB.bin 1024

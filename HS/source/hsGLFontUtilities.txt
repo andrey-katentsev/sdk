@@ -1,0 +1,3 @@
+unsigned int hsRegisterFont(char *font_name,HDC hdc) - Создаёт и регистрирует шрифт TrueType
+void hsTextOut(unsigned int base,const char *string,...) - Выводит на экран форматированную строку символов
+void hsDestroyFont(unsigned int base) - Удаляет созданный шрифт из памяти
