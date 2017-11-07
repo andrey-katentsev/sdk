@@ -13,21 +13,21 @@ namespace KAA
 {
 	namespace RAII
 	{
-		class heap_memory
+		class crt_heap_memory
 		{
 		public:
-			explicit heap_memory(void*);
-			~heap_memory();
+			explicit crt_heap_memory(void*);
+			~crt_heap_memory();
 
 			operator void* (void) const noexcept;
 
 		private:
 			void* m_memory;
 
-			heap_memory(const heap_memory&) = delete;
-			heap_memory(heap_memory&&) = delete;
-			heap_memory& operator = (const heap_memory&) = delete;
-			heap_memory& operator = (heap_memory&&) = delete;
+			crt_heap_memory(const crt_heap_memory&) = delete;
+			crt_heap_memory(crt_heap_memory&&) = delete;
+			crt_heap_memory& operator = (const crt_heap_memory&) = delete;
+			crt_heap_memory& operator = (crt_heap_memory&&) = delete;
 		};
 	}
 }

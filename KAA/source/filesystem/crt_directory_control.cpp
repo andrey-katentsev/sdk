@@ -24,7 +24,7 @@ namespace KAA
 			try
 			{
 				// MSDN: passing NULL as the buffer forces getcwd to allocate memory for the path, which allows the code to support file paths longer than _MAX_PATH, which are supported by NTFS.
-				const KAA::RAII::heap_memory path { _wgetcwd(nullptr, 0) };
+				const KAA::RAII::crt_heap_memory path { _wgetcwd(nullptr, 0) };
 				return static_cast<const wchar_t*>(static_cast<const void*>(path));
 			}
 			catch (const std::invalid_argument&)

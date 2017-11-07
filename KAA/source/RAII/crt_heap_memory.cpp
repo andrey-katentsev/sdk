@@ -15,19 +15,19 @@ namespace KAA
 {
 	namespace RAII
 	{
-		heap_memory::heap_memory(void* const memory) :
+		crt_heap_memory::crt_heap_memory(void* const memory) :
 		m_memory(memory)
 		{
 			if(nullptr == memory)
 				throw std::invalid_argument(__FUNCTION__);
 		}
 
-		heap_memory::~heap_memory()
+		crt_heap_memory::~crt_heap_memory()
 		{
 			::free(m_memory);
 		}
 
-		heap_memory::operator void* (void) const noexcept
+		crt_heap_memory::operator void* (void) const noexcept
 		{
 			return m_memory;
 		}
