@@ -30,6 +30,8 @@ RULE: All source code files (.h, .cpp, ...) must contain all required (used type
 
 #undef WindowsAPI // when necessary
 
+#pragma comment(lib, "advapi32.lib")
+
 namespace KAA // standard namespace (like std)
 {
 }

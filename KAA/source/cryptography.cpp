@@ -24,6 +24,8 @@
 #include "../include/exception/windows_api_failure.h"
 #include "../include/RAII/invalid_parameter_handler.h"
 
+#pragma comment(lib, "advapi32.lib")
+
 namespace
 {
 	void allow_execution(const wchar_t*, const wchar_t*, const wchar_t*, unsigned int, uintptr_t) { return; }
