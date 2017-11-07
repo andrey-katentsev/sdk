@@ -31,9 +31,16 @@
     <Filter Include="Header Files\RAII">
       <UniqueIdentifier>{1e025d74-36cd-4744-a46a-d96dbea21633}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\dll">
+      <UniqueIdentifier>{9688730b-97cb-4c84-9b71-2e03326645c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI">
+      <UniqueIdentifier>{629512a0-5b16-4085-ade7-d5f3a0ddd331}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
+    <Text Include="Backlog.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\cryptography.h">
@@ -75,6 +82,9 @@
     <ClInclude Include="include\RAII\invalid_parameter_handler.h">
       <Filter>Header Files\RAII</Filter>
     </ClInclude>
+    <ClInclude Include="include\RAII\crt_heap_memory.h">
+      <Filter>Header Files\RAII</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\cryptography.cpp">
@@ -114,6 +124,78 @@
       <Filter>Source Files\exception</Filter>
     </ClCompile>
     <ClCompile Include="source\random.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\registry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\registry_key.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\windows_registry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\load_string.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\module_context.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\windows_registry_key.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\dll\get_module_handle.cpp">
+      <Filter>Source Files\dll</Filter>
+    </ClCompile>
+    <ClCompile Include="source\md5.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\RAII\windows_registry_key_handle.cpp">
+      <Filter>Source Files\RAII</Filter>
+    </ClCompile>
+    <ClCompile Include="source\filesystem\file_progress_handler.cpp">
+      <Filter>Source Files\filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="source\filesystem\ordinary_file_remover.cpp">
+      <Filter>Source Files\filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="source\filesystem\simple_overwrite_wiper.cpp">
+      <Filter>Source Files\filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="source\filesystem\wiper.cpp">
+      <Filter>Source Files\filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="source\RAII\com_initializer.cpp">
+      <Filter>Source Files\RAII</Filter>
+    </ClCompile>
+    <ClCompile Include="source\RAII\com_task_memory.cpp">
+      <Filter>Source Files\RAII</Filter>
+    </ClCompile>
+    <ClCompile Include="source\filesystem\directory_control.cpp">
+      <Filter>Source Files\filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="source\format_string.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\filesystem\crt_directory_control.cpp">
+      <Filter>Source Files\filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="source\exception\com_failure.cpp">
+      <Filter>Source Files\exception</Filter>
+    </ClCompile>
+    <ClCompile Include="source\RAII\crt_heap_memory.cpp">
+      <Filter>Source Files\RAII</Filter>
+    </ClCompile>
+    <ClCompile Include="source\RAII\variable_argument_list.cpp">
+      <Filter>Source Files\RAII</Filter>
+    </ClCompile>
+    <ClCompile Include="source\RAII\local_memory.cpp">
+      <Filter>Source Files\RAII</Filter>
+    </ClCompile>
+    <ClCompile Include="source\UI\controls.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\convert.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

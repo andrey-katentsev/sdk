@@ -131,6 +131,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Text Include="Backlog.txt" />
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -145,23 +146,48 @@
     <ClInclude Include="include\filesystem\file.h" />
     <ClInclude Include="include\filesystem\filesystem.h" />
     <ClInclude Include="include\filesystem\split_path.h" />
+    <ClInclude Include="include\RAII\crt_heap_memory.h" />
     <ClInclude Include="include\RAII\invalid_parameter_handler.h" />
     <ClInclude Include="include\random.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\convert.cpp" />
     <ClCompile Include="source\cryptography.cpp" />
+    <ClCompile Include="source\dll\get_module_handle.cpp" />
+    <ClCompile Include="source\exception\com_failure.cpp" />
     <ClCompile Include="source\exception\failure.cpp" />
     <ClCompile Include="source\exception\operation_failure.cpp" />
     <ClCompile Include="source\exception\system_failure.cpp" />
     <ClCompile Include="source\exception\windows_api_failure.cpp" />
+    <ClCompile Include="source\filesystem\crt_directory_control.cpp" />
     <ClCompile Include="source\filesystem\crt_file.cpp" />
     <ClCompile Include="source\filesystem\crt_file_system.cpp" />
+    <ClCompile Include="source\filesystem\directory_control.cpp" />
     <ClCompile Include="source\filesystem\driver.cpp" />
     <ClCompile Include="source\filesystem\file.cpp" />
     <ClCompile Include="source\filesystem\filesystem.cpp" />
+    <ClCompile Include="source\filesystem\file_progress_handler.cpp" />
+    <ClCompile Include="source\filesystem\ordinary_file_remover.cpp" />
+    <ClCompile Include="source\filesystem\simple_overwrite_wiper.cpp" />
     <ClCompile Include="source\filesystem\split_path.cpp" />
+    <ClCompile Include="source\filesystem\wiper.cpp" />
+    <ClCompile Include="source\format_string.cpp" />
+    <ClCompile Include="source\load_string.cpp" />
+    <ClCompile Include="source\md5.cpp" />
+    <ClCompile Include="source\module_context.cpp" />
+    <ClCompile Include="source\RAII\com_initializer.cpp" />
+    <ClCompile Include="source\RAII\com_task_memory.cpp" />
+    <ClCompile Include="source\RAII\crt_heap_memory.cpp" />
     <ClCompile Include="source\RAII\invalid_parameter_handler.cpp" />
+    <ClCompile Include="source\RAII\local_memory.cpp" />
+    <ClCompile Include="source\RAII\variable_argument_list.cpp" />
+    <ClCompile Include="source\RAII\windows_registry_key_handle.cpp" />
     <ClCompile Include="source\random.cpp" />
+    <ClCompile Include="source\registry.cpp" />
+    <ClCompile Include="source\registry_key.cpp" />
+    <ClCompile Include="source\UI\controls.cpp" />
+    <ClCompile Include="source\windows_registry.cpp" />
+    <ClCompile Include="source\windows_registry_key.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
