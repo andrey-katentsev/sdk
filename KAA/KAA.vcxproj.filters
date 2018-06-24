@@ -85,6 +85,12 @@
     <ClInclude Include="include\RAII\crt_heap_memory.h">
       <Filter>Header Files\RAII</Filter>
     </ClInclude>
+    <ClInclude Include="include\filesystem\crt_directory_control.h">
+      <Filter>Header Files\filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="include\filesystem\directory_control.h">
+      <Filter>Header Files\filesystem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\cryptography.cpp">

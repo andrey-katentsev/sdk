@@ -140,8 +140,10 @@
     <ClInclude Include="include\exception\operation_failure.h" />
     <ClInclude Include="include\exception\system_failure.h" />
     <ClInclude Include="include\exception\windows_api_failure.h" />
+    <ClInclude Include="include\filesystem\crt_directory_control.h" />
     <ClInclude Include="include\filesystem\crt_file.h" />
     <ClInclude Include="include\filesystem\crt_file_system.h" />
+    <ClInclude Include="include\filesystem\directory_control.h" />
     <ClInclude Include="include\filesystem\driver.h" />
     <ClInclude Include="include\filesystem\file.h" />
     <ClInclude Include="include\filesystem\filesystem.h" />
