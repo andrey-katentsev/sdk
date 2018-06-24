@@ -20,8 +20,13 @@ namespace KAA
 				return path;
 			}
 
-			extension::extension(const std::wstring& extension) : m_extension(extension)
+			extension::extension(const std::wstring& extension) : ext(extension)
 			{}
+
+			std::wstring extension::to_wstring(void) const
+			{
+				return ext;
+			}
 		}
 	}
 }

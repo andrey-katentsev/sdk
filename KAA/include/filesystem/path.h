@@ -51,8 +51,10 @@ namespace KAA
 			public:
 				explicit extension(const std::wstring& extension);
 
+				std::wstring to_wstring(void) const;
+
 			private:
-				std::wstring m_extension;
+				std::wstring ext;
 			};
 		}
 	}
