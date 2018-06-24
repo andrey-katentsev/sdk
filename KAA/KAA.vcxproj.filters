@@ -91,6 +91,9 @@
     <ClInclude Include="include\filesystem\directory_control.h">
       <Filter>Header Files\filesystem</Filter>
     </ClInclude>
+    <ClInclude Include="include\filesystem\path.h">
+      <Filter>Header Files\filesystem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\cryptography.cpp">
@@ -203,6 +206,9 @@
     </ClCompile>
     <ClCompile Include="source\convert.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\filesystem\path.cpp">
+      <Filter>Source Files\filesystem</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
