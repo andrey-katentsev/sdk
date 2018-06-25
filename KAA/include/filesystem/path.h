@@ -60,6 +60,8 @@ namespace KAA
 			private:
 				std::wstring ext;
 			};
+
+			bool operator == (const directory&, const directory&);
 		}
 	}
 }

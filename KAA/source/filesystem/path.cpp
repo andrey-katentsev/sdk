@@ -37,6 +37,11 @@ namespace KAA
 			{
 				return ext;
 			}
+
+			bool operator == (const directory& left, const directory& right)
+			{
+				return left.to_wstring() == right.to_wstring();
+			}
 		}
 	}
 }
