@@ -10,8 +10,8 @@ namespace KAA
 		class crt_directory_control : public directory_control
 		{
 		private:
-			std::wstring iget_current_working_directory(void) const override;
-			void iset_current_working_directory(const std::wstring&) override;
+			path::directory iget_current_working_directory(void) const override;
+			void iset_current_working_directory(const path::directory&) override;
 		};
 	}
 }

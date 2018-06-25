@@ -6,17 +6,22 @@ namespace KAA
 {
 	namespace filesystem
 	{
+		namespace path
+		{
+			class directory;
+		}
+
 		class directory_control
 		{
 		public:
 			virtual ~directory_control();
 
-			std::wstring get_current_working_directory(void) const; // gets the current working directory
-			void set_current_working_directory(const std::wstring&); // changes the current working directory
+			path::directory get_current_working_directory(void) const; // gets the current working directory
+			void set_current_working_directory(const path::directory&); // changes the current working directory
 
 		private:
-			virtual std::wstring iget_current_working_directory(void) const = 0;
-			virtual void iset_current_working_directory(const std::wstring&) = 0;
+			virtual path::directory iget_current_working_directory(void) const = 0;
+			virtual void iset_current_working_directory(const path::directory&) = 0;
 		};
 	}
 }

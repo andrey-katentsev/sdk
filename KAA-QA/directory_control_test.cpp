@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
 
 #include "../KAA/include/filesystem/crt_directory_control.h"
+#include "../KAA/include/filesystem/path.h"
 
 #include <memory>
 
@@ -10,7 +11,7 @@ namespace
 	class working_directory_session
 	{
 	public:
-		explicit working_directory_session(const std::wstring& path) : previous_working_directory(environment.get_current_working_directory())
+		explicit working_directory_session(const KAA::filesystem::path::directory& path) : previous_working_directory(environment.get_current_working_directory())
 		{
 			environment.set_current_working_directory(path);
 		}
@@ -22,7 +23,7 @@ namespace
 
 	private:
 		KAA::filesystem::crt_directory_control environment;
-		const std::wstring previous_working_directory;
+		const KAA::filesystem::path::directory previous_working_directory;
 	};
 }
 
@@ -35,7 +36,7 @@ TEST(current_working_directory, get)
 	// ACT
 	const auto current_working_directory = environment->get_current_working_directory();
 	// ASSERT
-	ASSERT_FALSE(current_working_directory.empty());
+	ASSERT_FALSE(current_working_directory.to_wstring().empty()); // TODO: KAA: replace empty() with ASSERT_NO_THROW().
 }
 
 TEST(current_working_directory, set)
@@ -43,7 +44,7 @@ TEST(current_working_directory, set)
 	// ARRANGE
 	const auto environment = std::make_unique<crt_directory_control>();
 	const auto current_working_directory = environment->get_current_working_directory();
-	const auto new_working_directory = std::wstring { LR"(C:\Temp)" }; // FIX: KAA: must exists!
+	const auto new_working_directory = KAA::filesystem::path::directory { LR"(C:\Temp)" }; // FIX: KAA: must exists!
 
 	// ACT
 	const working_directory_session session { new_working_directory };
@@ -60,7 +61,7 @@ TEST(working_directory_session, sets_and_restores_current_working_directory)
 
 	// ACT
 	{
-		const auto new_working_directory = std::wstring { LR"(C:\Temp)" }; // FIX: KAA: must exists!
+		const auto new_working_directory = KAA::filesystem::path::directory { LR"(C:\Temp)" }; // FIX: KAA: must exists!
 		const working_directory_session session { new_working_directory };
 		EXPECT_EQ(new_working_directory, environment->get_current_working_directory());
 	}

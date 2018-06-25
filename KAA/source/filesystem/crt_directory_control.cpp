@@ -6,6 +6,7 @@
 #include <errno.h>
 
 #include "../../include/exception/system_failure.h"
+#include "../../include/filesystem/path.h"
 #include "../../include/RAII/crt_heap_memory.h"
 #include "../../include/RAII/invalid_parameter_handler.h"
 
@@ -18,14 +19,14 @@ namespace KAA
 {
 	namespace filesystem
 	{
-		std::wstring crt_directory_control::iget_current_working_directory(void) const
+		path::directory crt_directory_control::iget_current_working_directory(void) const
 		{
 			const RAII::invalid_parameter_handler session(allow_execution);
 			try
 			{
 				// MSDN: passing NULL as the buffer forces getcwd to allocate memory for the path, which allows the code to support file paths longer than _MAX_PATH, which are supported by NTFS.
 				const KAA::RAII::crt_heap_memory path { _wgetcwd(nullptr, 0) };
-				return static_cast<const wchar_t*>(static_cast<const void*>(path));
+				return path::directory { static_cast<const wchar_t*>(static_cast<const void*>(path)) };
 			}
 			catch (const std::invalid_argument&)
 			{
@@ -34,10 +35,10 @@ namespace KAA
 			}
 		}
 
-		void crt_directory_control::iset_current_working_directory(const std::wstring& path)
+		void crt_directory_control::iset_current_working_directory(const path::directory& path)
 		{
 			const RAII::invalid_parameter_handler session(allow_execution);
-			if (0 != _wchdir(path.c_str()))
+			if (0 != _wchdir(path.to_wstring().c_str()))
 			{
 				const errno_t error = *_errno();
 				throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to change the current working directory, _wchdir function fails.", error);
