@@ -9,8 +9,18 @@ namespace KAA
 			drive::drive(const std::wstring& drive) : root(drive)
 			{}
 
+			std::wstring drive::to_wstring(void) const
+			{
+				return root;
+			}
+
 			directory::directory(const std::wstring& path) : path(path)
 			{}
+
+			std::wstring directory::to_wstring(void) const
+			{
+				return path;
+			}
 
 			file::file(const std::wstring& path) : path(path)
 			{}

@@ -22,6 +22,8 @@ namespace KAA
 			public:
 				explicit drive(const std::wstring& drive);
 
+				std::wstring to_wstring(void) const;
+
 			private:
 				std::wstring root;
 			};
@@ -30,6 +32,8 @@ namespace KAA
 			{
 			public:
 				explicit directory(const std::wstring& path);
+
+				std::wstring to_wstring(void) const;
 
 			private:
 				std::wstring path;

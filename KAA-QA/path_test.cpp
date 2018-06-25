@@ -21,14 +21,44 @@ TEST(lfs_drive_path, from_string)
 	ASSERT_NO_THROW(const auto root = drive(lfs_drive));
 }
 
+TEST(lfs_drive_path, to_wstring)
+{
+	// ARRANGE
+	const auto testee = drive(lfs_drive);
+	// ACT
+	const auto actual = testee.to_wstring();
+	// ASSERT
+	ASSERT_EQ(lfs_drive, actual);
+}
+
 TEST(lfs_directory_path, from_string)
 {
 	ASSERT_NO_THROW(const auto path = directory(lfs_directory));
 }
 
+TEST(lfs_directory_path, to_wstring)
+{
+	// ARRANGE
+	const auto testee = directory(lfs_directory);
+	// ACT
+	const auto actual = testee.to_wstring();
+	// ASSERT
+	ASSERT_EQ(lfs_directory, actual);
+}
+
 TEST(lfs_file_path, from_string)
 {
 	ASSERT_NO_THROW(const auto path = file(lfs_path));
+}
+
+TEST(lfs_file_path, to_wstring)
+{;
+	// ARRANGE
+	const auto testee = file(lfs_path);
+	// ACT
+	const auto actual = testee.to_wstring();
+	// ASSERT
+	ASSERT_EQ(lfs_path, actual);
 }
 
 TEST(extension, from_string)
