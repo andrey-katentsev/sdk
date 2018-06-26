@@ -12,6 +12,9 @@ namespace
 	const auto lfs_drive = std::wstring { L"D:" };
 	const auto lfs_directory = std::wstring { LR"(D:\User\Hyperlink\eBooks\)" };
 
+	const auto lfs_inconsistent_path = std::wstring { LR"(D:\User/Hyperlink\eBooks/windows.txt)" };
+	const auto lfs_inconsistent_directory = std::wstring { LR"(D:/User\Hyperlink/eBooks\)" };
+
 	const auto filename = std::wstring { L"windows.txt" };
 	const auto extension = std::wstring { L".txt" };
 }
@@ -36,6 +39,12 @@ TEST(lfs_directory_path, from_string)
 	ASSERT_NO_THROW(const auto path = directory(lfs_directory));
 }
 
+TEST(lfs_directory_path, always_consistent)
+{
+	const auto path = directory(lfs_inconsistent_directory);
+	ASSERT_EQ(lfs_directory, path.to_wstring());
+}
+
 TEST(lfs_directory_path, to_wstring)
 {
 	// ARRANGE
@@ -49,6 +58,12 @@ TEST(lfs_directory_path, to_wstring)
 TEST(lfs_file_path, from_string)
 {
 	ASSERT_NO_THROW(const auto path = file(lfs_path));
+}
+
+TEST(lfs_file_path, always_consistent)
+{
+	const auto path = file(lfs_inconsistent_path);
+	ASSERT_EQ(lfs_path, path.to_wstring());
 }
 
 TEST(lfs_file_path, to_wstring)

@@ -1,5 +1,18 @@
 #include "../../include/filesystem/path.h"
 
+#include <algorithm>
+
+namespace
+{
+	// Replaces all backslashes [/] with slashes [\].
+	std::wstring make_consistent(const std::wstring& path)
+	{
+		auto consistent_path = path;
+		std::replace(consistent_path.begin(), consistent_path.end(), L'/', L'\\');
+		return consistent_path;
+	}
+}
+
 namespace KAA
 {
 	namespace filesystem
@@ -14,7 +27,7 @@ namespace KAA
 				return root;
 			}
 
-			directory::directory(const std::wstring& path) : path(path)
+			directory::directory(const std::wstring& path) : path(make_consistent(path))
 			{}
 
 			std::wstring directory::to_wstring(void) const
@@ -22,7 +35,7 @@ namespace KAA
 				return path;
 			}
 
-			file::file(const std::wstring& path) : path(path)
+			file::file(const std::wstring& path) : path(make_consistent(path))
 			{}
 
 			std::wstring file::to_wstring(void) const
