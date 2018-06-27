@@ -55,6 +55,11 @@ namespace KAA
 			{
 				return left.to_wstring() == right.to_wstring();
 			}
+
+			bool operator != (const directory& left, const directory& right)
+			{
+				return !(left == right);
+			}
 		}
 	}
 }

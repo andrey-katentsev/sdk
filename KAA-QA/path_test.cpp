@@ -10,10 +10,11 @@ namespace
 {
 	const auto lfs_path = std::wstring { LR"(D:\User\Hyperlink\eBooks\windows.txt)" };
 	const auto lfs_drive = std::wstring { L"D:" };
-	const auto lfs_directory = std::wstring { LR"(D:\User\Hyperlink\eBooks\)" };
+	const auto lfs_directory = std::wstring { LR"(D:\User\Hyperlink\)" };
+	const auto lfs_subdirectory = std::wstring { LR"(D:\User\Hyperlink\eBooks\)" };
 
 	const auto lfs_inconsistent_path = std::wstring { LR"(D:\User/Hyperlink\eBooks/windows.txt)" };
-	const auto lfs_inconsistent_directory = std::wstring { LR"(D:/User\Hyperlink/eBooks\)" };
+	const auto lfs_inconsistent_subdirectory = std::wstring { LR"(D:/User\Hyperlink/eBooks\)" };
 
 	const auto filename = std::wstring { L"windows.txt" };
 	const auto extension = std::wstring { L".txt" };
@@ -41,8 +42,8 @@ TEST(lfs_directory_path, from_string)
 
 TEST(lfs_directory_path, always_consistent)
 {
-	const auto path = directory(lfs_inconsistent_directory);
-	ASSERT_EQ(lfs_directory, path.to_wstring());
+	const auto path = directory(lfs_inconsistent_subdirectory);
+	ASSERT_EQ(lfs_subdirectory, path.to_wstring());
 }
 
 TEST(lfs_directory_path, to_wstring)
@@ -53,6 +54,22 @@ TEST(lfs_directory_path, to_wstring)
 	const auto actual = testee.to_wstring();
 	// ASSERT
 	ASSERT_EQ(lfs_directory, actual);
+}
+
+TEST(lfs_directory_path, case_sensitive_comparison)
+{
+	{
+		const auto A = directory(lfs_directory);
+		const auto B = directory(lfs_directory);
+		EXPECT_TRUE(A == B);
+		EXPECT_FALSE(A != B);
+	}
+	{
+		const auto A = directory(lfs_directory);
+		const auto B = directory(lfs_subdirectory);
+		EXPECT_TRUE(A != B);
+		EXPECT_FALSE(A == B);
+	}
 }
 
 TEST(lfs_file_path, from_string)

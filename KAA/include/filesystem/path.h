@@ -62,6 +62,7 @@ namespace KAA
 			};
 
 			bool operator == (const directory&, const directory&);
+			bool operator != (const directory&, const directory&);
 		}
 	}
 }
