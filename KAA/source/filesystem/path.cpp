@@ -9,7 +9,11 @@
 
 namespace
 {
-	// Replaces all backslashes [/] with slashes [\].
+	const auto slash = L'/';
+	const auto backslash = L'\\';
+
+	// Replaces all backslashes with slashes.
+	// EXAMPLE: D:\Temp\file.dat
 	std::wstring make_consistent(const std::wstring& path)
 	{
 		auto consistent_path = path;
@@ -66,18 +70,30 @@ namespace KAA
 				return !(left == right);
 			}
 
+			// EXAMPLE: 'D:\Temp\'
+			std::wstring append_trailing_backslash(const std::wstring& directory_path)
+			{
+				const auto append_backslash = (backslash != directory_path[directory_path.length() - 1]);
+				return append_backslash ? directory_path + backslash : directory_path;
+			}
+
+			// EXAMPLE: 'D:\Temp'
+			std::wstring remove_trailing_backslash(const std::wstring& directory_path)
+			{
+				const auto remove_backslash = (backslash == directory_path[directory_path.length() - 1]);
+				return remove_backslash ? std::wstring { directory_path.begin(), directory_path.end() - 1 } : directory_path;
+			}
+
 			// EXAMPLE: 'D:\Temp'
 			std::wstring make_WinAPI_directory_path(const std::wstring& directory_path)
 			{
-				const auto remove_trailing_backslash = (L'\\' == directory_path[directory_path.length() - 1]);
-				return remove_trailing_backslash ? std::wstring(directory_path.begin(), directory_path.end() - 1) : directory_path;
+				return remove_trailing_backslash(directory_path);
 			}
 
 			// EXAMPLE: 'D:\Temp\'
 			std::wstring make_CRT_directory_path(const std::wstring& directory_path)
 			{
-				const auto add_trailing_backslash = (L'\\' != directory_path[directory_path.length() - 1]);
-				return add_trailing_backslash ? directory_path + L'\\' : directory_path;
+				return append_trailing_backslash(directory_path);
 			}
 		}
 	}
