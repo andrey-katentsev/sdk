@@ -72,6 +72,22 @@ TEST(lfs_directory_path, case_sensitive_comparison)
 	}
 }
 
+TEST(lfs_directory_path, CRT_path)
+{
+	const auto CRT_directory = lfs_directory;
+	const auto WinAPI_directory = std::wstring { lfs_directory.c_str(), lfs_directory.length() - 1 };
+	EXPECT_EQ(CRT_directory, KAA::filesystem::path::make_CRT_directory_path(CRT_directory));
+	EXPECT_EQ(CRT_directory, KAA::filesystem::path::make_CRT_directory_path(WinAPI_directory));
+}
+
+TEST(lfs_directory_path, WinAPI_path)
+{
+	const auto CRT_directory = lfs_directory;
+	const auto WinAPI_directory = std::wstring { lfs_directory.c_str(), lfs_directory.length() - 1 };
+	EXPECT_EQ(WinAPI_directory, KAA::filesystem::path::make_WinAPI_directory_path(CRT_directory));
+	EXPECT_EQ(WinAPI_directory, KAA::filesystem::path::make_WinAPI_directory_path(WinAPI_directory));
+}
+
 TEST(lfs_file_path, from_string)
 {
 	ASSERT_NO_THROW(const auto path = file(lfs_path));
