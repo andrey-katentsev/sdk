@@ -8,16 +8,15 @@
 
 namespace
 {
-	const auto slash = L'/';
-	const auto backslash = L'\\';
+	constexpr auto slash = L'/';
+	constexpr auto backslash = L'\\';
 
 	// Replaces all backslashes with slashes.
 	// EXAMPLE: D:\Temp\file.dat
-	std::wstring make_consistent(const std::wstring& path)
+	std::wstring make_consistent(std::wstring path)
 	{
-		auto consistent_path = path;
-		std::replace(consistent_path.begin(), consistent_path.end(), L'/', L'\\');
-		return consistent_path;
+		std::replace(path.begin(), path.end(), slash, backslash);
+		return path;
 	}
 }
 
