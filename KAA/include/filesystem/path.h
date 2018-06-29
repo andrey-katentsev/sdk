@@ -64,9 +64,16 @@ namespace KAA
 			bool operator == (const directory&, const directory&);
 			bool operator != (const directory&, const directory&);
 
+			// EXAMPLE: D:\Temp + file.dat = D:\Temp\file.dat
+			file operator + (const directory&, const std::wstring&);
+
+			// EXAMPLE: 'D:\Temp\'
+			std::wstring append_trailing_backslash(const std::wstring& directory_path);
+			// EXAMPLE: 'D:\Temp'
+			std::wstring remove_trailing_backslash(const std::wstring& directory_path);
+
 			// EXAMPLE: 'D:\Temp'
 			std::wstring make_WinAPI_directory_path(const std::wstring& directory_path);
-
 			// EXAMPLE: 'D:\Temp\'
 			std::wstring make_CRT_directory_path(const std::wstring& directory_path);
 		}

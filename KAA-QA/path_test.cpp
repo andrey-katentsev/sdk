@@ -88,6 +88,20 @@ TEST(lfs_directory_path, WinAPI_path)
 	EXPECT_EQ(WinAPI_directory, KAA::filesystem::path::make_WinAPI_directory_path(WinAPI_directory));
 }
 
+TEST(lfs_directory_path, make_file_path)
+{
+	{
+		const auto directory = KAA::filesystem::path::directory { KAA::filesystem::path::append_trailing_backslash(lfs_subdirectory) };
+		const auto path = directory + filename;
+		EXPECT_EQ(lfs_path, path.to_wstring());
+	}
+	{
+		const auto directory = KAA::filesystem::path::directory { KAA::filesystem::path::remove_trailing_backslash(lfs_subdirectory) };
+		const auto path = directory + filename;
+		EXPECT_EQ(lfs_path, path.to_wstring());
+	}
+}
+
 TEST(lfs_file_path, from_string)
 {
 	ASSERT_NO_THROW(const auto path = file(lfs_path));
