@@ -72,10 +72,26 @@ TEST(lfs_directory_path, case_sensitive_comparison)
 	}
 }
 
+TEST(lfs_directory_path, append_trailing_backslash)
+{
+	const auto win_directory_path = LR"(D:\Temp)";
+	const auto crt_directory_path = LR"(D:\Temp\)";
+	EXPECT_EQ(crt_directory_path, KAA::filesystem::path::append_trailing_backslash(win_directory_path));
+	EXPECT_EQ(crt_directory_path, KAA::filesystem::path::append_trailing_backslash(crt_directory_path));
+}
+
+TEST(lfs_directory_path, remove_trailing_backslash)
+{
+	const auto win_directory_path = LR"(D:\Temp)";
+	const auto crt_directory_path = LR"(D:\Temp\)";
+	EXPECT_EQ(win_directory_path, KAA::filesystem::path::remove_trailing_backslash(crt_directory_path));
+	EXPECT_EQ(win_directory_path, KAA::filesystem::path::remove_trailing_backslash(win_directory_path));
+}
+
 TEST(lfs_directory_path, CRT_path)
 {
 	const auto CRT_directory = lfs_directory;
-	const auto WinAPI_directory = std::wstring { lfs_directory.c_str(), lfs_directory.length() - 1 };
+	const auto WinAPI_directory = KAA::filesystem::path::remove_trailing_backslash(lfs_directory);
 	EXPECT_EQ(CRT_directory, KAA::filesystem::path::make_CRT_directory_path(CRT_directory));
 	EXPECT_EQ(CRT_directory, KAA::filesystem::path::make_CRT_directory_path(WinAPI_directory));
 }
@@ -83,7 +99,7 @@ TEST(lfs_directory_path, CRT_path)
 TEST(lfs_directory_path, WinAPI_path)
 {
 	const auto CRT_directory = lfs_directory;
-	const auto WinAPI_directory = std::wstring { lfs_directory.c_str(), lfs_directory.length() - 1 };
+	const auto WinAPI_directory = KAA::filesystem::path::remove_trailing_backslash(lfs_directory);
 	EXPECT_EQ(WinAPI_directory, KAA::filesystem::path::make_WinAPI_directory_path(CRT_directory));
 	EXPECT_EQ(WinAPI_directory, KAA::filesystem::path::make_WinAPI_directory_path(WinAPI_directory));
 }
