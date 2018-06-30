@@ -71,7 +71,16 @@ namespace KAA
 		// SIDE EFFECTS: set errno to ERANGE, EINVAL
 		long to_long(const std::wstring& value)
 		{
-			return _wtol(value.c_str()); // DEFECT: KAA: error handling?
+			// TODO: KAA: wcstol
+			return _wtol(value.c_str());
+		}
+
+		// THROWS: -
+		// SAFE GUARANTEE: strong
+		// SIDE EFFECTS: set errno to ERANGE if overflow or underflow occurs
+		unsigned long to_ulong(const std::wstring& value, const int radix)
+		{
+			return  wcstoul(value.c_str(), nullptr, radix);
 		}
 
 		// THROWS: system_failure
@@ -95,7 +104,7 @@ namespace KAA
 		// THROWS: system_failure
 		// SAFE GUARANTEE: strong
 		// SIDE EFFECTS: -
-		std::wstring to_wstring(long value, int radix)
+		std::wstring to_wstring(const long value, const int radix)
 		{
 			RAII::invalid_parameter_handler session(allow_execution);
 			{
@@ -107,7 +116,22 @@ namespace KAA
 				}
 
 				return std::wstring(&buffer[0]);
-			}			
+			}
+		}
+
+		// THROWS: system_failure
+		// SAFE GUARANTEE: strong
+		// SIDE EFFECTS: -
+		std::wstring to_wstring(const unsigned long value, const int radix)
+		{
+			RAII::invalid_parameter_handler session(allow_execution);
+
+			std::vector<wchar_t> buffer(sizeof(value) * 8 + 1, 0); // binary (radix = 2)
+			const auto error = _ultow_s(value, &buffer[0], buffer.size(), radix);
+			if (0 != error)
+				throw system_failure(__FUNCTIONW__, L"Failed to convert an unsigned long integer to a wstring.", error);
+
+			return std::wstring(&buffer[0]);
 		}
 
 		// THROWS: system_failure
