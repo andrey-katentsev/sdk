@@ -24,7 +24,7 @@ namespace KAA
 			void iremove_file(const std::wstring&) override;
 
 			void iset_file_permissions(const std::wstring&, const permission&) override;
-			access iget_file_permissions(const std::wstring&) override;
+			access iget_file_permissions(const std::wstring&) const override;
 		};
 	}
 }

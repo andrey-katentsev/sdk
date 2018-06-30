@@ -259,7 +259,7 @@ namespace KAA
 		}
 
 		// FUTURE: KAA: not implemented.
-		driver::access crt_file_system::iget_file_permissions(const std::wstring& file_path)
+		driver::access crt_file_system::iget_file_permissions(const std::wstring& file_path) const
 		{
 			RAII::invalid_parameter_handler session(allow_execution);
 			{

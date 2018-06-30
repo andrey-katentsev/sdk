@@ -85,7 +85,7 @@ namespace KAA
 			return iset_file_permissions(path, attributes);
 		}
 
-		driver::access driver::get_file_permissions(const std::wstring& path)
+		driver::access driver::get_file_permissions(const std::wstring& path) const
 		{
 			return iget_file_permissions(path);
 		}

@@ -9,6 +9,8 @@ namespace KAA
 {
 	namespace filesystem
 	{
+		// TODO: KAA: filesystem::path::directory.
+		// TODO: KAA: filesystem::path::file.
 		class driver
 		{
 		public:
@@ -98,7 +100,7 @@ namespace KAA
 			void delete_file(const std::wstring&);
 
 			void set_file_permissions(const std::wstring&, const permission&);
-			access get_file_permissions(const std::wstring&);
+			access get_file_permissions(const std::wstring&) const;
 
 			//bool is_path_exists(const std::wstring& path);
 
@@ -115,7 +117,7 @@ namespace KAA
 			virtual void iremove_file(const std::wstring&) = 0;
 
 			virtual void iset_file_permissions(const std::wstring&, const permission&) = 0;
-			virtual access iget_file_permissions(const std::wstring&) = 0;
+			virtual access iget_file_permissions(const std::wstring&) const = 0;
 
 			//bool iis_path_exists(const std::wstring& path);
 		};
