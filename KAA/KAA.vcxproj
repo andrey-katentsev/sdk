@@ -135,6 +135,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\convert.h" />
     <ClInclude Include="include\cryptography.h" />
     <ClInclude Include="include\exception\failure.h" />
     <ClInclude Include="include\exception\operation_failure.h" />
