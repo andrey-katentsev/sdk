@@ -20,7 +20,7 @@ namespace KAA
 	public:
 		system_failure(const std::wstring& source, const std::wstring& description, errno_t);
 
-		operator errno_t (void) const;
+		operator errno_t (void) const noexcept;
 
 	private:
 		std::wstring source;

@@ -24,7 +24,7 @@ namespace KAA
 	error_code(error_code)
 	{}
 
-	system_failure::operator errno_t (void) const
+	system_failure::operator errno_t (void) const noexcept
 	{
 		return error_code;
 	}
