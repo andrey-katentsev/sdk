@@ -66,19 +66,23 @@ namespace KAA
 {
 	namespace convert
 	{
-		// THROWS: -
+		// THROWS: system_failure
 		// SAFE GUARANTEE: strong
 		// SIDE EFFECTS: errno is set to ERANGE if overflow or underflow occurs
 		long to_long(const std::wstring& value, const int radix)
 		{
+			if (2 > radix || 36 < radix)
+				throw system_failure(__FUNCTIONW__, L"'radix' argument is out of range [2,36]", EINVAL);
 			return wcstol(value.c_str(), nullptr, radix);
 		}
 
-		// THROWS: -
+		// THROWS: system_failure
 		// SAFE GUARANTEE: strong
 		// SIDE EFFECTS: errno is set to ERANGE if overflow or underflow occurs
 		unsigned long to_ulong(const std::wstring& value, const int radix)
 		{
+			if (2 > radix || 36 < radix)
+				throw system_failure(__FUNCTIONW__, L"'radix' argument is out of range [2,36]", EINVAL);
 			return  wcstoul(value.c_str(), nullptr, radix);
 		}
 

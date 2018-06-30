@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
 
 #include "../KAA/include/convert.h"
+#include "../KAA/include/exception/system_failure.h"
 
 using namespace KAA::convert;
 
@@ -25,6 +26,14 @@ TEST(convert, long_to_wstring_hex)
 
 TEST(convert, wstring_to_long)
 {
+	// radix (base) is between 2 and 36
+	const auto any_value = std::wstring();
+	EXPECT_THROW(to_long(any_value, 0), KAA::system_failure);
+	EXPECT_THROW(to_long(any_value, 1), KAA::system_failure);
+	EXPECT_NO_THROW(to_long(any_value, 2));
+	EXPECT_NO_THROW(to_long(any_value, 36));
+	EXPECT_THROW(to_long(any_value, 37), KAA::system_failure);
+
 	EXPECT_EQ(0L, to_long(std::wstring()));
 	EXPECT_EQ(0L, to_long(std::wstring(L"0")));
 	EXPECT_EQ(1L, to_long(std::wstring(L"1")));
@@ -61,6 +70,14 @@ TEST(convert, ulong_to_wstring_hex)
 
 TEST(convert, wstring_to_ulong)
 {
+	// radix (base) is between 2 and 36
+	const auto any_value = std::wstring();
+	EXPECT_THROW(to_ulong(any_value, 0), KAA::system_failure);
+	EXPECT_THROW(to_ulong(any_value, 1), KAA::system_failure);
+	EXPECT_NO_THROW(to_ulong(any_value, 2));
+	EXPECT_NO_THROW(to_ulong(any_value, 36));
+	EXPECT_THROW(to_ulong(any_value, 37), KAA::system_failure);
+
 	EXPECT_EQ(0UL, to_ulong(std::wstring()));
 	EXPECT_EQ(0UL, to_ulong(std::wstring(L"0")));
 	EXPECT_EQ(1UL, to_ulong(std::wstring(L"1")));
