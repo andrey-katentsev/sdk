@@ -68,16 +68,15 @@ namespace KAA
 	{
 		// THROWS: -
 		// SAFE GUARANTEE: strong
-		// SIDE EFFECTS: set errno to ERANGE, EINVAL
-		long to_long(const std::wstring& value)
+		// SIDE EFFECTS: errno is set to ERANGE if overflow or underflow occurs
+		long to_long(const std::wstring& value, const int radix)
 		{
-			// TODO: KAA: wcstol
-			return _wtol(value.c_str());
+			return wcstol(value.c_str(), nullptr, radix);
 		}
 
 		// THROWS: -
 		// SAFE GUARANTEE: strong
-		// SIDE EFFECTS: set errno to ERANGE if overflow or underflow occurs
+		// SIDE EFFECTS: errno is set to ERANGE if overflow or underflow occurs
 		unsigned long to_ulong(const std::wstring& value, const int radix)
 		{
 			return  wcstoul(value.c_str(), nullptr, radix);

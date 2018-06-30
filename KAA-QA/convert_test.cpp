@@ -33,12 +33,13 @@ TEST(convert, wstring_to_long)
 	EXPECT_EQ(-128L, to_long(std::wstring(L"-128")));
 }
 
-TEST(convert, DISABLED_wstring_to_long_hex)
+TEST(convert, wstring_to_long_hex)
 {
-	EXPECT_EQ(0L, to_long(std::wstring(L"0")));
-	EXPECT_EQ(1L, to_long(std::wstring(L"1")));
-	EXPECT_EQ(127L, to_long(std::wstring(L"7f")));
-	EXPECT_EQ(128L, to_long(std::wstring(L"80")));
+	enum { hex = 16 };
+	EXPECT_EQ(0L, to_long(std::wstring(L"0"), hex));
+	EXPECT_EQ(1L, to_long(std::wstring(L"1"), hex));
+	EXPECT_EQ(127L, to_long(std::wstring(L"7f"), hex));
+	EXPECT_EQ(128L, to_long(std::wstring(L"80"), hex));
 }
 
 TEST(convert, ulong_to_wstring)

@@ -13,7 +13,7 @@ namespace KAA
 {
 	namespace convert
 	{
-		long to_long(const std::wstring& value);
+		long to_long(const std::wstring& value, int radix = 10);
 		unsigned long to_ulong(const std::wstring& value, int radix = 10);
 
 		std::string to_string(const std::wstring&);
