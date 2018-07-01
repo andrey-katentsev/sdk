@@ -16,11 +16,11 @@ namespace KAA
 	class failure
 	{
 	public:
-		virtual ~failure();
+		virtual ~failure() = default;
 
 		std::wstring get_source(void) const;
 		std::wstring get_description(void) const;
-		std::wstring get_system_message(void) const;		
+		std::wstring get_system_message(void) const;
 
 	private:
 		virtual std::wstring iget_source(void) const = 0;

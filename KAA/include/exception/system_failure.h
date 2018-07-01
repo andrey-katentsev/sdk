@@ -27,8 +27,8 @@ namespace KAA
 		std::wstring description;
 		errno_t error_code;
 
-		std::wstring iget_source(void) const override final;
-		std::wstring iget_description(void) const override final;
-		std::wstring iget_system_message(void) const override final;
+		std::wstring iget_source(void) const override;
+		std::wstring iget_description(void) const override;
+		std::wstring iget_system_message(void) const override;
 	};
 }

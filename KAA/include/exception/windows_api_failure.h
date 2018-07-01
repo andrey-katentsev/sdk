@@ -34,18 +34,16 @@ namespace KAA
 	private:
 		std::wstring source;
 		std::wstring description;
-
 		WORD status_code;
 		WORD facility_code;
 		severity_t failure_severity;
 		bool is_custom;
 
 		void parse_error(DWORD);
-
 		DWORD get_error(void) const throw();
 
-		std::wstring iget_source(void) const override final;
-		std::wstring iget_description(void) const override final;
-		std::wstring iget_system_message(void) const override final;
+		std::wstring iget_source(void) const override;
+		std::wstring iget_description(void) const override;
+		std::wstring iget_system_message(void) const override;
 	};
 }

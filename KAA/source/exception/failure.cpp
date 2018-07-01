@@ -11,9 +11,6 @@
 
 namespace KAA
 {
-	failure::~failure()
-	{}
-
 	std::wstring failure::get_source(void) const
 	{
 		return iget_source();
