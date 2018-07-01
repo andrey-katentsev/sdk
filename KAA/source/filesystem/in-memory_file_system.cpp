@@ -50,12 +50,26 @@ namespace KAA
 
 		void in_memory_file_system::irename_file(const std::wstring& present_filename, const std::wstring& new_filename)
 		{
-			throw std::logic_error { "not implemented" };
+			if (vfs.end() != vfs.find(present_filename))
+			{
+				if (vfs.end() == vfs.find(new_filename))
+				{
+					vfs[new_filename].swap(vfs[present_filename]);
+					vfs.erase(present_filename);
+				}
+				else
+					throw std::logic_error { "file already exists" };
+			}
+			else
+				throw std::logic_error { "file does not exist" };
 		}
 
 		void in_memory_file_system::iremove_file(const std::wstring& path)
 		{
-			throw std::logic_error { "not implemented" };
+			if (vfs.end() != vfs.find(path))
+				vfs.erase(path);
+			else
+				throw std::logic_error { "file does not exist" };
 		}
 
 		void in_memory_file_system::iset_file_permissions(const std::wstring& file_path, const permission& new_attributes)
