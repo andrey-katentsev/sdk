@@ -22,11 +22,10 @@ namespace KAA
 		long to_long(const std::wstring& value, int radix = 10);
 		unsigned long to_ulong(const std::wstring& value, int radix = 10);
 
-		std::string to_string(const std::wstring&);
-
 		std::wstring to_wstring(long value, int radix = 10);
 		std::wstring to_wstring(unsigned long value, int radix = 10);
 
+		std::string to_string(const std::wstring&);
 		std::wstring to_wstring(const std::string&);
 	}
 }
