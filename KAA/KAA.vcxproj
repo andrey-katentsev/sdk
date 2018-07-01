@@ -131,10 +131,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="Backlog.txt" />
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="include\convert.h" />
     <ClInclude Include="include\cryptography.h" />
     <ClInclude Include="include\exception\com_failure.h" />
