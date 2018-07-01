@@ -15,7 +15,6 @@ namespace KAA
 		{
 		public:
 			// FUTURE: KAA: provide more meaningful names for m_ members.
-			// FUTURE: KAA: remove default parameters.
 			class mode
 			{
 			public:
@@ -26,6 +25,7 @@ namespace KAA
 				bool m_append;
 				bool m_truncate;
 
+				// default: sequential (serial) binary read write
 				mode(bool write = true, bool read = true, bool binary = true, bool random_access = false, bool append = false, bool truncate = false) :
 				m_binary(binary),
 				m_random_access(random_access),
@@ -57,6 +57,7 @@ namespace KAA
 				bool m_read;
 				bool m_write;
 
+				// default: share any access (read / write)
 				share(bool read = true, bool write = true) :
 				m_read(read),
 				m_write(write)
@@ -69,6 +70,7 @@ namespace KAA
 				bool m_read; // read permission
 				bool m_write; // write permission
 
+				// default: full access (allow read / write)
 				permission(bool write = true, bool read = true) :
 				m_read(read),
 				m_write(write)
