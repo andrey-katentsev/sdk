@@ -9,6 +9,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HS", "HS\HS.vcxproj", "{43E
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KAA-QA", "KAA-QA\KAA-QA.vcxproj", "{4A4A0CC6-26D2-49B6-A922-ED5D07C592E9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "documents", "documents", "{91F4D1E6-9BB4-4131-952D-B35C3BF04139}"
+	ProjectSection(SolutionItems) = preProject
+		KAA\documents\general\C++ developer rules.txt = KAA\documents\general\C++ developer rules.txt
+		KAA\documents\coding standard.txt = KAA\documents\coding standard.txt
+		KAA\documents\general\windows developer rules.txt = KAA\documents\general\windows developer rules.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
