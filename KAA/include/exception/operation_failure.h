@@ -18,7 +18,8 @@ namespace KAA
 		{
 			R_INVALID_ARGUMENT,
 			R_INVALID_PARAMETER = R_INVALID_ARGUMENT,
-			R_NOT_FOUND
+			R_NOT_FOUND,
+			R_NOT_IMPLEMENTED
 		};
 
 		enum severity_t
@@ -29,17 +30,16 @@ namespace KAA
 			S_ERROR = 3
 		};
 
-		operation_failure(const std::wstring& source, const std::wstring& description, status_code_t status_code, severity_t severity);
+		operation_failure(const std::wstring& source, const std::wstring& description, status_code_t, severity_t);
 
 	private:
 		std::wstring source;
 		std::wstring description;
-
 		status_code_t status_code;
 		severity_t severity;
 
-		std::wstring iget_source(void) const override final;
-		std::wstring iget_description(void) const override final;
-		std::wstring iget_system_message(void) const override final;
+		std::wstring iget_source(void) const override;
+		std::wstring iget_description(void) const override;
+		std::wstring iget_system_message(void) const override;
 	};
 }
