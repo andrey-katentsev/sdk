@@ -97,6 +97,9 @@
     <ClInclude Include="include\convert.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\filesystem\in-memory_file_system.h">
+      <Filter>Header Files\filesystem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\cryptography.cpp">
@@ -211,6 +214,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\filesystem\path.cpp">
+      <Filter>Source Files\filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="source\filesystem\in-memory_file_system.cpp">
       <Filter>Source Files\filesystem</Filter>
     </ClCompile>
   </ItemGroup>

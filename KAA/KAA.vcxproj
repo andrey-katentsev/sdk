@@ -148,6 +148,7 @@
     <ClInclude Include="include\filesystem\driver.h" />
     <ClInclude Include="include\filesystem\file.h" />
     <ClInclude Include="include\filesystem\filesystem.h" />
+    <ClInclude Include="include\filesystem\in-memory_file_system.h" />
     <ClInclude Include="include\filesystem\path.h" />
     <ClInclude Include="include\filesystem\split_path.h" />
     <ClInclude Include="include\RAII\crt_heap_memory.h" />
@@ -171,6 +172,7 @@
     <ClCompile Include="source\filesystem\file.cpp" />
     <ClCompile Include="source\filesystem\filesystem.cpp" />
     <ClCompile Include="source\filesystem\file_progress_handler.cpp" />
+    <ClCompile Include="source\filesystem\in-memory_file_system.cpp" />
     <ClCompile Include="source\filesystem\ordinary_file_remover.cpp" />
     <ClCompile Include="source\filesystem\path.cpp" />
     <ClCompile Include="source\filesystem\simple_overwrite_wiper.cpp" />
