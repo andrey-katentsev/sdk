@@ -13,6 +13,12 @@ namespace KAA
 {
 	namespace convert
 	{
+		// If the first character is 0 and the second character is not 'x' or 'X', the string is interpreted as an octal integer.
+		// If the first character is '0' and the second character is 'x' or 'X', the string is interpreted as a hexadecimal integer.
+		// If the first character is '1' through '9', the string is interpreted as a decimal integer.
+		long to_long_ex(const std::wstring& value) noexcept;
+		unsigned long to_ulong_ex(const std::wstring& value) noexcept;
+
 		long to_long(const std::wstring& value, int radix = 10);
 		unsigned long to_ulong(const std::wstring& value, int radix = 10);
 

@@ -60,12 +60,44 @@ namespace
 			return buffer_size;
 		}
 	}
+
+	// THROWS: -
+	// SAFE GUARANTEE: no throw
+	// SIDE EFFECTS: errno is set to ERANGE if overflow or underflow occurs
+	long to_long_ex(const std::wstring& value, const int radix) noexcept
+	{
+		return wcstol(value.c_str(), nullptr, radix);
+	}
+
+	// THROWS: -
+	// SAFE GUARANTEE: no throw
+	// SIDE EFFECTS: errno is set to ERANGE if overflow or underflow occurs
+	unsigned long to_ulong_ex(const std::wstring& value, const int radix) noexcept
+	{
+		return wcstoul(value.c_str(), nullptr, radix);
+	}
 }
 
 namespace KAA
 {
 	namespace convert
 	{
+		// THROWS: -
+		// SAFE GUARANTEE: strong
+		// SIDE EFFECTS: errno is set to ERANGE if overflow or underflow occurs
+		long to_long_ex(const std::wstring& value) noexcept
+		{
+			return ::to_long_ex(value, 0);
+		}
+
+		// THROWS: -
+		// SAFE GUARANTEE: strong
+		// SIDE EFFECTS: errno is set to ERANGE if overflow or underflow occurs
+		unsigned long to_ulong_ex(const std::wstring& value) noexcept
+		{
+			return ::to_ulong_ex(value, 0);
+		}
+
 		// THROWS: system_failure
 		// SAFE GUARANTEE: strong
 		// SIDE EFFECTS: errno is set to ERANGE if overflow or underflow occurs
@@ -73,7 +105,7 @@ namespace KAA
 		{
 			if (2 > radix || 36 < radix)
 				throw system_failure(__FUNCTIONW__, L"'radix' argument is out of range [2,36]", EINVAL);
-			return wcstol(value.c_str(), nullptr, radix);
+			return ::to_long_ex(value, radix);
 		}
 
 		// THROWS: system_failure
@@ -83,7 +115,7 @@ namespace KAA
 		{
 			if (2 > radix || 36 < radix)
 				throw system_failure(__FUNCTIONW__, L"'radix' argument is out of range [2,36]", EINVAL);
-			return  wcstoul(value.c_str(), nullptr, radix);
+			return ::to_ulong_ex(value, radix);
 		}
 
 		// THROWS: system_failure

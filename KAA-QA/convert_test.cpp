@@ -5,6 +5,32 @@
 
 using namespace KAA::convert;
 
+TEST(convert, wstring_to_long_ex)
+{
+	EXPECT_EQ(8L, to_long_ex(std::wstring(L"010"))); // octal
+	EXPECT_EQ(10L, to_long_ex(std::wstring(L"10"))); // decimal
+	EXPECT_EQ(16L, to_long_ex(std::wstring(L"0x10"))); // hexadecimal
+
+	EXPECT_EQ(10L, to_long_ex(std::wstring(L"0xa")));
+	EXPECT_EQ(10L, to_long_ex(std::wstring(L"0xA")));
+
+	EXPECT_EQ(15L, to_long_ex(std::wstring(L"0xf")));
+	EXPECT_EQ(15L, to_long_ex(std::wstring(L"0xF")));
+}
+
+TEST(convert, wstring_to_ulong_ex)
+{
+	EXPECT_EQ(8UL, to_ulong_ex(std::wstring(L"010"))); // octal
+	EXPECT_EQ(10UL, to_ulong_ex(std::wstring(L"10"))); // decimal
+	EXPECT_EQ(16UL, to_ulong_ex(std::wstring(L"0x10"))); // hexadecimal
+
+	EXPECT_EQ(10UL, to_ulong_ex(std::wstring(L"0xa")));
+	EXPECT_EQ(10UL, to_ulong_ex(std::wstring(L"0xA")));
+
+	EXPECT_EQ(15UL, to_ulong_ex(std::wstring(L"0xf")));
+	EXPECT_EQ(15UL, to_ulong_ex(std::wstring(L"0xF")));
+}
+
 TEST(convert, long_to_wstring)
 {
 	EXPECT_EQ(std::wstring(L"0"), to_wstring(0L));
