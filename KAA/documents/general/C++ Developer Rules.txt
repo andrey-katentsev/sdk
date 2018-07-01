@@ -18,8 +18,6 @@
 6. Найти глобальные переменные и статические данные, видоизменяемые в любом из методов, выявленных в ходе данного анализа.
 
 
-
-
 xUnit
 - пробуем создать объект в средстве тестирования
 TEST(CObject, Create)
@@ -59,8 +57,19 @@ TEST(CObject, Create)
   * // SAFE GUARANTEE: < basic | strong | [nofail | nothrow] >
   * RAII + Transactional Programming + SRP
 
+There are several levels of exception safety (in decreasing order of safety):
+• No-throw guarantee, also known as failure transparency: Operations are guaranteed to succeed and satisfy all requirements even in exceptional situations. If an exception occurs, it will be handled internally and not observed by clients.
+• Strong exception safety, also known as commit or rollback semantics: Operations can fail, but failed operations are guaranteed to have no side effects, so all data retains their original values.
+• Basic exception safety, also known as a no-leak guarantee: Partial execution of failed operations can cause side effects, but all invariants are preserved and there are no resource leaks (including memory leaks). Any stored data will contain valid values, even if they differ from what they were before the exception.
+• No exception safety: No guarantees are made.
+
 C:\Users\akatentsev\VirtualBox VMs
 V:\akatentsev\VM
+
+USER MACROS:
+$(SDK) = C:\Users\Андрей и Елена\OneDrive\Документы\Visual Studio 2015\Projects\SDK
+$(gtest_include) = C:\Users\Андрей и Елена\OneDrive\SDK\gtest\include
+$(testing_framework) = C:\Users\Андрей и Елена\OneDrive\Документы\Visual Studio 2015\Projects\Testing Framework
 
 КОД:
 - модуль (например BasicConstants.h / null.h) в котором определены константы нуля всех базовых типов.
@@ -122,6 +131,14 @@ Header files should include all other files they depend on, rather than relying 
 
 Source files should include all other files they depend on, rather than relying on transitive inclusion (“say what you use”).  The exception to this is that a source file need not include files required to be included in its associated header file.
 }
+
+SPECIAL MEMBER FUNCTIONS
+foo();
+foo(const foo&);
+foo(foo&&) noexcept;
+foo& operator = (const foo&);
+foo& operator = (foo&&) noexcept;
+~foo();
 
 C++:
 - prefere use a += b; instead of a = a + b; this might be more effective.

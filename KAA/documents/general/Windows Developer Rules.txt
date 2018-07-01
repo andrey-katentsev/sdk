@@ -14,7 +14,14 @@ TEXT ENCODING
 - #define _UNICODE // C run-time
 
 IDE
-- Task List [TODO, DEFECT, FUTURE]
+- Tools -> Options -> Environment -> Task List
+- Tools -> Options -> Text Editor -> * -> Formatting
+
+SOURCE TEXT MARKS:
+ - FIX, TODO, DEFECT, FUTURE
+ - [OPTIMIZE] - if code needs further optimization;
+ - [WARNING]  - if code contains some dangerous alteration;
+ - [UNKNOWN] - function call for unknown reason, research needed.
 
 COM
 - Compiler COM Support Classes (_com_error, ...)
@@ -34,8 +41,9 @@ MEMORY MANAGEMENT
 - Heap    // most situable for work with a lot of small objects.
 
 FILE SYSTEM
-- fsutil file createnew .\empty.bin 1058337388
-- subst
+>fsutil file createnew KiB.bin 1024
+>fsutil file createnew .\empty.bin 1058337388
+>subst
 
 REGISTRY
 - export >regedit /e "C:\Temp\Test.reg" "HKEY_CURRENT_USER\Test"
@@ -54,16 +62,13 @@ BUILD SPEED UP
 MFC
 - CWaitCursor
 
-SOURCE TEXT MARKS:
- - TODO, DEFECT, FUTURE (MVS Tools -> Options -> Environment -> Task List + Tools -> Options -> Text Editor -> * -> Formatting)
- - [OPTIMIZE] - if code needs further optimization;
- - [WARNING]  - if code contains some dangerous alteration;
- - [UNKNOWN] - function call for unknown reason, research needed.
-
 DUMP
 - Cscript.exe
 - Wscript.exe
 >adplus -crash -pn Sandbox.exe -o C:\Temp\Dump\Sandbox 
+
+VERSION
+<major><minor><feature><build>
 
 MANIFEST
 #define <identifier> <value>

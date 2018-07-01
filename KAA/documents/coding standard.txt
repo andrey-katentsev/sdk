@@ -71,13 +71,11 @@ enum data_t
 
 [CLASS/FUNCTION HEADER]
 
-// THROWS:
-// SAFE GUARANTEE: <basic | strong | no throw>
+// THROWS: <exception_class_name | - >
+// SAFE GUARANTEE: < - | basic | strong | no throw >
 // SIDE EFFECTS:
 // [RETURN VALUE:]
 // [REMARKS:]
 
 [CODE]
-Win32 API call should be provided with scope operator ( ::RegQueryValueExW )
-
->fsutil file createnew KiB.bin 1024
+Win32 API calls should be provided with a scope operator ( ::RegQueryValueExW )
