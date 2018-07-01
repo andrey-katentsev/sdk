@@ -100,6 +100,12 @@
     <ClInclude Include="include\filesystem\in-memory_file_system.h">
       <Filter>Header Files\filesystem</Filter>
     </ClInclude>
+    <ClInclude Include="include\exception\com_failure.h">
+      <Filter>Header Files\exception</Filter>
+    </ClInclude>
+    <ClInclude Include="include\exception\wait_timeout.h">
+      <Filter>Header Files\exception</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\cryptography.cpp">
@@ -218,6 +224,9 @@
     </ClCompile>
     <ClCompile Include="source\filesystem\in-memory_file_system.cpp">
       <Filter>Source Files\filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="source\exception\wait_timeout.cpp">
+      <Filter>Source Files\exception</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

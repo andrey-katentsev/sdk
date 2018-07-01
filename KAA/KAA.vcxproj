@@ -137,9 +137,11 @@
   <ItemGroup>
     <ClInclude Include="include\convert.h" />
     <ClInclude Include="include\cryptography.h" />
+    <ClInclude Include="include\exception\com_failure.h" />
     <ClInclude Include="include\exception\failure.h" />
     <ClInclude Include="include\exception\operation_failure.h" />
     <ClInclude Include="include\exception\system_failure.h" />
+    <ClInclude Include="include\exception\wait_timeout.h" />
     <ClInclude Include="include\exception\windows_api_failure.h" />
     <ClInclude Include="include\filesystem\crt_directory_control.h" />
     <ClInclude Include="include\filesystem\crt_file.h" />
@@ -163,6 +165,7 @@
     <ClCompile Include="source\exception\failure.cpp" />
     <ClCompile Include="source\exception\operation_failure.cpp" />
     <ClCompile Include="source\exception\system_failure.cpp" />
+    <ClCompile Include="source\exception\wait_timeout.cpp" />
     <ClCompile Include="source\exception\windows_api_failure.cpp" />
     <ClCompile Include="source\filesystem\crt_directory_control.cpp" />
     <ClCompile Include="source\filesystem\crt_file.cpp" />
