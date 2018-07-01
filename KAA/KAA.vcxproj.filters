@@ -102,6 +102,9 @@
     <ClInclude Include="include\exception\wait_timeout.h">
       <Filter>Header Files\exception</Filter>
     </ClInclude>
+    <ClInclude Include="include\filesystem\in-memory_file.h">
+      <Filter>Header Files\filesystem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\cryptography.cpp">
@@ -223,6 +226,9 @@
     </ClCompile>
     <ClCompile Include="source\exception\wait_timeout.cpp">
       <Filter>Source Files\exception</Filter>
+    </ClCompile>
+    <ClCompile Include="source\filesystem\in-memory_file.cpp">
+      <Filter>Source Files\filesystem</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
