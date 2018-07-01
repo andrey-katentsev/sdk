@@ -131,8 +131,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\character.h" />
     <ClInclude Include="include\convert.h" />
     <ClInclude Include="include\cryptography.h" />
+    <ClInclude Include="include\dll\get_module_handle.h" />
     <ClInclude Include="include\exception\com_failure.h" />
     <ClInclude Include="include\exception\failure.h" />
     <ClInclude Include="include\exception\operation_failure.h" />
@@ -146,13 +148,42 @@
     <ClInclude Include="include\filesystem\driver.h" />
     <ClInclude Include="include\filesystem\file.h" />
     <ClInclude Include="include\filesystem\filesystem.h" />
+    <ClInclude Include="include\filesystem\file_progress_handler.h" />
     <ClInclude Include="include\filesystem\in-memory_file.h" />
     <ClInclude Include="include\filesystem\in-memory_file_system.h" />
+    <ClInclude Include="include\filesystem\ordinary_file_remover.h" />
     <ClInclude Include="include\filesystem\path.h" />
+    <ClInclude Include="include\filesystem\simple_overwrite_wiper.h" />
     <ClInclude Include="include\filesystem\split_path.h" />
+    <ClInclude Include="include\filesystem\wiper.h" />
+    <ClInclude Include="include\format_string.h" />
+    <ClInclude Include="include\io_completion_packet.h" />
+    <ClInclude Include="include\io_completion_port.h" />
+    <ClInclude Include="include\keywords.h" />
+    <ClInclude Include="include\load_string.h" />
+    <ClInclude Include="include\md5.h" />
+    <ClInclude Include="include\module_context.h" />
+    <ClInclude Include="include\progress_state.h" />
+    <ClInclude Include="include\RAII\com_initializer.h" />
+    <ClInclude Include="include\RAII\com_task_memory.h" />
     <ClInclude Include="include\RAII\crt_heap_memory.h" />
     <ClInclude Include="include\RAII\invalid_parameter_handler.h" />
+    <ClInclude Include="include\RAII\io_completion_port_handle.h" />
+    <ClInclude Include="include\RAII\local_memory.h" />
+    <ClInclude Include="include\RAII\variable_argument_list.h" />
+    <ClInclude Include="include\RAII\windows_registry_key_handle.h" />
     <ClInclude Include="include\random.h" />
+    <ClInclude Include="include\registry.h" />
+    <ClInclude Include="include\registry_key.h" />
+    <ClInclude Include="include\std.h" />
+    <ClInclude Include="include\stdtypes.h" />
+    <ClInclude Include="include\time\calendar_date.h" />
+    <ClInclude Include="include\UI\controls.h" />
+    <ClInclude Include="include\UI\cursor.h" />
+    <ClInclude Include="include\UI\menu.h" />
+    <ClInclude Include="include\UI\notification_area.h" />
+    <ClInclude Include="include\windows_registry.h" />
+    <ClInclude Include="include\windows_registry_key.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\convert.cpp" />
@@ -164,6 +195,7 @@
     <ClCompile Include="source\exception\system_failure.cpp" />
     <ClCompile Include="source\exception\wait_timeout.cpp" />
     <ClCompile Include="source\exception\windows_api_failure.cpp" />
+    <ClCompile Include="source\filesystem\cpp_stream_file.cpp" />
     <ClCompile Include="source\filesystem\crt_directory_control.cpp" />
     <ClCompile Include="source\filesystem\crt_file.cpp" />
     <ClCompile Include="source\filesystem\crt_file_system.cpp" />
@@ -180,6 +212,7 @@
     <ClCompile Include="source\filesystem\split_path.cpp" />
     <ClCompile Include="source\filesystem\wiper.cpp" />
     <ClCompile Include="source\format_string.cpp" />
+    <ClCompile Include="source\io_completion_port.cpp" />
     <ClCompile Include="source\load_string.cpp" />
     <ClCompile Include="source\md5.cpp" />
     <ClCompile Include="source\module_context.cpp" />
@@ -187,13 +220,18 @@
     <ClCompile Include="source\RAII\com_task_memory.cpp" />
     <ClCompile Include="source\RAII\crt_heap_memory.cpp" />
     <ClCompile Include="source\RAII\invalid_parameter_handler.cpp" />
+    <ClCompile Include="source\RAII\io_completion_port_handle.cpp" />
     <ClCompile Include="source\RAII\local_memory.cpp" />
     <ClCompile Include="source\RAII\variable_argument_list.cpp" />
     <ClCompile Include="source\RAII\windows_registry_key_handle.cpp" />
     <ClCompile Include="source\random.cpp" />
     <ClCompile Include="source\registry.cpp" />
     <ClCompile Include="source\registry_key.cpp" />
+    <ClCompile Include="source\time\calendar_date.cpp" />
     <ClCompile Include="source\UI\controls.cpp" />
+    <ClCompile Include="source\UI\cursor.cpp" />
+    <ClCompile Include="source\UI\menu.cpp" />
+    <ClCompile Include="source\UI\notification_area.cpp" />
     <ClCompile Include="source\windows_registry.cpp" />
     <ClCompile Include="source\windows_registry_key.cpp" />
   </ItemGroup>

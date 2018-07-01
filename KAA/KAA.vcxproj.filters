@@ -37,6 +37,18 @@
     <Filter Include="Source Files\UI">
       <UniqueIdentifier>{629512a0-5b16-4085-ade7-d5f3a0ddd331}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\dll">
+      <UniqueIdentifier>{640f55d2-34ac-42d6-a034-fbc8535108cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\time">
+      <UniqueIdentifier>{b68c0ca0-9373-4182-bd79-06605fe393dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\UI">
+      <UniqueIdentifier>{ee5133a2-e583-4d3c-85c5-ecaaf32a48de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\time">
+      <UniqueIdentifier>{ca6d3c67-9c85-4744-9b80-668689145424}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\cryptography.h">
@@ -104,6 +116,99 @@
     </ClInclude>
     <ClInclude Include="include\filesystem\in-memory_file.h">
       <Filter>Header Files\filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dll\get_module_handle.h">
+      <Filter>Header Files\dll</Filter>
+    </ClInclude>
+    <ClInclude Include="include\filesystem\file_progress_handler.h">
+      <Filter>Header Files\filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="include\filesystem\ordinary_file_remover.h">
+      <Filter>Header Files\filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="include\filesystem\simple_overwrite_wiper.h">
+      <Filter>Header Files\filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="include\filesystem\wiper.h">
+      <Filter>Header Files\filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RAII\com_initializer.h">
+      <Filter>Header Files\RAII</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RAII\com_task_memory.h">
+      <Filter>Header Files\RAII</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RAII\io_completion_port_handle.h">
+      <Filter>Header Files\RAII</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RAII\local_memory.h">
+      <Filter>Header Files\RAII</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RAII\variable_argument_list.h">
+      <Filter>Header Files\RAII</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RAII\windows_registry_key_handle.h">
+      <Filter>Header Files\RAII</Filter>
+    </ClInclude>
+    <ClInclude Include="include\time\calendar_date.h">
+      <Filter>Header Files\time</Filter>
+    </ClInclude>
+    <ClInclude Include="include\UI\controls.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\UI\cursor.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\UI\menu.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\UI\notification_area.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\character.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\format_string.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\io_completion_packet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\io_completion_port.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\keywords.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\load_string.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\md5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\module_context.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\progress_state.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\registry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\registry_key.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\std.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\stdtypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\windows_registry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\windows_registry_key.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -229,6 +334,27 @@
     </ClCompile>
     <ClCompile Include="source\filesystem\in-memory_file.cpp">
       <Filter>Source Files\filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="source\io_completion_port.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\filesystem\cpp_stream_file.cpp">
+      <Filter>Source Files\filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="source\RAII\io_completion_port_handle.cpp">
+      <Filter>Source Files\RAII</Filter>
+    </ClCompile>
+    <ClCompile Include="source\UI\cursor.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\UI\menu.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\UI\notification_area.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\time\calendar_date.cpp">
+      <Filter>Source Files\time</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
