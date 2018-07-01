@@ -141,6 +141,9 @@ namespace KAA
 		// SIDE EFFECTS: -
 		std::wstring to_wstring(const long value, const int radix)
 		{
+			if (2 > radix || 36 < radix)
+				throw system_failure(__FUNCTIONW__, L"'radix' argument is out of range [2,36]", EINVAL);
+
 			RAII::invalid_parameter_handler session(allow_execution);
 			{
 				std::vector<wchar_t> buffer(sizeof(value) * 8 + 1, 0); // binary (radix = 2)
@@ -159,6 +162,9 @@ namespace KAA
 		// SIDE EFFECTS: -
 		std::wstring to_wstring(const unsigned long value, const int radix)
 		{
+			if (2 > radix || 36 < radix)
+				throw system_failure(__FUNCTIONW__, L"'radix' argument is out of range [2,36]", EINVAL);
+
 			RAII::invalid_parameter_handler session(allow_execution);
 
 			std::vector<wchar_t> buffer(sizeof(value) * 8 + 1, 0); // binary (radix = 2)
