@@ -21,6 +21,18 @@ TEST(in_memory_filesystem, remove_directory)
 	EXPECT_THROW(filesystem.remove_directory(directory), std::logic_error);
 }
 
+TEST(in_memory_filesystem, create_file)
+{
+	const auto path = std::wstring { LR"(A:\directory\file.dat)" };
+	in_memory_file_system filesystem;
+	driver::create_mode new_persistent_file;
+	driver::mode sequential_binary_read_write;
+	driver::share share_any_access;
+	driver::permission full_access;
+	EXPECT_NO_THROW(filesystem.create_file(path, new_persistent_file, sequential_binary_read_write, share_any_access, full_access));
+	EXPECT_THROW(filesystem.create_file(path, new_persistent_file, sequential_binary_read_write, share_any_access, full_access), std::logic_error);
+}
+
 TEST(in_memory_filesystem, get_temp_filename)
 {
 	const in_memory_file_system filesystem;
@@ -32,7 +44,7 @@ TEST(in_memory_filesystem, get_temp_filename)
 	EXPECT_NE(B, C);
 }
 
-TEST(in_memory_filesystem, DISABLED_rename_file)
+TEST(in_memory_filesystem, rename_file)
 {
 	const auto path = std::wstring { LR"(A:\directory\file.dat)" };
 	const auto new_name = std::wstring { LR"(A:\directory\file.bin)" };
@@ -47,7 +59,7 @@ TEST(in_memory_filesystem, DISABLED_rename_file)
 	EXPECT_THROW(filesystem.rename_file(path, new_name), std::logic_error);
 }
 
-TEST(in_memory_filesystem, DISABLED_remove_file)
+TEST(in_memory_filesystem, remove_file)
 {
 	const auto path = std::wstring { LR"(A:\directory\file.dat)" };
 	in_memory_file_system filesystem;

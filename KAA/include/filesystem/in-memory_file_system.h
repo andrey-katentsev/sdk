@@ -10,6 +10,7 @@
 #pragma once
 
 #include <map>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -21,7 +22,7 @@ namespace KAA
 {
 	namespace filesystem
 	{
-		class in_memory_file_system : public driver
+		class in_memory_file_system final : public driver
 		{
 		private:
 			void icreate_directory(const std::wstring&) override;
@@ -38,7 +39,7 @@ namespace KAA
 			void iset_file_permissions(const std::wstring&, const permission&) override;
 			access iget_file_permissions(const std::wstring&) const override;
 
-			std::map<std::wstring, std::vector<uint8_t>> vfs;
+			std::map<std::wstring, std::shared_ptr<std::vector<uint8_t>>> vfs;
 		};
 	}
 }

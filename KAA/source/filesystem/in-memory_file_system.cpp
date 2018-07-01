@@ -12,6 +12,7 @@
 #include "../../include/convert.h"
 #include "../../include/random.h"
 #include "../../include/exception/operation_failure.h"
+#include "../../include/filesystem/in-memory_file.h"
 
 namespace KAA
 {
@@ -20,7 +21,7 @@ namespace KAA
 		void in_memory_file_system::icreate_directory(const std::wstring& path)
 		{
 			if (vfs.end() == vfs.find(path))
-				vfs[path].resize(0);
+				vfs[path];
 			else
 				throw std::logic_error { "directory already exists" };
 		}
@@ -40,7 +41,14 @@ namespace KAA
 
 		std::auto_ptr<file> in_memory_file_system::icreate_file(const std::wstring& path, const create_mode& lifetime, const mode& operations_allowed, const share& sharing_allowed, const permission& attributes)
 		{
-			throw std::logic_error { "not implemented" };
+			if (vfs.end() == vfs.find(path))
+			{
+				auto& descriptor = vfs[path];
+				descriptor.reset(new std::vector<uint8_t>());
+				return std::auto_ptr<file>(new in_memory_file(descriptor));
+			}
+			else
+				throw std::logic_error { "directory already exists" };
 		}
 
 		std::wstring in_memory_file_system::iget_temp_filename(void) const
