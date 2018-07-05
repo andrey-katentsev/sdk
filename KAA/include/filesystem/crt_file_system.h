@@ -7,7 +7,7 @@ namespace KAA
 {
 	namespace filesystem
 	{
-		class crt_file_system : public driver
+		class crt_file_system final : public driver
 		{
 		private:
 			void icreate_directory(const std::wstring&) override;
