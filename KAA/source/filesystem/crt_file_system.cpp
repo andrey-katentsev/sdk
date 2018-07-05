@@ -15,6 +15,7 @@
 
 #include "../../include/exception/system_failure.h"
 #include "../../include/filesystem/crt_file.h"
+#include "../../include/filesystem/path.h"
 #include "../../include/RAII/invalid_parameter_handler.h"
 
 namespace
@@ -137,9 +138,9 @@ namespace KAA
 {
 	namespace filesystem
 	{
-		void crt_file_system::icreate_directory(const std::wstring& directory_path)
+		void crt_file_system::icreate_directory(const path::directory& path)
 		{
-			const int code = _wmkdir(directory_path.c_str());
+			const int code = _wmkdir(path.to_wstring().c_str());
 			if(0 != code)
 			{
 				const errno_t error = *_errno();
@@ -147,9 +148,9 @@ namespace KAA
 			}
 		}
 
-		void crt_file_system::iremove_directory(const std::wstring& directory_path)
+		void crt_file_system::iremove_directory(const path::directory& path)
 		{
-			const int code = _wrmdir(directory_path.c_str());
+			const int code = _wrmdir(path.to_wstring().c_str());
 			if(0 != code)
 			{
 				const errno_t error = *_errno();

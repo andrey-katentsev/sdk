@@ -1,24 +1,25 @@
 #include "gtest/gtest.h"
 
 #include "../KAA/include/filesystem/in-memory_file_system.h"
+#include "../KAA/include/filesystem/path.h"
 
 using namespace KAA::filesystem;
 
 TEST(in_memory_filesystem, create_directory)
 {
-	const auto directory = std::wstring { LR"(V:\root)" };
+	const auto path = path::directory { LR"(V:\root)" };
 	in_memory_file_system filesystem;
-	EXPECT_NO_THROW(filesystem.create_directory(directory));
-	EXPECT_THROW(filesystem.create_directory(directory), std::logic_error);
+	EXPECT_NO_THROW(filesystem.create_directory(path));
+	EXPECT_THROW(filesystem.create_directory(path), std::logic_error);
 }
 
 TEST(in_memory_filesystem, remove_directory)
 {
-	const auto directory = std::wstring { LR"(V:\root)" };
+	const auto path = path::directory { LR"(V:\root)" };
 	in_memory_file_system filesystem;
-	filesystem.create_directory(directory);
-	EXPECT_NO_THROW(filesystem.remove_directory(directory));
-	EXPECT_THROW(filesystem.remove_directory(directory), std::logic_error);
+	filesystem.create_directory(path);
+	EXPECT_NO_THROW(filesystem.remove_directory(path));
+	EXPECT_THROW(filesystem.remove_directory(path), std::logic_error);
 }
 
 TEST(in_memory_filesystem, create_file)

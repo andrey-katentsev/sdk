@@ -25,8 +25,8 @@ namespace KAA
 		class in_memory_file_system final : public driver
 		{
 		private:
-			void icreate_directory(const std::wstring&) override;
-			void iremove_directory(const std::wstring&) override;
+			void icreate_directory(const path::directory&) override;
+			void iremove_directory(const path::directory&) override;
 
 			std::auto_ptr<file> iopen_file(const std::wstring&, const mode&, const share&) const override;
 			std::auto_ptr<file> icreate_file(const std::wstring&, const create_mode&, const mode&, const share&, const permission&) override;

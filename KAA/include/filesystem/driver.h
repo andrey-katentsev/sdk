@@ -9,8 +9,12 @@ namespace KAA
 {
 	namespace filesystem
 	{
-		// TODO: KAA: filesystem::path::directory.
-		// TODO: KAA: filesystem::path::file.
+		namespace path
+		{
+			class directory;
+			class file;
+		}
+
 		class driver
 		{
 		public:
@@ -88,8 +92,8 @@ namespace KAA
 
 			virtual ~driver() = default;
 
-			void create_directory(const std::wstring&);
-			void remove_directory(const std::wstring&);
+			void create_directory(const path::directory&);
+			void remove_directory(const path::directory&);
 
 			std::auto_ptr<file> open_file(const std::wstring&, const mode&, const share&) const;
 			std::auto_ptr<file> create_file(const std::wstring&, const create_mode&, const mode&, const share&, const permission&);
@@ -107,8 +111,8 @@ namespace KAA
 			//bool is_path_exists(const std::wstring& path);
 
 		private:
-			virtual void icreate_directory(const std::wstring&) = 0;
-			virtual void iremove_directory(const std::wstring&) = 0;
+			virtual void icreate_directory(const path::directory&) = 0;
+			virtual void iremove_directory(const path::directory&) = 0;
 
 			virtual std::auto_ptr<file> iopen_file(const std::wstring&, const mode&, const share&) const = 0;
 			virtual std::auto_ptr<file> icreate_file(const std::wstring&, const create_mode&, const mode&, const share&, const permission&) = 0;

@@ -11,14 +11,14 @@ namespace KAA
 		m_permission(write, read)
 		{}
 
-		void driver::create_directory(const std::wstring& directory_path)
+		void driver::create_directory(const path::directory& path)
 		{
-			return icreate_directory(directory_path);
+			return icreate_directory(path);
 		}
 
-		void driver::remove_directory(const std::wstring& directory_path)
+		void driver::remove_directory(const path::directory& path)
 		{
-			return iremove_directory(directory_path);
+			return iremove_directory(path);
 		}
 
 		std::auto_ptr<file> driver::open_file(const std::wstring& path, const mode& operations_allowed, const share& sharing_allowed) const

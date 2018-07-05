@@ -13,23 +13,26 @@
 #include "../../include/random.h"
 #include "../../include/exception/operation_failure.h"
 #include "../../include/filesystem/in-memory_file.h"
+#include "../../include/filesystem/path.h"
 
 namespace KAA
 {
 	namespace filesystem
 	{
-		void in_memory_file_system::icreate_directory(const std::wstring& path)
+		void in_memory_file_system::icreate_directory(const path::directory& path)
 		{
-			if (vfs.end() == vfs.find(path))
-				vfs[path];
+			const auto directory = path.to_wstring();
+			if (vfs.end() == vfs.find(directory))
+				vfs[directory];
 			else
 				throw std::logic_error { "directory already exists" };
 		}
 
-		void in_memory_file_system::iremove_directory(const std::wstring& path)
+		void in_memory_file_system::iremove_directory(const path::directory& path)
 		{
-			if (vfs.end() != vfs.find(path))
-				vfs.erase(path);
+			const auto directory = path.to_wstring();
+			if (vfs.end() != vfs.find(directory))
+				vfs.erase(directory);
 			else
 				throw std::logic_error { "directory does not exist" };
 		}
