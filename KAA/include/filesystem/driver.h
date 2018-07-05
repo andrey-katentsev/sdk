@@ -86,7 +86,7 @@ namespace KAA
 				permission m_permission;
 			};
 
-			virtual ~driver();
+			virtual ~driver() = default;
 
 			void create_directory(const std::wstring&);
 			void remove_directory(const std::wstring&);

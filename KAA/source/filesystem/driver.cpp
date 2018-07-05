@@ -11,9 +11,6 @@ namespace KAA
 		m_permission(write, read)
 		{}
 
-		driver::~driver()
-		{}
-
 		void driver::create_directory(const std::wstring& directory_path)
 		{
 			return icreate_directory(directory_path);
