@@ -95,18 +95,18 @@ namespace KAA
 			void create_directory(const path::directory&);
 			void remove_directory(const path::directory&);
 
-			std::auto_ptr<file> open_file(const std::wstring&, const mode&, const share&) const;
-			std::auto_ptr<file> create_file(const std::wstring&, const create_mode&, const mode&, const share&, const permission&);
+			std::auto_ptr<file> open_file(const path::file&, const mode&, const share&) const;
+			std::auto_ptr<file> create_file(const path::file&, const create_mode&, const mode&, const share&, const permission&);
 
 			std::wstring get_temp_filename(void) const;
 
-			void rename_file(const std::wstring& present_filename, const std::wstring& new_filename);
-			void remove_file(const std::wstring&);
+			void rename_file(const path::file& from, const path::file& to);
+			void remove_file(const path::file&);
 
-			void delete_file(const std::wstring&);
+			void delete_file(const path::file&);
 
-			void set_file_permissions(const std::wstring&, const permission&);
-			access get_file_permissions(const std::wstring&) const;
+			void set_file_permissions(const path::file&, const permission&);
+			access get_file_permissions(const path::file&) const;
 
 			//bool is_path_exists(const std::wstring& path);
 
@@ -114,16 +114,16 @@ namespace KAA
 			virtual void icreate_directory(const path::directory&) = 0;
 			virtual void iremove_directory(const path::directory&) = 0;
 
-			virtual std::auto_ptr<file> iopen_file(const std::wstring&, const mode&, const share&) const = 0;
-			virtual std::auto_ptr<file> icreate_file(const std::wstring&, const create_mode&, const mode&, const share&, const permission&) = 0;
+			virtual std::auto_ptr<file> iopen_file(const path::file&, const mode&, const share&) const = 0;
+			virtual std::auto_ptr<file> icreate_file(const path::file&, const create_mode&, const mode&, const share&, const permission&) = 0;
 
 			virtual std::wstring iget_temp_filename(void) const = 0;
 
-			virtual void irename_file(const std::wstring&, const std::wstring&) = 0;
-			virtual void iremove_file(const std::wstring&) = 0;
+			virtual void irename_file(const path::file&, const path::file&) = 0;
+			virtual void iremove_file(const path::file&) = 0;
 
-			virtual void iset_file_permissions(const std::wstring&, const permission&) = 0;
-			virtual access iget_file_permissions(const std::wstring&) const = 0;
+			virtual void iset_file_permissions(const path::file&, const permission&) = 0;
+			virtual access iget_file_permissions(const path::file&) const = 0;
 
 			//bool iis_path_exists(const std::wstring& path);
 		};

@@ -6,6 +6,7 @@
 #include "../../include/filesystem/driver.h"
 #include "../../include/filesystem/file.h"
 #include "../../include/filesystem/file_progress_handler.h"
+#include "../../include/filesystem/path.h"
 #include "../../include/filesystem/split_path.h"
 
 namespace
@@ -29,7 +30,7 @@ namespace KAA
 		void simple_owerwrite_wiper::ioverwrite_file(const std::wstring& path)
 		{
 			const driver::mode binary_sequential_overwrite(true, false, true, false);
-			const std::auto_ptr<file> file_to_overwrite(m_filesystem->open_file(path, binary_sequential_overwrite, exclusive_access));
+			const auto file_to_overwrite = m_filesystem->open_file(path::file { path }, binary_sequential_overwrite, exclusive_access);
 
 			{
 				const size_t chunk_size = (64 * 1024) - 1;
@@ -63,21 +64,21 @@ namespace KAA
 		void simple_owerwrite_wiper::itruncate_file(const std::wstring& path)
 		{
 			const driver::mode truncate(true, false, true, false, false, true);
-			const std::auto_ptr<file> file_to_remove(m_filesystem->open_file(path, truncate, exclusive_access));
+			const auto file_to_remove = m_filesystem->open_file(path::file { path }, truncate, exclusive_access);
 			//file_to_remove->set_size(0);
 			file_to_remove->commit();
 		}
 
 		std::wstring simple_owerwrite_wiper::irename_file(const std::wstring& path)
 		{
-			const std::wstring temporary_path(split_directory(path) + m_filesystem->get_temp_filename());
-			m_filesystem->rename_file(path, temporary_path);
-			return temporary_path;
+			const auto temporary_path = path::directory { split_directory(path) } + m_filesystem->get_temp_filename();
+			m_filesystem->rename_file(path::file { path }, temporary_path);
+			return temporary_path.to_wstring();
 		}
 
 		void simple_owerwrite_wiper::iremove_file(const std::wstring& path)
 		{
-			return m_filesystem->remove_file(path);
+			return m_filesystem->remove_file(path::file { path });
 		}
 
 		file_progress_handler* simple_owerwrite_wiper::iset_progress_handler(file_progress_handler* handler)

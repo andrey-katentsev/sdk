@@ -158,27 +158,27 @@ namespace KAA
 			}
 		}
 
-		std::auto_ptr<file> crt_file_system::iopen_file(const std::wstring& path, const mode& operations_allowed, const share& sharing_allowed) const
+		std::auto_ptr<file> crt_file_system::iopen_file(const path::file& path, const mode& operations_allowed, const share& sharing_allowed) const
 		{
 			RAII::invalid_parameter_handler session(allow_execution);
 			const int open = get_crt_open_flags(operations_allowed);
 			const int share = get_crt_share_flags(sharing_allowed);
 			int handle = 0;
-			const errno_t code = _wsopen_s(&handle, path.c_str(), open, share, 0);
+			const auto code = _wsopen_s(&handle, path.to_wstring().c_str(), open, share, 0);
 			if(0 == code)
 				return std::auto_ptr<file>(new crt_file(handle));
 			else
 				throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to open file, _wsopen_s function fails.", code);
 		}
 
-		std::auto_ptr<file> crt_file_system::icreate_file(const std::wstring& path, const create_mode& lifetime, const mode& operations_allowed, const share& sharing_allowed, const permission& attributes)
+		std::auto_ptr<file> crt_file_system::icreate_file(const path::file& path, const create_mode& lifetime, const mode& operations_allowed, const share& sharing_allowed, const permission& attributes)
 		{
 			RAII::invalid_parameter_handler session(allow_execution);
 			const int create = get_crt_create_flags(lifetime, operations_allowed);
 			const int share = get_crt_share_flags(sharing_allowed);
 			const int permissions = get_crt_permission_flags(attributes);
 			int handle = 0;
-			const errno_t code = _wsopen_s(&handle, path.c_str(), create, share, permissions);
+			const auto code = _wsopen_s(&handle, path.to_wstring().c_str(), create, share, permissions);
 			if(0 == code)
 				return std::auto_ptr<file>(new crt_file(handle));
 			else
@@ -214,18 +214,18 @@ namespace KAA
 			{ throw std::invalid_argument(__FUNCTION__); }
 		}*/
 
-		void crt_file_system::irename_file(const std::wstring& present_filename, const std::wstring& new_filename)
+		void crt_file_system::irename_file(const path::file& from, const path::file& to)
 		{
-			if(0 != _wrename(present_filename.c_str(), new_filename.c_str()))
+			if(0 != _wrename(from.to_wstring().c_str(), to.to_wstring().c_str()))
 			{
 				const errno_t error = *_errno();
 				throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to rename file, _wrename function fails.", error);
 			}
 		}
 
-		void crt_file_system::iremove_file(const std::wstring& path)
+		void crt_file_system::iremove_file(const path::file& path)
 		{
-			if(0 != _wremove(path.c_str()))
+			if(0 != _wremove(path.to_wstring().c_str()))
 			{
 				const errno_t error = *_errno();
 				throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to remove file, _wremove function fails.", error);
@@ -234,18 +234,18 @@ namespace KAA
 
 		// FIX: KAA: check all and provide SESSION!
 		// FUTURE: KAA: check for directories and rename.
-		void crt_file_system::iset_file_permissions(const std::wstring& file_path, const permission& new_attributes)
+		void crt_file_system::iset_file_permissions(const path::file& path, const permission& new_attributes)
 		{
-			if(0 != _wchmod(file_path.c_str(), get_crt_permission_flags(new_attributes)))
+			if(0 != _wchmod(path.to_wstring().c_str(), get_crt_permission_flags(new_attributes)))
 			{
 				const errno_t error = *_errno();
 				throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to set file permissions, _wchmod function fails.", error);
 			}
 		}
 
-		bool is_access_allowed(const std::wstring& path, const crt_access requested_access)
+		bool is_access_allowed(const path::file& path, const crt_access requested_access)
 		{
-			switch(_waccess_s(path.c_str(), requested_access))
+			switch(_waccess_s(path.to_wstring().c_str(), requested_access))
 			{
 			case 0:
 				return true;
@@ -260,13 +260,13 @@ namespace KAA
 		}
 
 		// FUTURE: KAA: not implemented.
-		driver::access crt_file_system::iget_file_permissions(const std::wstring& file_path) const
+		driver::access crt_file_system::iget_file_permissions(const path::file& path) const
 		{
 			RAII::invalid_parameter_handler session(allow_execution);
 			{
-				const bool is_exists = is_access_allowed(file_path, crt_access::exist);
-				const bool is_read_permission = is_access_allowed(file_path, crt_access::read);
-				const bool is_write_permission = is_access_allowed(file_path, crt_access::write);
+				const auto is_exists = is_access_allowed(path, crt_access::exist);
+				const auto is_read_permission = is_access_allowed(path, crt_access::read);
+				const auto is_write_permission = is_access_allowed(path, crt_access::write);
 				return access(is_read_permission, is_write_permission, is_exists);
 			}
 		}

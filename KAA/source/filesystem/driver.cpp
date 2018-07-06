@@ -21,12 +21,12 @@ namespace KAA
 			return iremove_directory(path);
 		}
 
-		std::auto_ptr<file> driver::open_file(const std::wstring& path, const mode& operations_allowed, const share& sharing_allowed) const
+		std::auto_ptr<file> driver::open_file(const path::file& path, const mode& operations_allowed, const share& sharing_allowed) const
 		{
 			return iopen_file(path, operations_allowed, sharing_allowed);
 		}
 
-		std::auto_ptr<file> driver::create_file(const std::wstring& path, const create_mode& lifetime, const mode& operations_allowed, const share& sharing_allowed, const permission& attributes)
+		std::auto_ptr<file> driver::create_file(const path::file& path, const create_mode& lifetime, const mode& operations_allowed, const share& sharing_allowed, const permission& attributes)
 		{
 			return icreate_file(path, lifetime, operations_allowed, sharing_allowed, attributes);
 		}
@@ -62,27 +62,27 @@ namespace KAA
 			return iset_file_size(handle);
 		}*/
 
-		void driver::rename_file(const std::wstring& present_filename, const std::wstring& new_filename)
+		void driver::rename_file(const path::file& from, const path::file& to)
 		{
-			return irename_file(present_filename, new_filename);
+			return irename_file(from, to);
 		}
 
-		void driver::remove_file(const std::wstring& path)
+		void driver::remove_file(const path::file& path)
 		{
 			return iremove_file(path);
 		}
 
-		void driver::delete_file(const std::wstring& path)
+		void driver::delete_file(const path::file& path)
 		{
 			return remove_file(path);
 		}
 
-		void driver::set_file_permissions(const std::wstring& path, const permission& attributes)
+		void driver::set_file_permissions(const path::file& path, const permission& attributes)
 		{
 			return iset_file_permissions(path, attributes);
 		}
 
-		driver::access driver::get_file_permissions(const std::wstring& path) const
+		driver::access driver::get_file_permissions(const path::file& path) const
 		{
 			return iget_file_permissions(path);
 		}

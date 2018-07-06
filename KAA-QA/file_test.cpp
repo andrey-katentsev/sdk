@@ -1,10 +1,11 @@
 #include "gtest/gtest.h"
 
 #include "../KAA/include/filesystem/crt_file_system.h"
+#include "../KAA/include/filesystem/path.h"
 
 namespace
 {
-	const std::wstring kibibyte(L"./bin/KiB.bin");
+	const KAA::filesystem::path::file kibibyte(L"./bin/KiB.bin");
 
 	const KAA::filesystem::driver::mode read_attributes_only(false, false);
 	const KAA::filesystem::driver::mode sequential_binary_read_only(false, true);

@@ -37,16 +37,17 @@ namespace KAA
 				throw std::logic_error { "directory does not exist" };
 		}
 
-		std::auto_ptr<file> in_memory_file_system::iopen_file(const std::wstring& path, const mode& operations_allowed, const share& sharing_allowed) const
+		std::auto_ptr<file> in_memory_file_system::iopen_file(const path::file& path, const mode& operations_allowed, const share& sharing_allowed) const
 		{
 			throw std::logic_error { "not implemented" };
 		}
 
-		std::auto_ptr<file> in_memory_file_system::icreate_file(const std::wstring& path, const create_mode& lifetime, const mode& operations_allowed, const share& sharing_allowed, const permission& attributes)
+		std::auto_ptr<file> in_memory_file_system::icreate_file(const path::file& path, const create_mode& lifetime, const mode& operations_allowed, const share& sharing_allowed, const permission& attributes)
 		{
-			if (vfs.end() == vfs.find(path))
+			const auto filename = path.to_wstring();
+			if (vfs.end() == vfs.find(filename))
 			{
-				auto& descriptor = vfs[path];
+				auto& descriptor = vfs[filename];
 				descriptor.reset(new std::vector<uint8_t>());
 				return std::auto_ptr<file>(new in_memory_file(descriptor));
 			}
@@ -59,10 +60,12 @@ namespace KAA
 			return convert::to_wstring(static_cast<unsigned long>(cryptography::random()), 36);
 		}
 
-		void in_memory_file_system::irename_file(const std::wstring& present_filename, const std::wstring& new_filename)
+		void in_memory_file_system::irename_file(const path::file& from, const path::file& to)
 		{
+			const auto present_filename = from.to_wstring();
 			if (vfs.end() != vfs.find(present_filename))
 			{
+				const auto new_filename = to.to_wstring();
 				if (vfs.end() == vfs.find(new_filename))
 				{
 					vfs[new_filename].swap(vfs[present_filename]);
@@ -75,20 +78,21 @@ namespace KAA
 				throw std::logic_error { "file does not exist" };
 		}
 
-		void in_memory_file_system::iremove_file(const std::wstring& path)
+		void in_memory_file_system::iremove_file(const path::file& path)
 		{
-			if (vfs.end() != vfs.find(path))
-				vfs.erase(path);
+			const auto filename = path.to_wstring();
+			if (vfs.end() != vfs.find(filename))
+				vfs.erase(filename);
 			else
 				throw std::logic_error { "file does not exist" };
 		}
 
-		void in_memory_file_system::iset_file_permissions(const std::wstring& file_path, const permission& new_attributes)
+		void in_memory_file_system::iset_file_permissions(const path::file& path, const permission& attributes)
 		{
 			throw std::logic_error { "not implemented" };
 		}
 
-		driver::access in_memory_file_system::iget_file_permissions(const std::wstring& file_path) const
+		driver::access in_memory_file_system::iget_file_permissions(const path::file& path) const
 		{
 			throw std::logic_error { "not implemented" };
 		}
