@@ -23,20 +23,17 @@ namespace KAA
 		{
 		public:
 			provider(LPCWSTR wzContainer, LPCWSTR wzProvider, DWORD dwProviderType, DWORD dwFlags);
+			provider(const provider&) = delete;
+			provider(provider&&) = delete;
 			~provider();
+
+			provider& operator = (const provider&) = delete;
+			provider& operator = (provider&&) = delete;
 
 			operator HCRYPTPROV (void) const;
 
 		private:
 			HCRYPTPROV m_handle;
-
-			provider(const provider&);
-			provider& operator = (const provider&);
-
-			#if(1500 < _MSC_VER)
-			provider(provider&&);
-			provider& operator = (provider&&);
-			#endif
 		};
 
 		// FUTURE: KAA: complete.
@@ -45,20 +42,17 @@ namespace KAA
 		{
 		public:
 			hash(const provider&, ALG_ID algorithm, HCRYPTKEY hKey, DWORD dwFlags);
+			hash(const hash&) = delete;
+			hash(hash&&) = delete;
 			~hash();
+
+			hash& operator = (const hash&) = delete;
+			hash& operator = (hash&&) = delete;
 
 			operator HCRYPTHASH (void) const;
 
 		private:
 			HCRYPTHASH m_hash;
-
-			hash(const hash&);
-			hash& operator = (const hash&);
-
-			#if(1500 < _MSC_VER)
-			hash(hash&&);
-			hash& operator = (hash&&);
-			#endif
 		};
 
 		void gamma(const void* source, const void* key, void* destination, size_t size);
