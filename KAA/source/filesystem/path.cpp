@@ -2,6 +2,8 @@
 
 #include <algorithm>
 
+#include "../../include/filesystem/split_path.h"
+
 // TODO: KAA: remove separators dublicate (e.g. C://temp///file.dat)
 // TODO: KAA: remove trailing separator for directories.
 // TODO: KAA: directory + name + extension = file
@@ -44,6 +46,16 @@ namespace KAA
 
 			file::file(const std::wstring& path) : path(make_consistent(path))
 			{}
+
+			directory file::get_directory(void) const
+			{
+				return directory { split_directory(path) };
+			}
+
+			std::wstring file::get_filename(void) const
+			{
+				return split_filename(path);
+			}
 
 			std::wstring file::to_wstring(void) const
 			{

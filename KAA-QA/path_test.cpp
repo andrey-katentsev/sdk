@@ -129,6 +129,19 @@ TEST(lfs_file_path, always_consistent)
 	ASSERT_EQ(lfs_path, path.to_wstring());
 }
 
+TEST(lfs_file_path, get_directory)
+{
+	const auto path = file(lfs_path);
+	const auto parent = directory { lfs_subdirectory };
+	ASSERT_EQ(parent, path.get_directory());
+}
+
+TEST(lfs_file_path, get_filename)
+{
+	const auto path = file(lfs_path);
+	ASSERT_EQ(filename, path.get_filename());
+}
+
 TEST(lfs_file_path, to_wstring)
 {;
 	// ARRANGE

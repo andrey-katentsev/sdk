@@ -44,6 +44,9 @@ namespace KAA
 			public:
 				explicit file(const std::wstring& path);
 
+				directory get_directory(void) const;
+				std::wstring get_filename(void) const;
+
 				std::wstring to_wstring(void) const;
 
 			private:
@@ -65,7 +68,7 @@ namespace KAA
 			bool operator != (const directory&, const directory&);
 
 			// EXAMPLE: D:\Temp + file.dat = D:\Temp\file.dat
-			file operator + (const directory&, const std::wstring&);
+			file operator + (const directory&, const std::wstring& filename);
 
 			// EXAMPLE: 'D:\Temp\'
 			std::wstring append_trailing_backslash(const std::wstring& directory_path);
