@@ -1,7 +1,6 @@
 #include "../../include/filesystem/ordinary_file_remover.h"
 
 #include "../../include/filesystem/driver.h"
-#include "../../include/filesystem/path.h"
 
 namespace KAA
 {
@@ -11,9 +10,9 @@ namespace KAA
 		m_filesystem(filesystem)
 		{}
 
-		void ordinary_file_remover::iremove_file(const std::wstring& path)
+		void ordinary_file_remover::iremove_file(const path::file& path)
 		{
-			return m_filesystem->remove_file(path::file { path });
+			return m_filesystem->remove_file(path);
 		}
 
 		file_progress_handler* ordinary_file_remover::iset_progress_handler(file_progress_handler*)

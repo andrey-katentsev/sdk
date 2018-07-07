@@ -13,7 +13,7 @@ namespace KAA
 {
 	namespace filesystem
 	{
-		void wiper::wipe_file(const std::wstring& path)
+		void wiper::wipe_file(const path::file& path)
 		{
 			ioverwrite_file(path);
 			itruncate_file(path);
@@ -25,13 +25,13 @@ namespace KAA
 			return iset_progress_handler(handler);
 		}
 
-		void wiper::ioverwrite_file(const std::wstring&)
+		void wiper::ioverwrite_file(const path::file&)
 		{}
 
-		void wiper::itruncate_file(const std::wstring&)
+		void wiper::itruncate_file(const path::file&)
 		{}
 
-		std::wstring wiper::irename_file(const std::wstring& path)
+		path::file wiper::irename_file(const path::file& path)
 		{
 			return path;
 		}

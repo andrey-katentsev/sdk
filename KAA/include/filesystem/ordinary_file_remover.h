@@ -21,7 +21,7 @@ namespace KAA
 		private:
 			driver* m_filesystem;
 
-			void iremove_file(const std::wstring& path) override;
+			void iremove_file(const path::file&) override;
 
 			file_progress_handler* iset_progress_handler(file_progress_handler*) override;
 		};

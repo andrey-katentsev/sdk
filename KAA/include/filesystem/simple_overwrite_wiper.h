@@ -24,10 +24,10 @@ namespace KAA
 			uint8_t m_aggregate;
 			file_progress_handler* progress_handler;
 
-			void ioverwrite_file(const std::wstring& path) override;
-			void itruncate_file(const std::wstring& path) override;
-			std::wstring irename_file(const std::wstring& path) override;
-			void iremove_file(const std::wstring& path) override;
+			void ioverwrite_file(const path::file&) override;
+			void itruncate_file(const path::file&) override;
+			path::file irename_file(const path::file&) override;
+			void iremove_file(const path::file&) override;
 
 			file_progress_handler* iset_progress_handler(file_progress_handler*) override;
 

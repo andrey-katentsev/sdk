@@ -9,7 +9,7 @@
 
 #pragma once
 
-#include <string>
+#include "../../include/filesystem/path.h"
 
 namespace KAA
 {
@@ -27,15 +27,15 @@ namespace KAA
 			// 2. truncate file (to zero size)
 			// 3. rename file (to random name)
 			// 4. remove renamed file
-			void wipe_file(const std::wstring& path);
+			void wipe_file(const path::file&);
 
 			file_progress_handler* set_progress_handler(file_progress_handler*);
 
 		private:
-			virtual void ioverwrite_file(const std::wstring& path);
-			virtual void itruncate_file(const std::wstring& path);
-			virtual std::wstring irename_file(const std::wstring& path);
-			virtual void iremove_file(const std::wstring& path) = 0;
+			virtual void ioverwrite_file(const path::file&);
+			virtual void itruncate_file(const path::file&);
+			virtual path::file irename_file(const path::file&);
+			virtual void iremove_file(const path::file&) = 0;
 
 			virtual file_progress_handler* iset_progress_handler(file_progress_handler*) = 0;
 		};
