@@ -4,9 +4,6 @@ namespace KAA
 {
 	namespace filesystem
 	{
-		file::~file()
-		{}
-
 		size_t file::read(const size_t bytes_to_read, void* buffer) const
 		{
 			return iread(bytes_to_read, buffer);

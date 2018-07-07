@@ -17,7 +17,7 @@ namespace KAA
 				end // end of file
 			};
 
-			virtual ~file();
+			virtual ~file() = default;
 
 			size_t read(size_t, void*) const; // reads data from a file
 			size_t write(const void*, size_t); // writes data to a file
