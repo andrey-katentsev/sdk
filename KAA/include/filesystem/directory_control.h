@@ -1,6 +1,6 @@
 #pragma once
 
-#include <string>
+#include "../../include/filesystem/path.h"
 
 namespace KAA
 {
@@ -14,7 +14,7 @@ namespace KAA
 		class directory_control
 		{
 		public:
-			virtual ~directory_control();
+			virtual ~directory_control() = default;
 
 			path::directory get_current_working_directory(void) const; // gets the current working directory
 			void set_current_working_directory(const path::directory&); // changes the current working directory
