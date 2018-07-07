@@ -20,7 +20,7 @@ namespace KAA
 		class wiper
 		{
 		public:
-			virtual ~wiper();
+			virtual ~wiper() = default;
 
 			// ALGORITHM FRAME:
 			// 1. overwrite file content

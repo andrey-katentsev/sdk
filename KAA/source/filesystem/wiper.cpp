@@ -13,9 +13,6 @@ namespace KAA
 {
 	namespace filesystem
 	{
-		wiper::~wiper()
-		{}
-
 		void wiper::wipe_file(const std::wstring& path)
 		{
 			ioverwrite_file(path);
