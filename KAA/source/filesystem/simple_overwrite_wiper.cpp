@@ -6,7 +6,6 @@
 #include "../../include/filesystem/driver.h"
 #include "../../include/filesystem/file.h"
 #include "../../include/filesystem/file_progress_handler.h"
-#include "../../include/filesystem/split_path.h"
 
 namespace
 {
@@ -70,7 +69,7 @@ namespace KAA
 
 		path::file simple_owerwrite_wiper::irename_file(const path::file& path)
 		{
-			const auto temporary_path = path::directory { split_directory(path.to_wstring()) } + m_filesystem->get_temp_filename();
+			const auto temporary_path = path.get_directory() + m_filesystem->get_temp_filename();
 			m_filesystem->rename_file(path, temporary_path);
 			return temporary_path;
 		}
