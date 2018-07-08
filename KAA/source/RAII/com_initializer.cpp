@@ -8,8 +8,6 @@
 //
 
 #include "../../include/RAII/com_initializer.h"
-
-#include "../../include/keywords.h"
 #include "../../include/exception/com_failure.h"
 
 #include <objbase.h>

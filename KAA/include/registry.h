@@ -5,8 +5,6 @@
 #include <memory>
 #include <string>
 
-#include "keywords.h"
-
 namespace KAA
 {
 	namespace system

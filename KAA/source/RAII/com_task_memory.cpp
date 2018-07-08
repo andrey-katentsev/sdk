@@ -8,7 +8,6 @@
 //
 
 #include "../../include/RAII/com_task_memory.h"
-#include "../../include/keywords.h"
 #include "../../include/exception/com_failure.h"
 
 #include <objbase.h>

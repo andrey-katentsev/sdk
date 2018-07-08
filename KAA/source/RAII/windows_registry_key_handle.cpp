@@ -11,9 +11,6 @@
 
 #include <stdexcept>
 
-#include "../../include/keywords.h"
-//#include "../../include/exception/win32_failure.h"
-
 namespace KAA
 {
 	namespace RAII

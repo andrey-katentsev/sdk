@@ -13,7 +13,6 @@
 
 #include <cstdlib>
 
-#include "../include/keywords.h"
 #include "../include/exception/system_failure.h"
 #include "../include/RAII/invalid_parameter_handler.h"
 

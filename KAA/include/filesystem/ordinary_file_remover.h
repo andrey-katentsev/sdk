@@ -4,8 +4,6 @@
 
 #include "wiper.h"
 
-#include "../keywords.h"
-
 namespace KAA
 {
 	namespace filesystem

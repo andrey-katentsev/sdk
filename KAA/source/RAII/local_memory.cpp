@@ -11,8 +11,6 @@
 
 #include <stdexcept>
 
-#include "../../include/keywords.h"
-
 namespace KAA
 {
 	namespace RAII
