@@ -23,8 +23,10 @@
 #include "../include/exception/system_failure.h"
 #include "../include/exception/windows_api_failure.h"
 #include "../include/RAII/invalid_parameter_handler.h"
+#include "../include/RAII/local_memory.h"
 
 #pragma comment(lib, "advapi32.lib")
+#pragma comment(lib, "crypt32.lib")
 
 namespace
 {
@@ -134,6 +136,48 @@ namespace KAA
 				const DWORD code = ::GetLastError();
 				throw windows_api_failure(__FUNCTIONW__, L"Unable to fill a buffer with cryptographically random bytes.", code);
 			}
+		}
+
+		std::vector<uint8_t> protect_data(const void* source, const size_t size)
+		{
+			const ::DATA_BLOB plaintext = { size, static_cast<BYTE*>(const_cast<void*>(source)) };
+			::DATA_BLOB ciphertext = { 0 };
+			// no description, no additional entropy, no prompt, no flags
+			if (FALSE == ::CryptProtectData(const_cast<::DATA_BLOB*>(&plaintext), nullptr, nullptr, nullptr, nullptr, 0UL, &ciphertext))
+			{
+				const auto code = ::GetLastError();
+				throw windows_api_failure(__FUNCTIONW__, L"failed to protect data with the user session key", code);
+			}
+
+			const RAII::local_memory memory { ciphertext.pbData };
+
+			// FUTURE: KAA: consider to use memcpy or etc.
+			std::vector<uint8_t> data(ciphertext.cbData);
+			for (auto i = 0U; i < ciphertext.cbData; ++i)
+				data[i] = ciphertext.pbData[i];
+
+			return data;
+		}
+
+		std::vector<uint8_t> unprotect_data(const void* source, const size_t size)
+		{
+			const ::DATA_BLOB ciphertext = { size, static_cast<BYTE*>(const_cast<void*>(source)) };
+			::DATA_BLOB plaintext = { 0 };
+			// no description, no additional entropy, no prompt, no flags
+			if (FALSE == ::CryptUnprotectData(const_cast<::DATA_BLOB*>(&ciphertext), nullptr, nullptr, nullptr, nullptr, 0UL, &plaintext))
+			{
+				const auto code = ::GetLastError();
+				throw windows_api_failure(__FUNCTIONW__, L"failed to protect data with the user session key", code);
+			}
+
+			const RAII::local_memory memory { plaintext.pbData };
+
+			// FUTURE: KAA: consider to use memcpy or etc.
+			std::vector<uint8_t> data(plaintext.cbData);
+			for (auto i = 0U; i < plaintext.cbData; ++i)
+				data[i] = plaintext.pbData[i];
+
+			return data;
 		}
 	}
 }
