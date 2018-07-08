@@ -20,7 +20,7 @@ namespace KAA
 			return iremove_file(irename_file(path));
 		}
 
-		file_progress_handler* wiper::set_progress_handler(file_progress_handler* const handler)
+		std::shared_ptr<file_progress_handler> wiper::set_progress_handler(const std::shared_ptr<file_progress_handler> handler)
 		{
 			return iset_progress_handler(handler);
 		}

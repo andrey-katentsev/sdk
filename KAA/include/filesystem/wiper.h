@@ -9,6 +9,8 @@
 
 #pragma once
 
+#include <memory>
+
 #include "../../include/filesystem/path.h"
 
 namespace KAA
@@ -29,7 +31,7 @@ namespace KAA
 			// 4. remove renamed file
 			void wipe_file(const path::file&);
 
-			file_progress_handler* set_progress_handler(file_progress_handler*);
+			std::shared_ptr<file_progress_handler> set_progress_handler(std::shared_ptr<file_progress_handler>);
 
 		private:
 			virtual void ioverwrite_file(const path::file&);
@@ -37,7 +39,7 @@ namespace KAA
 			virtual path::file irename_file(const path::file&);
 			virtual void iremove_file(const path::file&) = 0;
 
-			virtual file_progress_handler* iset_progress_handler(file_progress_handler*) = 0;
+			virtual std::shared_ptr<file_progress_handler> iset_progress_handler(std::shared_ptr<file_progress_handler>) = 0;
 		};
 	}
 }

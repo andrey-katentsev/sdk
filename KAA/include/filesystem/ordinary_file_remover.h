@@ -21,7 +21,7 @@ namespace KAA
 
 			void iremove_file(const path::file&) override;
 
-			file_progress_handler* iset_progress_handler(file_progress_handler*) override;
+			std::shared_ptr<file_progress_handler> iset_progress_handler(std::shared_ptr<file_progress_handler>) override;
 		};
 	}
 }
