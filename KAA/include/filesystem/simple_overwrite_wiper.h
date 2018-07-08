@@ -16,10 +16,10 @@ namespace KAA
 		class simple_owerwrite_wiper : public wiper
 		{
 		public:
-			simple_owerwrite_wiper(driver*, uint8_t aggregate);
+			simple_owerwrite_wiper(std::shared_ptr<driver>, uint8_t aggregate);
 
 		private:
-			driver* m_filesystem;
+			std::shared_ptr<driver> m_filesystem;
 			uint8_t m_aggregate;
 			std::shared_ptr<file_progress_handler> progress_handler;
 
