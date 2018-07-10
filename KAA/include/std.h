@@ -4,7 +4,7 @@
 // Created: May 19, 2013
 // Author: Andrey A. Katentsev
 //
-// Copyright (C) 2013, Hyperlink Software.
+// Copyright © Andrey A. Katentsev, 2013
 //
 
 namespace KAA
@@ -39,4 +39,4 @@ namespace KAA
 			return GetValue(container, key);
 		}
 	}
-} // namespace KAA
+}

@@ -4,7 +4,7 @@
 // Created: August 18, 2013
 // Author: Andrey A. Katentsev
 //
-// Copyright (C) 2013, Hyperlink Software.
+// Copyright © Andrey A. Katentsev, 2013
 //
 
 namespace KAA

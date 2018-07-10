@@ -4,7 +4,7 @@
 // Created: May 18, 2013
 // Author: Andrey A. Katentsev
 //
-// Copyright (C) 2013, Hyperlink Software.
+// Copyright © Andrey A. Katentsev, 2013
 //
 
 #pragma once
@@ -19,6 +19,6 @@ namespace KAA
 			extern const __declspec(selectany) wchar_t comma = L',';
 			extern const __declspec(selectany) wchar_t period = L'.';
 			extern const __declspec(selectany) wchar_t slash = L'/';
-		} // namespace Wide
-	} // namespace Character
-} // namespace KAA
+		}
+	}
+}
