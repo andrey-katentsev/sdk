@@ -12,5 +12,6 @@ namespace KAA
 	namespace cryptography
 	{
 		unsigned int random(void);
+		void generate(size_t, void*);
 	}
 }

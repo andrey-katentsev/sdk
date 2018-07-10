@@ -10,7 +10,6 @@
 #pragma once
 
 #include <vector>
-#include <cstdint>
 // FUTURE: KAA: consider to remove this header.
 #include <windows.h>
 
@@ -58,7 +57,6 @@ namespace KAA
 		};
 
 		void gamma(const void* source, const void* key, void* destination, size_t size);
-		void generate(size_t, void*);
 		void generate_random(_In_ const provider&, _Out_ byte* buffer, size_t buffer_size);
 
 		// Typically, only a user with the same logon credential as the user who encrypted the data can decrypt the data.
