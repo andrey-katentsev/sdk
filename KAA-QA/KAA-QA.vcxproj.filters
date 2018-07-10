@@ -45,6 +45,9 @@
     <ClCompile Include="in-memory_file_system_test.cpp">
       <Filter>Source Files\filesystem</Filter>
     </ClCompile>
+    <ClCompile Include="random_test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\KiB.bin">

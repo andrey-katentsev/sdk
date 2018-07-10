@@ -181,6 +181,7 @@
     <ClCompile Include="in-memory_file_system_test.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="path_test.cpp" />
+    <ClCompile Include="random_test.cpp" />
     <ClCompile Include="split_path_test.cpp" />
   </ItemGroup>
   <ItemGroup>
