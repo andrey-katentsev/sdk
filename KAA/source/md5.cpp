@@ -12,6 +12,7 @@
 #include <iomanip>
 #include <sstream>
 
+#include "../include/cryptography.h"
 #include "../include/exception/windows_api_failure.h"
 
 #include <windows.h>
@@ -57,8 +58,9 @@ namespace KAA
 		// THROWS: windows_api_failure
 		// SAFE GUARANTEE: strong
 		// SIDE EFFECTS: -
-		md5 calculate_md5(const provider& csp, const void* data, const size_t data_size)
+		md5 calculate_md5(const void* data, const size_t data_size)
 		{
+			const provider csp { nullptr, MS_DEF_PROV, PROV_RSA_FULL, CRYPT_SILENT | CRYPT_VERIFYCONTEXT };
 			const hash algorithm { csp, CALG_MD5, 0, 0 };
 
 			if(FALSE == ::CryptHashData(algorithm, reinterpret_cast<const BYTE*>(data), data_size, 0))

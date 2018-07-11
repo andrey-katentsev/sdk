@@ -9,7 +9,6 @@
 
 #pragma once
 
-#include "../include/cryptography.h"
 #include "../include/stdtypes.h"
 
 #include <string>
@@ -33,6 +32,6 @@ namespace KAA
 		bool operator != (const md5&, const md5&);
 		std::wstring to_wstring(const md5&);
 
-		md5 calculate_md5(const provider&, const void* data, size_t data_size);
+		md5 calculate_md5(const void* data, size_t data_size);
 	}
 }
