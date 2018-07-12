@@ -7,15 +7,14 @@
 // Copyright © Andrey A. Katentsev, 2013
 //
 
+#define _CRT_RAND_S
+
 #include "../include/random.h"
 
-#define _CRT_RAND_S
-#include <cstdlib>
-
 #include <algorithm>
-#include <vector>
 
 #include <memory.h>
+#include <stdlib.h>
 
 #include "../include/exception/system_failure.h"
 #include "../include/RAII/invalid_parameter_handler.h"
@@ -40,6 +39,21 @@ namespace
 
 			return bytes_to_write;
 		}
+	}
+
+	size_t generate(const size_t bytes_to_write, void* memory_write_to)
+	{
+		size_t bytes_written = 0U;
+
+		auto random_data = 0U;
+		constexpr auto chunk_size = sizeof(random_data);
+		for (size_t offset = 0U; offset < bytes_to_write; offset += chunk_size)
+		{
+			random_data = KAA::cryptography::random();
+			bytes_written += copy_memory(&random_data, chunk_size, static_cast<uint8_t*>(memory_write_to) + offset, bytes_to_write - offset);
+		}
+
+		return bytes_written;
 	}
 }
 
@@ -66,24 +80,12 @@ namespace KAA
 			}
 		}
 
-		// Генерирование (криптографически) случайных данных.
-		void generate(const size_t bytes_to_write, void* memory_write_to)
+		std::vector<uint8_t> generate(const size_t bytes_to_generate)
 		{
-			unsigned int value = 0;
-			const size_t chunk_size = sizeof(value);
-
-			std::vector<uint8_t> buffer(bytes_to_write, 0);
-			uint8_t* random_data = &buffer[0];
-
-			size_t bytes_written = 0;
-
-			for (size_t i = 0; i < bytes_to_write; i += chunk_size)
-			{
-				value = random();
-				bytes_written += copy_memory(&value, chunk_size, random_data + i, bytes_to_write - i);
-			}
-
-			copy_memory(random_data, bytes_written, memory_write_to, bytes_to_write);
+			std::vector<uint8_t> data(bytes_to_generate);
+			if (0 < bytes_to_generate)
+				::generate(bytes_to_generate, &data[0]);
+			return data;
 		}
 	}
 }

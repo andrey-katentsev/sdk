@@ -7,11 +7,13 @@
 // Copyright © Andrey A. Katentsev, 2013
 //
 
+#include <vector>
+
 namespace KAA
 {
 	namespace cryptography
 	{
 		unsigned int random(void);
-		void generate(size_t, void*);
+		std::vector<uint8_t> generate(size_t);
 	}
 }
