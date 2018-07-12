@@ -176,6 +176,7 @@
   <ItemGroup>
     <ClCompile Include="convert_test.cpp" />
     <ClCompile Include="cryptography_test.cpp" />
+    <ClCompile Include="digest_test.cpp" />
     <ClCompile Include="directory_control_test.cpp" />
     <ClCompile Include="file_test.cpp" />
     <ClCompile Include="in-memory_file_system_test.cpp" />
