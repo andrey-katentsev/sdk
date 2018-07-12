@@ -17,11 +17,26 @@
 
 #include <windows.h>
 
-using std::wstring;
-using std::wstringstream;
-
 namespace KAA
 {
+	namespace convert
+	{
+		// THROWS: -
+		// SAFE GUARANTEE: strong
+		// SIDE EFFECTS: -
+		std::wstring to_wstring(const cryptography::md5& digest)
+		{
+			std::wstringstream output;
+			output << std::setfill(L'0');
+			for (size_t i = 0; i < sizeof(digest); ++i)
+			{
+				output << std::hex << std::setw(2) << digest.byte[i];
+			}
+
+			return output.str();
+		}
+	}
+
 	namespace cryptography
 	{
 		// THROWS: -
@@ -38,21 +53,6 @@ namespace KAA
 		bool operator != (const md5& left, const md5& right)
 		{
 			return !(left == right);
-		}
-
-		// THROWS: -
-		// SAFE GUARANTEE: strong
-		// SIDE EFFECTS: -
-		wstring to_wstring(const md5& digest)
-		{
-			wstringstream output;
-			output << std::setfill(L'0');
-			for(size_t i = 0; i < sizeof(digest); ++i)
-			{
-				output << std::hex << std::setw(2) << digest.byte[i];
-			}
-
-			return output.str();
 		}
 
 		// THROWS: windows_api_failure

@@ -30,8 +30,12 @@ namespace KAA
 
 		bool operator == (const md5&, const md5&);
 		bool operator != (const md5&, const md5&);
-		std::wstring to_wstring(const md5&);
 
 		md5 calculate_md5(const void* data, size_t data_size);
+	}
+
+	namespace convert
+	{
+		std::wstring to_wstring(const cryptography::md5&);
 	}
 }
