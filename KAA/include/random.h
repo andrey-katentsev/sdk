@@ -15,5 +15,6 @@ namespace KAA
 	{
 		unsigned int random(void);
 		std::vector<uint8_t> generate(size_t);
+		size_t generate(const size_t, void*);
 	}
 }

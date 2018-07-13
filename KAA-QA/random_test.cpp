@@ -1,10 +1,11 @@
 #include "gtest/gtest.h"
 
 #include "../KAA/include/random.h"
+#include "../KAA/include/exception/operation_failure.h"
 
 using namespace KAA::cryptography;
 
-TEST(random, random)
+TEST(random, produces_different_values)
 {
 	const auto A = random();
 	const auto B = random();
@@ -23,15 +24,30 @@ TEST(random, random)
 	EXPECT_NE(D, E);
 }
 
-TEST(random, generate)
+TEST(generate, with_invalid_arguments)
 {
-	EXPECT_EQ(generate(0), generate(0));
-	EXPECT_NE(generate(1), generate(1));
-	EXPECT_NE(generate(2), generate(2));
-	EXPECT_NE(generate(3), generate(3));
-	EXPECT_NE(generate(4), generate(4));
-	EXPECT_NE(generate(5), generate(5));
-	EXPECT_NE(generate(6), generate(6));
-	EXPECT_NE(generate(7), generate(7));
-	EXPECT_NE(generate(8), generate(8));
+	auto data = 0U;
+	EXPECT_EQ(0U, generate(0, &data));
+	EXPECT_EQ(0U, data);
+	EXPECT_TRUE(generate(0).empty());
+
+	EXPECT_THROW(generate(0, nullptr), KAA::operation_failure);
+	EXPECT_THROW(generate(1, nullptr), KAA::operation_failure);
 }
+
+class generate_vector : public testing::TestWithParam<size_t>
+{};
+
+TEST_P(generate_vector, produces_different_vectors)
+{
+	EXPECT_NE(generate(GetParam()), generate(GetParam()));
+}
+
+TEST_P(generate_vector, does_not_skip_boundary_bytes)
+{
+	const auto data = generate(GetParam());
+	EXPECT_NE(0, data.front());
+	EXPECT_NE(0, data.back());
+}
+
+INSTANTIATE_TEST_CASE_P(bytes_to_generate, generate_vector, testing::Values(1U, 2U, 3U, 4U, 5U, 6U, 7U, 8U));

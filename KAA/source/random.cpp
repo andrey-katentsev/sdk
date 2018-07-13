@@ -16,6 +16,7 @@
 #include <memory.h>
 #include <stdlib.h>
 
+#include "../include/exception/operation_failure.h"
 #include "../include/exception/system_failure.h"
 #include "../include/RAII/invalid_parameter_handler.h"
 
@@ -39,21 +40,6 @@ namespace
 
 			return bytes_to_write;
 		}
-	}
-
-	size_t generate(const size_t bytes_to_write, void* memory_write_to)
-	{
-		size_t bytes_written = 0U;
-
-		auto random_data = 0U;
-		constexpr auto chunk_size = sizeof(random_data);
-		for (size_t offset = 0U; offset < bytes_to_write; offset += chunk_size)
-		{
-			random_data = KAA::cryptography::random();
-			bytes_written += copy_memory(&random_data, chunk_size, static_cast<uint8_t*>(memory_write_to) + offset, bytes_to_write - offset);
-		}
-
-		return bytes_written;
 	}
 }
 
@@ -84,8 +70,29 @@ namespace KAA
 		{
 			std::vector<uint8_t> data(bytes_to_generate);
 			if (0 < bytes_to_generate)
-				::generate(bytes_to_generate, &data[0]);
+				generate(bytes_to_generate, &data[0]);
 			return data;
+		}
+
+		size_t generate(const size_t bytes_to_generate, void* memory_write_to)
+		{
+			if (!memory_write_to)
+				throw operation_failure { __FUNCTIONW__, L"failed to generate random bytes", operation_failure::R_INVALID_ARGUMENT, operation_failure::S_ERROR };
+
+			size_t bytes_written = 0U;
+
+			if (0 < bytes_to_generate)
+			{
+				unsigned int random_data = 0U;
+				constexpr auto chunk_size = sizeof(random_data);
+				for (size_t offset = 0U; offset < bytes_to_generate; offset += chunk_size)
+				{
+					random_data = KAA::cryptography::random();
+					bytes_written += copy_memory(&random_data, chunk_size, static_cast<uint8_t*>(memory_write_to) + offset, bytes_to_generate - offset);
+				}
+			}
+
+			return bytes_written;
 		}
 	}
 }
