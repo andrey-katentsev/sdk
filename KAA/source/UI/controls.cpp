@@ -118,5 +118,17 @@ namespace KAA
 			const auto text = resources::load_string(text_id);
 			::show_ballon_tip(edit_control, title, text, icon_id);
 		}
+
+		unsigned int get_items_count(HWND combo_box_control)
+		{
+			const auto number_of_items = ::SendMessageW(combo_box_control, CB_GETCOUNT, 0, 0);
+			if (CB_ERR == number_of_items)
+			{
+				const auto code = ::GetLastError();
+				throw KAA::windows_api_failure(__FUNCTIONW__, L"failed to get the number of items in the list box of a combo box", code);
+			}
+
+			return number_of_items;
+		}
 	}
 }
