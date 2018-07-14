@@ -11,8 +11,10 @@
 
 #include <vector>
 
+#include "../../include/load_string.h"
 #include "../../include/exception/windows_api_failure.h"
 
+#include <commctrl.h>
 #include <windows.h>
 
 namespace
@@ -56,6 +58,21 @@ namespace
 
 		return context.child_window;
 	}
+
+	void show_ballon_tip(HWND edit_control, const EDITBALLOONTIP& information) noexcept
+	{
+		::SendMessageW(edit_control, EM_SHOWBALLOONTIP, 0, reinterpret_cast<LPARAM>(&information));
+	}
+
+	void show_ballon_tip(HWND edit_control, const std::wstring& title, const std::wstring& text, const INT icon_id) noexcept
+	{
+		::EDITBALLOONTIP information = { 0 };
+		information.cbStruct = sizeof(information);
+		information.pszTitle = title.c_str();
+		information.pszText = text.c_str();
+		information.ttiIcon = icon_id;
+		show_ballon_tip(edit_control, information);
+	}
 }
 
 namespace KAA
@@ -93,6 +110,13 @@ namespace KAA
 				const auto error = ::GetLastError();
 				throw windows_api_failure(__FUNCTIONW__, L"Unable to set the window's text.", error);
 			}
+		}
+
+		void show_ballon_tip(HWND edit_control, const unsigned int title_id, const unsigned int text_id, const int icon_id)
+		{
+			const auto title = resources::load_string(title_id);
+			const auto text = resources::load_string(text_id);
+			::show_ballon_tip(edit_control, title, text, icon_id);
 		}
 	}
 }
