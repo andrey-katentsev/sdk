@@ -130,5 +130,17 @@ namespace KAA
 
 			return number_of_items;
 		}
+
+		LRESULT get_item_data(HWND combo_box_control, const unsigned int item_index)
+		{
+			const auto assotiated_value = ::SendMessageW(combo_box_control, CB_GETITEMDATA, item_index, 0);
+			if (CB_ERR == assotiated_value)
+			{
+				const auto code = ::GetLastError();
+				throw KAA::windows_api_failure(__FUNCTIONW__, L"failed to retrieve value associated with the combo box item", code);
+			}
+
+			return assotiated_value;
+		}
 	}
 }

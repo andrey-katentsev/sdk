@@ -27,5 +27,7 @@ namespace KAA
 
 		// Gets the number of items in the list box of a combo box.
 		unsigned int get_items_count(HWND combo_box_control);
+		// Retrieves the application-supplied value associated with the specified item in the combo box.
+		LRESULT get_item_data(HWND combo_box_control, unsigned int item_index);
 	}
 }
