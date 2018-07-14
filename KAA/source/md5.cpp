@@ -12,10 +12,9 @@
 #include <iomanip>
 #include <sstream>
 
-#include "../include/cryptography.h"
+#include "../include/cryptography/hash.h"
+#include "../include/cryptography/provider.h"
 #include "../include/exception/windows_api_failure.h"
-
-#include <windows.h>
 
 namespace KAA
 {

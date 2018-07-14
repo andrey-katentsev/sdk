@@ -11,8 +11,11 @@
 
 #include <iso646.h>
 
+#include "../include/cryptography/provider.h"
 #include "../include/exception/windows_api_failure.h"
 #include "../include/RAII/local_memory.h"
+
+#include <wincrypt.h>
 
 #pragma comment(lib, "advapi32.lib")
 #pragma comment(lib, "crypt32.lib")
@@ -21,45 +24,6 @@ namespace KAA
 {
 	namespace cryptography
 	{
-		provider::provider(LPCWSTR wzContainer, LPCWSTR wzProvider, DWORD dwProviderType, DWORD dwFlags)
-		{
-			if(FALSE == ::CryptAcquireContextW(&m_handle, wzContainer, wzProvider, dwProviderType, dwFlags))
-			{
-				// FUTURE: KAA: incorrect message from windows_api_failure::get_system_message (see MSDN: NTE_BAD_KEYSET etc.)
-				const DWORD code = ::GetLastError();
-				throw windows_api_failure(__FUNCTIONW__, L"Unable to acquire a handle to a particular key container within a particular cryptographic service provider.", code);
-			}
-		}
-
-		provider::~provider()
-		{
-			::CryptReleaseContext(m_handle, 0);
-		}
-
-		provider::operator HCRYPTPROV (void) const
-		{
-			return m_handle;
-		}
-
-		hash::hash(const provider& csp, ALG_ID algorithm, HCRYPTKEY hKey, DWORD dwFlags)
-		{
-			if(FALSE == ::CryptCreateHash(csp, algorithm, hKey, dwFlags, &m_hash))
-			{
-				const DWORD code = ::GetLastError();
-				throw windows_api_failure(__FUNCTIONW__, L"Unable to create a handle to a cryptographic service provider hash object.", code);
-			}
-		}
-
-		hash::~hash()
-		{
-			::CryptDestroyHash(m_hash);
-		}
-
-		hash::operator HCRYPTHASH (void) const
-		{
-			return m_hash;
-		}
-
 		// Шифрование путём наложениея гамма-последовательности на открытый текст.
 		// Параметры:
 		// [in]  source      - данные для шифрования (открытый текст)
@@ -75,9 +39,9 @@ namespace KAA
 		// THROWS: windows_api_failure
 		// SAFE GUARANTEE: basic
 		// SIDE EFFECTS: -
-		void generate_random(_In_ const provider& csp, _Out_ byte* buffer, size_t buffer_size)
+		void generate_random(_In_ const provider& csp, void* buffer, const size_t size)
 		{
-			if(FALSE == ::CryptGenRandom(csp, buffer_size, buffer))
+			if(FALSE == ::CryptGenRandom(csp, size, static_cast<BYTE*>(buffer)))
 			{
 				const DWORD code = ::GetLastError();
 				throw windows_api_failure(__FUNCTIONW__, L"Unable to fill a buffer with cryptographically random bytes.", code);

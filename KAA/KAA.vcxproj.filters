@@ -49,6 +49,12 @@
     <Filter Include="Source Files\time">
       <UniqueIdentifier>{ca6d3c67-9c85-4744-9b80-668689145424}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\cryptography">
+      <UniqueIdentifier>{ddbaba64-5007-4b11-8e90-ef952ad1f0ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cryptography">
+      <UniqueIdentifier>{c8d870ac-18b0-4ca0-a595-b078dd30f89f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\cryptography.h">
@@ -210,6 +216,12 @@
     <ClInclude Include="include\windows_registry_key.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\cryptography\hash.h">
+      <Filter>Header Files\cryptography</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cryptography\provider.h">
+      <Filter>Header Files\cryptography</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\cryptography.cpp">
@@ -355,6 +367,12 @@
     </ClCompile>
     <ClCompile Include="source\time\calendar_date.cpp">
       <Filter>Source Files\time</Filter>
+    </ClCompile>
+    <ClCompile Include="source\cryptography\hash.cpp">
+      <Filter>Source Files\cryptography</Filter>
+    </ClCompile>
+    <ClCompile Include="source\cryptography\provider.cpp">
+      <Filter>Source Files\cryptography</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

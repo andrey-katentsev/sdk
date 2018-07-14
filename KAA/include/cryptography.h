@@ -10,54 +10,15 @@
 #pragma once
 
 #include <vector>
-// FUTURE: KAA: consider to remove this header.
-#include <windows.h>
 
 namespace KAA
 {
 	namespace cryptography
 	{
-		// FUTURE: KAA: abstract base class required.
-		// FUTURE: KAA: complete.
-		// Used to acquire a handle to a particular key container within a particular cryptographic service provider (CSP).
-		class provider
-		{
-		public:
-			provider(LPCWSTR wzContainer, LPCWSTR wzProvider, DWORD dwProviderType, DWORD dwFlags);
-			provider(const provider&) = delete;
-			provider(provider&&) = delete;
-			~provider();
-
-			provider& operator = (const provider&) = delete;
-			provider& operator = (provider&&) = delete;
-
-			operator HCRYPTPROV (void) const;
-
-		private:
-			HCRYPTPROV m_handle;
-		};
-
-		// FUTURE: KAA: complete.
-		// Initiates the hashing of a stream of data.
-		class hash
-		{
-		public:
-			hash(const provider&, ALG_ID algorithm, HCRYPTKEY hKey, DWORD dwFlags);
-			hash(const hash&) = delete;
-			hash(hash&&) = delete;
-			~hash();
-
-			hash& operator = (const hash&) = delete;
-			hash& operator = (hash&&) = delete;
-
-			operator HCRYPTHASH (void) const;
-
-		private:
-			HCRYPTHASH m_hash;
-		};
+		class provider;
 
 		void gamma(const void* source, const void* key, void* destination, size_t size);
-		void generate_random(_In_ const provider&, _Out_ byte* buffer, size_t buffer_size);
+		void generate_random(const provider&, void* buffer, size_t size);
 
 		// Typically, only a user with the same logon credential as the user who encrypted the data can decrypt the data.
 		// In addition, the encryption and decryption usually must be done on the same computer.
