@@ -137,10 +137,19 @@ namespace KAA
 			if (CB_ERR == assotiated_value)
 			{
 				const auto code = ::GetLastError();
-				throw KAA::windows_api_failure(__FUNCTIONW__, L"failed to retrieve value associated with the combo box item", code);
+				throw KAA::windows_api_failure(__FUNCTIONW__, L"failed to retrieve the value associated with the item in a combo box", code);
 			}
 
 			return assotiated_value;
+		}
+
+		void set_item_data(HWND combo_box_control, const unsigned int item_index, const LRESULT data)
+		{
+			if (CB_ERR == ::SendMessageW(combo_box_control, CB_SETITEMDATA, item_index, data))
+			{
+				const auto code = ::GetLastError();
+				throw KAA::windows_api_failure(__FUNCTIONW__, L"failed to set the value associated with the item in a combo box", code);
+			}
 		}
 	}
 }
