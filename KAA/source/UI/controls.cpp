@@ -131,6 +131,18 @@ namespace KAA
 			return number_of_items;
 		}
 
+		unsigned int get_selected_item(HWND combo_box_control)
+		{
+			const auto item_index = ::SendMessageW(combo_box_control, CB_GETCURSEL, 0, 0);
+			if (CB_ERR == item_index) // if no item is selected, it is CB_ERR
+			{
+				const auto code = ::GetLastError();
+				throw KAA::windows_api_failure(__FUNCTIONW__, L"failed to retrieve the index of the currently selected item: no item is selected", code);
+			}
+
+			return item_index;
+		}
+
 		LRESULT get_item_data(HWND combo_box_control, const unsigned int item_index)
 		{
 			const auto assotiated_value = ::SendMessageW(combo_box_control, CB_GETITEMDATA, item_index, 0);
