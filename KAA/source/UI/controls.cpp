@@ -155,6 +155,24 @@ namespace KAA
 			}
 		}
 
+		unsigned int add_string(HWND combo_box_control, const std::wstring& text)
+		{
+			const auto index = ::SendMessageW(combo_box_control, CB_ADDSTRING, 0, reinterpret_cast<LPARAM>(text.c_str()));
+			if (CB_ERR == index)
+			{
+				const auto code = ::GetLastError();
+				throw KAA::windows_api_failure(__FUNCTIONW__, L"failed to add a string to the list box of a combo box", code);
+			}
+
+			if (CB_ERRSPACE == index)
+			{
+				const auto code = ::GetLastError();
+				throw KAA::windows_api_failure(__FUNCTIONW__, L"failed to add a string to the list box of a combo box: insufficient space is available to store the new string", code);
+			}
+
+			return index;
+		}
+
 		LRESULT get_item_data(HWND combo_box_control, const unsigned int item_index)
 		{
 			const auto assotiated_value = ::SendMessageW(combo_box_control, CB_GETITEMDATA, item_index, 0);

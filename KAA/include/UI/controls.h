@@ -32,6 +32,10 @@ namespace KAA
 		// Selects a string in the list of a combo box. If necessary, the list scrolls the string into view.
 		// The text in the edit control of the combo box changes to reflect the new selection, and any previous selection in the list is removed.
 		void set_selected_item(HWND combo_box_control, unsigned int item_index);
+		// Adds a string to the list box of a combo box.
+		// If the combo box does not have the CBS_SORT style, the string is added to the end of the list.
+		// Otherwise, the string is inserted into the list, and the list is sorted.
+		unsigned int add_string(HWND combo_box_control, const std::wstring& text);
 		// Retrieves the application-supplied value associated with the specified item in the combo box.
 		LRESULT get_item_data(HWND combo_box_control, unsigned int item_index);
 		// Sets the value associated with the specified item in a combo box.
