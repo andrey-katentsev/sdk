@@ -29,6 +29,9 @@ namespace KAA
 		unsigned int get_items_count(HWND combo_box_control);
 		// Retrieves the index of the currently selected item, if any.
 		unsigned int get_selected_item(HWND combo_box_control);
+		// Selects a string in the list of a combo box. If necessary, the list scrolls the string into view.
+		// The text in the edit control of the combo box changes to reflect the new selection, and any previous selection in the list is removed.
+		void set_selected_item(HWND combo_box_control, unsigned int item_index);
 		// Retrieves the application-supplied value associated with the specified item in the combo box.
 		LRESULT get_item_data(HWND combo_box_control, unsigned int item_index);
 		// Sets the value associated with the specified item in a combo box.

@@ -143,6 +143,18 @@ namespace KAA
 			return item_index;
 		}
 
+		// THROWS: windows_api_failure
+		// SAFE GUARANTEE: basic
+		// SIDE EFFECTS: if 'item_index' is greater than the number of items in the list or if 'item_index' is –1, the return value is CB_ERR and the selection is cleared
+		void set_selected_item(HWND combo_box_control, const unsigned int item_index)
+		{
+			if (CB_ERR == ::SendMessageW(combo_box_control, CB_SETCURSEL, item_index, 0))
+			{
+				const auto code = ::GetLastError();
+				throw KAA::windows_api_failure(__FUNCTIONW__, L"failed to select a string in the list of a combo box", code);
+			}
+		}
+
 		LRESULT get_item_data(HWND combo_box_control, const unsigned int item_index)
 		{
 			const auto assotiated_value = ::SendMessageW(combo_box_control, CB_GETITEMDATA, item_index, 0);
