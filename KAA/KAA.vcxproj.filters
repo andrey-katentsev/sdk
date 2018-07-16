@@ -222,6 +222,9 @@
     <ClInclude Include="include\cryptography\provider.h">
       <Filter>Header Files\cryptography</Filter>
     </ClInclude>
+    <ClInclude Include="include\checksum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\cryptography.cpp">
@@ -373,6 +376,9 @@
     </ClCompile>
     <ClCompile Include="source\cryptography\provider.cpp">
       <Filter>Source Files\cryptography</Filter>
+    </ClCompile>
+    <ClCompile Include="source\checksum.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

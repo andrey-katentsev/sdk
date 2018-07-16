@@ -132,6 +132,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\character.h" />
+    <ClInclude Include="include\checksum.h" />
     <ClInclude Include="include\convert.h" />
     <ClInclude Include="include\cryptography.h" />
     <ClInclude Include="include\cryptography\hash.h" />
@@ -188,6 +189,7 @@
     <ClInclude Include="include\windows_registry_key.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\checksum.cpp" />
     <ClCompile Include="source\convert.cpp" />
     <ClCompile Include="source\cryptography.cpp" />
     <ClCompile Include="source\cryptography\hash.cpp" />
