@@ -51,6 +51,9 @@
     <ClCompile Include="digest_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="checksum_test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\KiB.bin">
