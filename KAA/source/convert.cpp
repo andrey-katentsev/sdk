@@ -135,6 +135,16 @@ namespace KAA
 			}
 		}
 
+		std::wstring to_wstring(const int value, const int radix)
+		{
+			return to_wstring(static_cast<long>(value), radix);
+		}
+
+		std::wstring to_wstring(const unsigned int value, const int radix)
+		{
+			return to_wstring(static_cast<unsigned long>(value), radix);
+		}
+
 		// THROWS: system_failure
 		// SAFE GUARANTEE: strong
 		// SIDE EFFECTS: -
