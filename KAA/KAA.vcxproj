@@ -164,6 +164,7 @@
     <ClInclude Include="include\io_completion_port.h" />
     <ClInclude Include="include\keywords.h" />
     <ClInclude Include="include\load_string.h" />
+    <ClInclude Include="include\lock.h" />
     <ClInclude Include="include\md5.h" />
     <ClInclude Include="include\module_context.h" />
     <ClInclude Include="include\progress_state.h" />
@@ -220,6 +221,7 @@
     <ClCompile Include="source\format_string.cpp" />
     <ClCompile Include="source\io_completion_port.cpp" />
     <ClCompile Include="source\load_string.cpp" />
+    <ClCompile Include="source\lock.cpp" />
     <ClCompile Include="source\md5.cpp" />
     <ClCompile Include="source\module_context.cpp" />
     <ClCompile Include="source\RAII\com_initializer.cpp" />
