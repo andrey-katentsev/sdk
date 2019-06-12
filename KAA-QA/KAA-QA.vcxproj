@@ -177,6 +177,7 @@
     <ClCompile Include="checksum_test.cpp" />
     <ClCompile Include="convert_test.cpp" />
     <ClCompile Include="cryptography_test.cpp" />
+    <ClCompile Include="debug_test.cpp" />
     <ClCompile Include="digest_test.cpp" />
     <ClCompile Include="directory_control_test.cpp" />
     <ClCompile Include="file_test.cpp" />
