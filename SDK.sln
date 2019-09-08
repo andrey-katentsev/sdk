@@ -11,9 +11,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KAA-QA", "KAA-QA\KAA-QA.vcx
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "documents", "documents", "{91F4D1E6-9BB4-4131-952D-B35C3BF04139}"
 	ProjectSection(SolutionItems) = preProject
-		KAA\documents\general\C++ developer rules.txt = KAA\documents\general\C++ developer rules.txt
+		KAA\documents\general\C++ developer rules.txt = KAA\documents\general\C++ Developer Rules.txt
 		KAA\documents\coding standard.txt = KAA\documents\coding standard.txt
-		KAA\documents\general\windows developer rules.txt = KAA\documents\general\windows developer rules.txt
+		KAA\documents\general\windows developer rules.txt = KAA\documents\general\Windows Developer Rules.txt
 	EndProjectSection
 EndProject
 Global
