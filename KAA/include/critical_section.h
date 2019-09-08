@@ -24,6 +24,12 @@ namespace KAA
 			critical_section(unsigned int spin_count, bool debug = false);
 			~critical_section();
 
+			critical_section(const critical_section&) = delete;
+			critical_section(critical_section&&) = delete;
+
+			critical_section& operator = (const critical_section&) = delete;
+			critical_section& operator = (critical_section&&) = delete;
+
 		private:
 			void iseize(void) override;
 			void irelease(void) override;
