@@ -32,6 +32,26 @@ namespace KAA
 
 				return position;
 			}
+
+			// FIX: KAA: unreferenced, incomplete.
+			class WaitCursor
+			{
+			public:
+				WaitCursor()
+				{
+					m_handle = ::LoadCursorW(::GetModuleHandleW(nullptr), IDC_WAIT);
+					m_previous = ::SetCursor(m_handle);
+				}
+
+				~WaitCursor()
+				{
+					::SetCursor(m_previous);
+				}
+
+			private:
+				HCURSOR m_handle;
+				HCURSOR m_previous;
+			};
 		}
 	}
 }
