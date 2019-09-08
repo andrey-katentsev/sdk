@@ -17,7 +17,6 @@
 5. Проанализировать параметры, передаваемые методам, выявленным в ходе данного анализа. Проверить, используются ли эти параметры или любые объекты, возвращаемые их методами, в коде, который требуется изменить.
 6. Найти глобальные переменные и статические данные, видоизменяемые в любом из методов, выявленных в ходе данного анализа.
 
-
 xUnit
 - пробуем создать объект в средстве тестирования
 TEST(CObject, Create)
@@ -50,7 +49,6 @@ TEST(CObject, Create)
 - следить за чистотой функций!
 - упрощение (максимально локализовать данные) - только интерфейс, только инкапсуляция!
 - нет глобальным переменным, только понятный и прозрачный код ("Анализируя код, мы должны понять, как и на что он действует". Без дополнительного изучения или углуюления во внутренние детали.).
-
 
 - Safe Code
   * программа не использует неинициализированную память
@@ -162,6 +160,11 @@ You then need only maintain the prefix versions, because the postfix versions wi
 
 - Like C, C++ employs short-circuit evaluation of boolean expressions.
 This means that once the truth or falsehood of an expression has been determined, evaluation of the expression ceases, even if some parts of the expression haven't yet been examined.
+
+- __declspec(noreturn) void foo(void);
+- __declspec(nothrow) void foo(void);
+
+- void foo(void) noexcept;
 
 - void Function(void) throw(); it is the equivalent to void __declspec(nothrow) Function(void);
 - void Function(void) throw(); - the function does not throw an exception.
