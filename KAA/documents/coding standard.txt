@@ -30,7 +30,7 @@ RULE: All source code files (.h, .cpp, ...) must contain all required (used type
 
 #undef WindowsAPI // when necessary
 
-#pragma comment(lib, "advapi32.lib")
+#pragma comment(lib, "crypt32.lib")
 
 namespace KAA // standard namespace (like std)
 {
@@ -67,6 +67,14 @@ enum data_t
 {
 	D_CONSTANT_1,
 	D_CONSTANT_2,
+};
+
+enum class data_t
+{
+	constant_one,
+	constant_two,
+	...
+	constant_n
 };
 
 [CLASS/FUNCTION HEADER]
