@@ -19,11 +19,14 @@ namespace KAA
 		// THROWS: windows_api_failure
 		// SAFE GUARANTEE: strong
 		// SIDE EFFECTS: -
+		// Returns a handle to the file used to create the calling process (.exe file).
 		HINSTANCE get_calling_process_module_handle(void);
 
 		// THROWS: windows_api_failure
 		// SAFE GUARANTEE: strong
 		// SIDE EFFECTS: -
+		// Retrieves a module handle for the specified module.
+		// The module must have been loaded by the calling process.
 		HINSTANCE get_module_handle(const std::wstring& name);
 	}
 }
