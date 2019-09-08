@@ -6,8 +6,6 @@
 
 #include "../include/exception/windows_api_failure.h"
 
-#include <windows.h>
-
 namespace
 {
 	// THROWS: windows_api_failure
