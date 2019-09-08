@@ -17,7 +17,6 @@ namespace KAA
 		HINSTANCE get_calling_process_module_handle(void)
 		{
 			HINSTANCE handle = ::GetModuleHandleW(nullptr);
-
 			if(nullptr == handle)
 			{
 				const DWORD error = ::GetLastError();
@@ -27,10 +26,10 @@ namespace KAA
 			return handle;
 		}
 
+		// TODO: KAA: consider to replace const std::wstring& with the std::move(std::wstring).
 		HINSTANCE get_module_handle(const std::wstring& name)
 		{
 			HINSTANCE handle = ::GetModuleHandleW(name.c_str());
-
 			if(nullptr == handle)
 			{
 				const DWORD error = ::GetLastError();
