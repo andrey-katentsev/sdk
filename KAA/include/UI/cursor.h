@@ -9,6 +9,7 @@
 
 #pragma once
 
+// FUTURE: KAA: consider to remove this header.
 #include <windows.h>
 
 namespace KAA

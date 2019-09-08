@@ -6,6 +6,7 @@
 
 #include "./RAII/windows_registry_key_handle.h"
 
+// FUTURE: KAA: consider to remove this header.
 #include <windows.h>
 
 namespace KAA

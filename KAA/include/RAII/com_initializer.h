@@ -7,6 +7,7 @@
 // Copyright © Andrey A. Katentsev, 2013
 //
 
+// FUTURE: KAA: consider to remove this header.
 #include <windows.h>
 
 namespace KAA
