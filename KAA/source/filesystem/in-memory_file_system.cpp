@@ -9,6 +9,8 @@
 
 #include "../../include/filesystem/in-memory_file_system.h"
 
+#include <stdexcept>
+
 #include "../../include/convert.h"
 #include "../../include/random.h"
 #include "../../include/exception/operation_failure.h"

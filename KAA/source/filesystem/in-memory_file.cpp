@@ -9,6 +9,8 @@
 
 #include "../../include/filesystem/in-memory_file.h"
 
+#include <stdexcept>
+
 namespace KAA
 {
 	namespace filesystem
