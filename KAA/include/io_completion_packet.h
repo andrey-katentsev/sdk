@@ -7,7 +7,7 @@ namespace KAA
 	struct io_completion_packet
 	{
 		DWORD bytes_transferred;
-		DWORD key;
+		ULONG_PTR key;
 		OVERLAPPED* status;
 	};
 }
