@@ -2,8 +2,8 @@
 
 namespace KAA
 {
-	wait_timeout::wait_timeout(const std::wstring& source, const std::wstring& description) :
-	base(source, description, WAIT_TIMEOUT)
+	wait_timeout::wait_timeout(std::wstring source, std::wstring description) :
+	base(std::move(source), std::move(description), WAIT_TIMEOUT)
 	{}
 
 	std::wstring wait_timeout::iget_source(void) const

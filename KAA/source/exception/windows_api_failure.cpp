@@ -91,9 +91,9 @@ namespace
 
 namespace KAA
 {
-	windows_api_failure::windows_api_failure(const std::wstring& source, const std::wstring& description, const long error) : // defined in winerror.h
-	source(source),
-	description(description),
+	windows_api_failure::windows_api_failure(std::wstring source, std::wstring description, const long error) : // defined in winerror.h
+	source(std::move(source)),
+	description(std::move(description)),
 	status_code(ERROR_SUCCESS),
 	facility_code(FACILITY_NULL),
 	failure_severity(S_SUCCESS),
@@ -102,9 +102,9 @@ namespace KAA
 		parse_error(error);
 	}
 
-	windows_api_failure::windows_api_failure(const std::wstring& source, const std::wstring& description, const DWORD error) : // returned by ::GetLastError()
-	source(source),
-	description(description),
+	windows_api_failure::windows_api_failure(std::wstring source, std::wstring description, const DWORD error) : // returned by ::GetLastError()
+	source(std::move(source)),
+	description(std::move(description)),
 	status_code(ERROR_SUCCESS),
 	facility_code(FACILITY_NULL),
 	failure_severity(S_SUCCESS),
@@ -113,9 +113,9 @@ namespace KAA
 		parse_error(error);
 	}
 
-	windows_api_failure::windows_api_failure(const std::wstring& source, const std::wstring& description, const WORD status_code, const WORD facility_code, const severity_t severity, const bool is_custom) :
-	source(source),
-	description(description),
+	windows_api_failure::windows_api_failure(std::wstring source, std::wstring description, const WORD status_code, const WORD facility_code, const severity_t severity, const bool is_custom) :
+	source(std::move(source)),
+	description(std::move(description)),
 	status_code(status_code),
 	facility_code(facility_code),
 	failure_severity(severity),

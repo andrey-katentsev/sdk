@@ -18,9 +18,9 @@ namespace
 
 namespace KAA
 {
-	system_failure::system_failure(const std::wstring& source, const std::wstring& description, const errno_t error_code) :
-	source(source),
-	description(description),
+	system_failure::system_failure(std::wstring source, std::wstring description, const errno_t error_code) :
+	source(std::move(source)),
+	description(std::move(description)),
 	error_code(error_code)
 	{}
 

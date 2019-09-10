@@ -18,7 +18,7 @@ namespace KAA
 	class system_failure final : public failure
 	{
 	public:
-		system_failure(const std::wstring& source, const std::wstring& description, errno_t);
+		system_failure(std::wstring source, std::wstring description, errno_t);
 
 		operator errno_t (void) const noexcept;
 

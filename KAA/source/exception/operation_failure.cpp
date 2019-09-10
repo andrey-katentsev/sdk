@@ -45,9 +45,9 @@ namespace
 
 namespace KAA
 {
-	operation_failure::operation_failure(const std::wstring& source, const std::wstring& description, const status_code_t status_code, const severity_t severity) :
-	source(source),
-	description(description),
+	operation_failure::operation_failure(std::wstring source, std::wstring description, const status_code_t status_code, const severity_t severity) :
+	source(std::move(source)),
+	description(std::move(description)),
 	status_code(status_code),
 	severity(severity)
 	{}

@@ -30,7 +30,7 @@ namespace KAA
 			S_ERROR = 3
 		};
 
-		operation_failure(const std::wstring& source, const std::wstring& description, status_code_t, severity_t);
+		operation_failure(std::wstring source, std::wstring description, status_code_t, severity_t);
 
 	private:
 		std::wstring source;

@@ -8,7 +8,6 @@
 //
 
 #include "../../include/exception/com_failure.h"
-
 #include "../../include/exception/windows_api_failure.h"
 #include "../../include/RAII/local_memory.h"
 
@@ -63,9 +62,9 @@ namespace
 
 namespace KAA
 {
-	com_failure::com_failure(const std::wstring& source, const std::wstring& description, const HRESULT error) :
-	source(source),
-	description(description),
+	com_failure::com_failure(std::wstring source, std::wstring description, const HRESULT error) :
+	source(std::move(source)),
+	description(std::move(description)),
 	status_code(S_OK),
 	facility_code(FACILITY_NULL),
 	is_success(true)
@@ -77,9 +76,9 @@ namespace KAA
 		is_success = com_error.layout.severity == 0 ? true : false;
 	}
 
-	com_failure::com_failure(const std::wstring& source, const std::wstring& description, const WORD status_code, const WORD facility_code, const bool is_success) :
-	source(source),
-	description(description),
+	com_failure::com_failure(std::wstring source, std::wstring description, const WORD status_code, const WORD facility_code, const bool is_success) :
+	source(std::move(source)),
+	description(std::move(description)),
 	status_code(status_code),
 	facility_code(facility_code),
 	is_success(is_success)

@@ -8,9 +8,7 @@
 //
 
 #include <string>
-
 #include "failure.h"
-
 #include <windows.h>
 
 namespace KAA
@@ -18,8 +16,8 @@ namespace KAA
 	class com_failure final : public failure
 	{
 	public:
-		com_failure(const std::wstring& source, const std::wstring& description, HRESULT);
-		com_failure(const std::wstring& source, const std::wstring& description, WORD status_code, WORD facility_code, bool is_success);
+		com_failure(std::wstring source, std::wstring description, HRESULT);
+		com_failure(std::wstring source, std::wstring description, WORD status_code, WORD facility_code, bool is_success);
 
 		operator HRESULT (void) const throw();
 

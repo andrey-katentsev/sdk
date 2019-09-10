@@ -8,7 +8,7 @@ namespace KAA
 	class wait_timeout final : public failure
 	{
 	public:
-		wait_timeout(const std::wstring& source, const std::wstring& description);
+		wait_timeout(std::wstring source, std::wstring description);
 
 	private:
 		windows_api_failure base;

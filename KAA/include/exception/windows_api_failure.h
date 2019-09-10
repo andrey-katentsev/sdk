@@ -25,9 +25,9 @@ namespace KAA
 			S_ERROR = 3
 		};
 
-		windows_api_failure(const std::wstring& source, const std::wstring& description, long);
-		windows_api_failure(const std::wstring& source, const std::wstring& description, DWORD);
-		windows_api_failure(const std::wstring& source, const std::wstring& description, WORD status_code, WORD facility_code, severity_t severity, bool is_custom);
+		windows_api_failure(std::wstring source, std::wstring description, long);
+		windows_api_failure(std::wstring source, std::wstring description, DWORD);
+		windows_api_failure(std::wstring source, std::wstring description, WORD status_code, WORD facility_code, severity_t severity, bool is_custom);
 
 		operator DWORD (void) const throw();
 
