@@ -27,7 +27,7 @@ namespace KAA
 
 		windows_api_failure(std::wstring source, std::wstring description, long);
 		windows_api_failure(std::wstring source, std::wstring description, DWORD);
-		windows_api_failure(std::wstring source, std::wstring description, WORD status_code, WORD facility_code, severity_t severity, bool is_custom);
+		windows_api_failure(std::wstring source, std::wstring description, WORD status_code, WORD facility_code, severity_t severity, bool custom);
 
 		operator DWORD (void) const throw();
 
@@ -37,7 +37,7 @@ namespace KAA
 		WORD status_code;
 		WORD facility_code;
 		severity_t failure_severity;
-		bool is_custom;
+		bool custom;
 
 		void parse_error(DWORD);
 		DWORD get_error(void) const throw();

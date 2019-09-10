@@ -67,21 +67,21 @@ namespace KAA
 	description(std::move(description)),
 	status_code(S_OK),
 	facility_code(FACILITY_NULL),
-	is_success(true)
+	success(true)
 	{
 		com_error_t com_error = { 0 };
 		com_error.value = error;
 		status_code = com_error.layout.status_code;
 		facility_code = com_error.layout.facility_code;
-		is_success = com_error.layout.severity == 0 ? true : false;
+		success = com_error.layout.severity == 0 ? true : false;
 	}
 
-	com_failure::com_failure(std::wstring source, std::wstring description, const WORD status_code, const WORD facility_code, const bool is_success) :
+	com_failure::com_failure(std::wstring source, std::wstring description, const WORD status_code, const WORD facility_code, const bool success) :
 	source(std::move(source)),
 	description(std::move(description)),
 	status_code(status_code),
 	facility_code(facility_code),
-	is_success(is_success)
+	success(success)
 	{}
 
 	com_failure::operator HRESULT (void) const throw()
@@ -94,7 +94,7 @@ namespace KAA
 		com_error_t com_error = { 0 };
 		com_error.layout.status_code = status_code;
 		com_error.layout.facility_code = facility_code;
-		com_error.layout.severity = is_success ? 0 : 1;
+		com_error.layout.severity = success ? 0 : 1;
 		return com_error.value;
 	}
 

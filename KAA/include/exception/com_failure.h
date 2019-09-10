@@ -17,7 +17,7 @@ namespace KAA
 	{
 	public:
 		com_failure(std::wstring source, std::wstring description, HRESULT);
-		com_failure(std::wstring source, std::wstring description, WORD status_code, WORD facility_code, bool is_success);
+		com_failure(std::wstring source, std::wstring description, WORD status_code, WORD facility_code, bool success);
 
 		operator HRESULT (void) const throw();
 
@@ -26,7 +26,7 @@ namespace KAA
 		std::wstring description;
 		WORD status_code;
 		WORD facility_code;
-		bool is_success;
+		bool success;
 
 		HRESULT get_error(void) const throw();
 

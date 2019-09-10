@@ -97,7 +97,7 @@ namespace KAA
 	status_code(ERROR_SUCCESS),
 	facility_code(FACILITY_NULL),
 	failure_severity(S_SUCCESS),
-	is_custom(true)
+	custom(true)
 	{
 		parse_error(error);
 	}
@@ -108,18 +108,18 @@ namespace KAA
 	status_code(ERROR_SUCCESS),
 	facility_code(FACILITY_NULL),
 	failure_severity(S_SUCCESS),
-	is_custom(true)
+	custom(true)
 	{
 		parse_error(error);
 	}
 
-	windows_api_failure::windows_api_failure(std::wstring source, std::wstring description, const WORD status_code, const WORD facility_code, const severity_t severity, const bool is_custom) :
+	windows_api_failure::windows_api_failure(std::wstring source, std::wstring description, const WORD status_code, const WORD facility_code, const severity_t severity, const bool custom) :
 	source(std::move(source)),
 	description(std::move(description)),
 	status_code(status_code),
 	facility_code(facility_code),
 	failure_severity(severity),
-	is_custom(is_custom)
+	custom(custom)
 	{}
 
 	void windows_api_failure::parse_error(const DWORD error)
@@ -129,7 +129,7 @@ namespace KAA
 		status_code = win32_api_error.layout.status_code;
 		facility_code = win32_api_error.layout.facility_code;
 		failure_severity = to_severity(win32_api_error.layout.severity_code);
-		is_custom = win32_api_error.layout.customer_code_flag == 1 ? true : false;
+		custom = win32_api_error.layout.customer_code_flag == 1 ? true : false;
 	}
 
 	windows_api_failure::operator DWORD (void) const throw()
@@ -143,7 +143,7 @@ namespace KAA
 		win32_api_error.layout.status_code = status_code;
 		win32_api_error.layout.facility_code = facility_code;
 		win32_api_error.layout.severity_code = to_severity_code(failure_severity);
-		win32_api_error.layout.customer_code_flag = is_custom ? 1 : 0;
+		win32_api_error.layout.customer_code_flag = custom ? 1 : 0;
 		return win32_api_error.value;
 	}
 
