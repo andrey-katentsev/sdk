@@ -1,9 +1,6 @@
-#include "../include/module_context.h"
-
+#include "../../include/dll/module_context.h"
 #include <vector>
-
-#include "../include/exception/windows_api_failure.h"
-
+#include "../../include/exception/windows_api_failure.h"
 #include <psapi.h>
 #pragma comment(lib, "psapi.lib")
 
