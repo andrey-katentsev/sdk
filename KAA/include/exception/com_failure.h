@@ -19,7 +19,7 @@ namespace KAA
 		com_failure(std::wstring source, std::wstring description, HRESULT);
 		com_failure(std::wstring source, std::wstring description, WORD status_code, WORD facility_code, bool success);
 
-		operator HRESULT (void) const throw();
+		operator HRESULT (void) const noexcept;
 
 	private:
 		std::wstring source;
@@ -28,7 +28,7 @@ namespace KAA
 		WORD facility_code;
 		bool success;
 
-		HRESULT get_error(void) const throw();
+		HRESULT get_error(void) const noexcept;
 
 		std::wstring iget_source(void) const override;
 		std::wstring iget_description(void) const override;

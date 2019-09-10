@@ -84,12 +84,12 @@ namespace KAA
 	success(success)
 	{}
 
-	com_failure::operator HRESULT (void) const throw()
+	com_failure::operator HRESULT (void) const noexcept
 	{
 		return get_error();
 	}
 
-	HRESULT com_failure::get_error(void) const throw()
+	HRESULT com_failure::get_error(void) const noexcept
 	{
 		com_error_t com_error = { 0 };
 		com_error.layout.status_code = status_code;

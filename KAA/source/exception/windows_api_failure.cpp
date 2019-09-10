@@ -132,12 +132,12 @@ namespace KAA
 		custom = win32_api_error.layout.customer_code_flag == 1 ? true : false;
 	}
 
-	windows_api_failure::operator DWORD (void) const throw()
+	windows_api_failure::operator DWORD (void) const noexcept
 	{
 		return get_error();
 	}
 
-	DWORD windows_api_failure::get_error(void) const throw()
+	DWORD windows_api_failure::get_error(void) const noexcept
 	{
 		win32_error_t win32_api_error = { 0 };
 		win32_api_error.layout.status_code = status_code;
