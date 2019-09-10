@@ -7,12 +7,15 @@
 
 namespace KAA
 {
-	class module_context
+	namespace dll
 	{
-	public:
-		std::wstring get_module_base_name(void) const;
-		// FUTURE: KAA: C++11: throw() = noexcept.
-		HINSTANCE get_module_handle(void) const throw();
-		HINSTANCE m_module; // DEFECT: KAA: broken encapsulation.
-	};
+		class module_context
+		{
+		public:
+			std::wstring get_module_base_name(void) const;
+			// FUTURE: KAA: C++11: throw() = noexcept.
+			HINSTANCE get_module_handle(void) const throw();
+			HINSTANCE m_module; // DEFECT: KAA: broken encapsulation.
+		};
+	}
 }
