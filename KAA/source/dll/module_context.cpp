@@ -11,6 +11,18 @@ namespace KAA
 		// THROWS: windows_api_failure
 		// SAFE GUARANTEE: strong
 		// SIDE EFFECTS: -
+		void module_context::disable_thread_notifications(void) const
+		{
+			if (0 == ::DisableThreadLibraryCalls(m_module))
+			{
+				const auto error = ::GetLastError();
+				throw windows_api_failure(__FUNCTIONW__, L"failed to disable the DLL_THREAD_ATTACH and DLL_THREAD_DETACH notifications for the dynamic-link library.", error);
+			}
+		}
+
+		// THROWS: windows_api_failure
+		// SAFE GUARANTEE: strong
+		// SIDE EFFECTS: -
 		std::wstring module_context::get_module_base_name(void) const
 		{
 			std::vector<wchar_t> buffer(MAX_PATH);
