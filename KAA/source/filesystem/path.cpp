@@ -1,12 +1,12 @@
 #include "../../include/filesystem/path.h"
-
 #include <algorithm>
-
 #include "../../include/filesystem/split_path.h"
 
+// TODO: KAA: throw if empty.
 // TODO: KAA: remove separators dublicate (e.g. C://temp///file.dat)
 // TODO: KAA: remove trailing separator for directories.
 // TODO: KAA: directory + name + extension = file
+// TODO: KAA: operator std::wstring (void) const;
 
 namespace
 {
@@ -28,7 +28,7 @@ namespace KAA
 	{
 		namespace path
 		{
-			drive::drive(const std::wstring& drive) : root(drive)
+			drive::drive(std::wstring drive) : root(std::move(drive))
 			{}
 
 			std::wstring drive::to_wstring(void) const
@@ -36,7 +36,7 @@ namespace KAA
 				return root;
 			}
 
-			directory::directory(const std::wstring& path) : path(make_consistent(path))
+			directory::directory(std::wstring path) : path(make_consistent(std::move(path)))
 			{}
 
 			std::wstring directory::to_wstring(void) const
@@ -44,12 +44,12 @@ namespace KAA
 				return path;
 			}
 
-			file::file(const std::wstring& path) : path(make_consistent(path))
+			file::file(std::wstring path) : path(make_consistent(std::move(path)))
 			{}
 
 			directory file::get_directory(void) const
 			{
-				return directory { split_directory(path) };
+				return split_directory(path);
 			}
 
 			std::wstring file::get_filename(void) const
@@ -62,12 +62,12 @@ namespace KAA
 				return path;
 			}
 
-			extension::extension(const std::wstring& extension) : ext(extension)
+			extension::extension(std::wstring extension) : extension_(std::move(extension))
 			{}
 
 			std::wstring extension::to_wstring(void) const
 			{
-				return ext;
+				return extension_;
 			}
 
 			bool operator == (const directory& left, const directory& right)
@@ -82,7 +82,7 @@ namespace KAA
 
 			file operator + (const directory& directory, const std::wstring& filename)
 			{
-				return file { append_trailing_backslash(directory.to_wstring()) + filename };
+				return append_trailing_backslash(directory.to_wstring()) + filename;
 			}
 
 			std::wstring append_trailing_backslash(const std::wstring& directory_path)

@@ -1,6 +1,6 @@
 //
 // File: path.h
-// Description: drive, directory, and file_path class type
+// Description: drive, directory, file, and extension path class type
 // Created: June 24, 2018
 // Author: Andrey A. Katentsev
 //
@@ -20,7 +20,13 @@ namespace KAA
 			class drive
 			{
 			public:
-				explicit drive(const std::wstring& drive);
+				drive(std::wstring drive);
+				drive(const drive&) = default;
+				drive(drive&&) = default;
+				~drive() = default;
+
+				drive& operator = (const drive&) = default;
+				drive& operator = (drive&&) = default;
 
 				std::wstring to_wstring(void) const;
 
@@ -31,7 +37,13 @@ namespace KAA
 			class directory
 			{
 			public:
-				explicit directory(const std::wstring& path);
+				directory(std::wstring path);
+				directory(const directory&) = default;
+				directory(directory&&) = default;
+				~directory() = default;
+
+				directory& operator = (const directory&) = default;
+				directory& operator = (directory&&) = default;
 
 				std::wstring to_wstring(void) const;
 
@@ -42,7 +54,13 @@ namespace KAA
 			class file
 			{
 			public:
-				explicit file(const std::wstring& path);
+				file(std::wstring path);
+				file(const file&) = default;
+				file(file&&) = default;
+				~file() = default;
+
+				file& operator = (const file&) = default;
+				file& operator = (file&&) = default;
 
 				directory get_directory(void) const;
 				std::wstring get_filename(void) const;
@@ -56,14 +74,21 @@ namespace KAA
 			class extension
 			{
 			public:
-				explicit extension(const std::wstring& extension);
+				extension(std::wstring extension);
+				extension(const extension&) = default;
+				extension(extension&&) = default;
+				~extension() = default;
+
+				extension& operator = (const extension&) = default;
+				extension& operator = (extension&&) = default;
 
 				std::wstring to_wstring(void) const;
 
 			private:
-				std::wstring ext;
+				std::wstring extension_;
 			};
 
+			// TODO: KAA: make a friend.
 			bool operator == (const directory&, const directory&);
 			bool operator != (const directory&, const directory&);
 
