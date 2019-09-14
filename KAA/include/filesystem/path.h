@@ -96,14 +96,14 @@ namespace KAA
 			file operator + (const directory&, const std::wstring& filename);
 
 			// EXAMPLE: 'D:\Temp\'
-			std::wstring append_trailing_backslash(const std::wstring& directory_path);
+			std::wstring append_trailing_backslash(std::wstring directory_path);
 			// EXAMPLE: 'D:\Temp'
-			std::wstring remove_trailing_backslash(const std::wstring& directory_path);
+			std::wstring remove_trailing_backslash(std::wstring directory_path);
 
 			// EXAMPLE: 'D:\Temp'
-			std::wstring make_WinAPI_directory_path(const std::wstring& directory_path);
+			std::wstring make_WinAPI_directory_path(std::wstring directory_path);
 			// EXAMPLE: 'D:\Temp\'
-			std::wstring make_CRT_directory_path(const std::wstring& directory_path);
+			std::wstring make_CRT_directory_path(std::wstring directory_path);
 		}
 	}
 }
