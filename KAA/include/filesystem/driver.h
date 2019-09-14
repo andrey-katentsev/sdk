@@ -62,7 +62,7 @@ namespace KAA
 				bool m_write;
 
 				// default: share any access (read / write)
-				share(bool read = true, bool write = true) :
+				share(bool write = true, bool read = true) :
 				m_read(read),
 				m_write(write)
 				{}
