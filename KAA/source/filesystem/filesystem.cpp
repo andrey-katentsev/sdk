@@ -17,9 +17,16 @@ namespace KAA
 	{
 		_fsize_t get_file_size(const driver& filesystem, const path::file& path)
 		{
-			const driver::mode query_attributes_only(false, false);
+			const driver::mode query_attributes_only { false, false };
 			const driver::share share_any_access;
 			return filesystem.open_file(path, query_attributes_only, share_any_access)->get_size();
+		}
+
+		void set_file_size(const driver& filesystem, const path::file& path, const _fsize_t size)
+		{
+			const driver::mode write_only { true, false };
+			const driver::share share_any_access;
+			return filesystem.open_file(path, write_only, share_any_access)->set_size(size);
 		}
 	}
 }
