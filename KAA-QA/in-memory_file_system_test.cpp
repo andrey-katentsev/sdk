@@ -11,6 +11,7 @@ TEST(in_memory_filesystem, create_directory)
 	in_memory_file_system filesystem;
 	EXPECT_NO_THROW(filesystem.create_directory(path));
 	EXPECT_THROW(filesystem.create_directory(path), std::logic_error);
+	filesystem.remove_directory(path);
 }
 
 TEST(in_memory_filesystem, remove_directory)
@@ -32,6 +33,7 @@ TEST(in_memory_filesystem, create_file)
 	driver::permission full_access;
 	EXPECT_NO_THROW(filesystem.create_file(path, new_persistent_file, sequential_binary_read_write, share_any_access, full_access));
 	EXPECT_THROW(filesystem.create_file(path, new_persistent_file, sequential_binary_read_write, share_any_access, full_access), std::logic_error);
+	filesystem.remove_file(path);
 }
 
 TEST(in_memory_filesystem, get_temp_filename)
@@ -58,6 +60,7 @@ TEST(in_memory_filesystem, rename_file)
 	EXPECT_THROW(filesystem.rename_file(from, from), std::logic_error);
 	EXPECT_NO_THROW(filesystem.rename_file(from, to));
 	EXPECT_THROW(filesystem.rename_file(from, to), std::logic_error);
+	filesystem.remove_file(to);
 }
 
 TEST(in_memory_filesystem, remove_file)
