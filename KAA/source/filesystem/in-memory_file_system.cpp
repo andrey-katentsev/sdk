@@ -26,7 +26,7 @@ namespace KAA
 			if (vfs.end() == vfs.find(directory))
 				vfs[directory];
 			else
-				throw std::logic_error { "directory already exists" };
+				throw std::runtime_error { "directory already exists" };
 		}
 
 		void in_memory_file_system::iremove_directory(const path::directory& path)
@@ -35,12 +35,12 @@ namespace KAA
 			if (vfs.end() != vfs.find(directory))
 				vfs.erase(directory);
 			else
-				throw std::logic_error { "directory does not exist" };
+				throw std::runtime_error { "directory does not exist" };
 		}
 
 		std::auto_ptr<file> in_memory_file_system::iopen_file(const path::file& path, const mode& operations_allowed, const share& sharing_allowed) const
 		{
-			throw std::logic_error { "not implemented" };
+			throw std::runtime_error { "not implemented" };
 		}
 
 		std::auto_ptr<file> in_memory_file_system::icreate_file(const path::file& path, const create_mode& lifetime, const mode& operations_allowed, const share& sharing_allowed, const permission& attributes)
@@ -53,7 +53,7 @@ namespace KAA
 				return std::auto_ptr<file>(new in_memory_file(descriptor));
 			}
 			else
-				throw std::logic_error { "directory already exists" };
+				throw std::runtime_error { "directory already exists" };
 		}
 
 		path::file in_memory_file_system::iget_temp_filename(const path::directory& path) const
@@ -73,10 +73,10 @@ namespace KAA
 					vfs.erase(present_filename);
 				}
 				else
-					throw std::logic_error { "file already exists" };
+					throw std::runtime_error { "file already exists" };
 			}
 			else
-				throw std::logic_error { "file does not exist" };
+				throw std::runtime_error { "file does not exist" };
 		}
 
 		void in_memory_file_system::iremove_file(const path::file& path)
@@ -85,17 +85,17 @@ namespace KAA
 			if (vfs.end() != vfs.find(filename))
 				vfs.erase(filename);
 			else
-				throw std::logic_error { "file does not exist" };
+				throw std::runtime_error { "file does not exist" };
 		}
 
 		void in_memory_file_system::iset_file_permissions(const path::file& path, const permission& attributes)
 		{
-			throw std::logic_error { "not implemented" };
+			throw std::runtime_error { "not implemented" };
 		}
 
 		driver::access in_memory_file_system::iget_file_permissions(const path::file& path) const
 		{
-			throw std::logic_error { "not implemented" };
+			throw std::runtime_error { "not implemented" };
 		}
 	}
 }
