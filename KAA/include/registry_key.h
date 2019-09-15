@@ -3,8 +3,7 @@
 #pragma once
 
 #include <string>
-
-#include "stdtypes.h"
+#include <cstdint>
 
 namespace KAA
 {

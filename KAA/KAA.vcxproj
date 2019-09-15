@@ -181,7 +181,6 @@
     <ClInclude Include="include\registry.h" />
     <ClInclude Include="include\registry_key.h" />
     <ClInclude Include="include\std.h" />
-    <ClInclude Include="include\stdtypes.h" />
     <ClInclude Include="include\time\calendar_date.h" />
     <ClInclude Include="include\UI\controls.h" />
     <ClInclude Include="include\UI\cursor.h" />

@@ -9,9 +9,8 @@
 
 #pragma once
 
-#include "../include/stdtypes.h"
-
 #include <string>
+#include <cstdint>
 
 namespace KAA
 {
@@ -31,6 +30,7 @@ namespace KAA
 		bool operator == (const md5&, const md5&);
 		bool operator != (const md5&, const md5&);
 
+		// TODO: KAA: support multiple times call to compute the hash of long or discontinuous data streams.
 		md5 calculate_md5(const void* data, size_t data_size);
 	}
 

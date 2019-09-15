@@ -14,9 +14,9 @@
 #include <string>
 #include <vector>
 
-#include "driver.h"
+#include <cstdint>
 
-#include "../stdtypes.h"
+#include "driver.h"
 
 namespace KAA
 {

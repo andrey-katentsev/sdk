@@ -204,9 +204,6 @@
     <ClInclude Include="include\std.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\stdtypes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\windows_registry.h">
       <Filter>Header Files</Filter>
     </ClInclude>

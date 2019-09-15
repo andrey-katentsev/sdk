@@ -4,8 +4,9 @@
 
 #include "wiper.h"
 
+#include <cstdint>
+
 #include "../progress_state.h"
-#include "../stdtypes.h"
 
 namespace KAA
 {
