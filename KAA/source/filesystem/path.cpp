@@ -85,16 +85,18 @@ namespace KAA
 				return append_trailing_backslash(directory.to_wstring()) + std::move(filename);
 			}
 
-			std::wstring append_trailing_backslash(const std::wstring directory_path)
+			std::wstring append_trailing_backslash(std::wstring path)
 			{
-				const auto append_backslash = (backslash != directory_path[directory_path.length() - 1]);
-				return append_backslash ? directory_path + backslash : directory_path;
+				if (backslash != path.back())
+					path.push_back(backslash);
+				return path;
 			}
 
-			std::wstring remove_trailing_backslash(const std::wstring directory_path)
+			std::wstring remove_trailing_backslash(std::wstring path)
 			{
-				const auto remove_backslash = (backslash == directory_path[directory_path.length() - 1]);
-				return remove_backslash ? std::wstring { directory_path.begin(), directory_path.end() - 1 } : directory_path;
+				if (backslash == path.back())
+					path.pop_back();
+				return path;
 			}
 
 			std::wstring make_WinAPI_directory_path(std::wstring directory_path)
