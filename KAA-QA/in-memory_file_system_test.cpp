@@ -1,7 +1,6 @@
 #include "gtest/gtest.h"
 
 #include "../KAA/include/filesystem/in-memory_file_system.h"
-#include "../KAA/include/filesystem/path.h"
 
 using namespace KAA::filesystem;
 
@@ -38,10 +37,11 @@ TEST(in_memory_filesystem, create_file)
 
 TEST(in_memory_filesystem, get_temp_filename)
 {
+	const auto root = path::directory { LR"(V:\root)" };
 	const in_memory_file_system filesystem;
-	const auto A = filesystem.get_temp_filename();
-	const auto B = filesystem.get_temp_filename();
-	const auto C = filesystem.get_temp_filename();
+	const auto A = filesystem.get_temp_filename(root);
+	const auto B = filesystem.get_temp_filename(root);
+	const auto C = filesystem.get_temp_filename(root);
 	EXPECT_NE(A, B);
 	EXPECT_NE(A, C);
 	EXPECT_NE(B, C);

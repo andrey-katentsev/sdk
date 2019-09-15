@@ -15,7 +15,6 @@
 
 #include "../../include/exception/system_failure.h"
 #include "../../include/filesystem/crt_file.h"
-#include "../../include/filesystem/path.h"
 #include "../../include/RAII/invalid_parameter_handler.h"
 
 namespace
@@ -185,16 +184,19 @@ namespace KAA
 				throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to create file, icreate_file function fails.", code);
 		}
 
-		// FIX: KAA: base (tmp) must be a file path.
-		std::wstring crt_file_system::iget_temp_filename(void) const
+		path::file crt_file_system::iget_temp_filename(const path::directory& path) const
 		{
 			RAII::invalid_parameter_handler session(allow_execution);
 			{
-				wchar_t format[] = L"tmpXXXXXX";
-				const auto code = _wmktemp_s(format);
+				const auto format = (path + L"tmpXXXXXX").to_wstring();
+				std::vector<wchar_t> buffer;
+				buffer.reserve(format.length() + 1);
+				buffer.assign(format.begin(), format.end());
+				buffer.push_back(L'\0');
+				const auto code = _wmktemp_s(buffer.data(), buffer.size());
 				if(0 != code)
 					throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to create a unique file name, _wmktemp_s function fails.", code);
-				return format;
+				return buffer.data();
 			}
 		}
 

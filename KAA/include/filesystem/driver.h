@@ -1,20 +1,14 @@
 #pragma once
 
 #include <memory>
-#include <string>
 
 #include "file.h"
+#include "path.h"
 
 namespace KAA
 {
 	namespace filesystem
 	{
-		namespace path
-		{
-			class directory;
-			class file;
-		}
-
 		class driver
 		{
 		public:
@@ -98,7 +92,7 @@ namespace KAA
 			std::auto_ptr<file> open_file(const path::file&, const mode&, const share&) const;
 			std::auto_ptr<file> create_file(const path::file&, const create_mode&, const mode&, const share&, const permission&);
 
-			std::wstring get_temp_filename(void) const;
+			path::file get_temp_filename(const path::directory&) const;
 
 			void rename_file(const path::file& from, const path::file& to);
 			void remove_file(const path::file&);
@@ -115,7 +109,7 @@ namespace KAA
 			virtual std::auto_ptr<file> iopen_file(const path::file&, const mode&, const share&) const = 0;
 			virtual std::auto_ptr<file> icreate_file(const path::file&, const create_mode&, const mode&, const share&, const permission&) = 0;
 
-			virtual std::wstring iget_temp_filename(void) const = 0;
+			virtual path::file iget_temp_filename(const path::directory&) const = 0;
 
 			virtual void irename_file(const path::file&, const path::file&) = 0;
 			virtual void iremove_file(const path::file&) = 0;

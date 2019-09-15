@@ -1,5 +1,4 @@
 #include "../../include/filesystem/driver.h"
-
 #include <stdexcept>
 
 namespace KAA
@@ -31,9 +30,9 @@ namespace KAA
 			return icreate_file(path, lifetime, operations_allowed, sharing_allowed, attributes);
 		}
 
-		std::wstring driver::get_temp_filename(void) const
+		path::file driver::get_temp_filename(const path::directory& path) const
 		{
-			return iget_temp_filename();
+			return iget_temp_filename(path);
 		}
 
 		void driver::rename_file(const path::file& from, const path::file& to)

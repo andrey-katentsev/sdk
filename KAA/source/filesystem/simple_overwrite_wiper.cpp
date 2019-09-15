@@ -62,7 +62,7 @@ namespace KAA
 
 		path::file simple_owerwrite_wiper::irename_file(const path::file& path)
 		{
-			const auto temporary_path = path.get_directory() + m_filesystem->get_temp_filename();
+			const auto temporary_path = m_filesystem->get_temp_filename(path.get_directory());
 			m_filesystem->rename_file(path, temporary_path);
 			return temporary_path;
 		}

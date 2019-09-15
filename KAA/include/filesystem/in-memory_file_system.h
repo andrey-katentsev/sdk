@@ -31,7 +31,7 @@ namespace KAA
 			std::auto_ptr<file> iopen_file(const path::file&, const mode&, const share&) const override;
 			std::auto_ptr<file> icreate_file(const path::file&, const create_mode&, const mode&, const share&, const permission&) override;
 
-			std::wstring iget_temp_filename(void) const override;
+			path::file iget_temp_filename(const path::directory&) const override;
 
 			void irename_file(const path::file&, const path::file&) override;
 			void iremove_file(const path::file&) override;

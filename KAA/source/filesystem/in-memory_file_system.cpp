@@ -15,7 +15,6 @@
 #include "../../include/random.h"
 #include "../../include/exception/operation_failure.h"
 #include "../../include/filesystem/in-memory_file.h"
-#include "../../include/filesystem/path.h"
 
 namespace KAA
 {
@@ -57,9 +56,9 @@ namespace KAA
 				throw std::logic_error { "directory already exists" };
 		}
 
-		std::wstring in_memory_file_system::iget_temp_filename(void) const
+		path::file in_memory_file_system::iget_temp_filename(const path::directory& path) const
 		{
-			return convert::to_wstring(static_cast<unsigned long>(cryptography::random()), 36);
+			return path + convert::to_wstring(static_cast<unsigned long>(cryptography::random()), 36);
 		}
 
 		void in_memory_file_system::irename_file(const path::file& from, const path::file& to)
