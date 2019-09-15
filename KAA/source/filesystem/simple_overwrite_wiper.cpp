@@ -16,8 +16,8 @@ namespace KAA
 {
 	namespace filesystem
 	{
-		simple_owerwrite_wiper::simple_owerwrite_wiper(const std::shared_ptr<driver> filesystem, const uint8_t aggregate) :
-		m_filesystem(filesystem),
+		simple_owerwrite_wiper::simple_owerwrite_wiper(std::shared_ptr<driver> filesystem, const uint8_t aggregate) :
+		m_filesystem(std::move(filesystem)),
 		m_aggregate(aggregate),
 		progress_handler(nullptr)
 		{
