@@ -92,6 +92,9 @@ namespace KAA
 			bool operator == (const directory&, const directory&);
 			bool operator != (const directory&, const directory&);
 
+			bool operator == (const file&, const file&);
+			bool operator != (const file&, const file&);
+
 			// EXAMPLE: D:\Temp + file.dat = D:\Temp\file.dat
 			file operator + (const directory&, std::wstring filename);
 

@@ -80,6 +80,16 @@ namespace KAA
 				return !(left == right);
 			}
 
+			bool operator == (const file& left, const file& right)
+			{
+				return left.to_wstring() == right.to_wstring();
+			}
+
+			bool operator != (const file& left, const file& right)
+			{
+				return !(left == right);
+			}
+
 			file operator + (const directory& directory, std::wstring filename)
 			{
 				return append_trailing_backslash(directory.to_wstring()) + std::move(filename);
