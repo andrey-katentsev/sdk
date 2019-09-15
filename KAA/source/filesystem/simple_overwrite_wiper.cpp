@@ -21,7 +21,7 @@ namespace KAA
 		m_aggregate(aggregate),
 		progress_handler(nullptr)
 		{
-			if(nullptr == filesystem)
+			if(!m_filesystem)
 				throw std::invalid_argument(__FUNCTION__);
 		}
 

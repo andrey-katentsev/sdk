@@ -9,7 +9,7 @@ namespace KAA
 		ordinary_file_remover::ordinary_file_remover(std::shared_ptr<driver> filesystem) :
 		m_filesystem(std::move(filesystem))
 		{
-			if (!filesystem)
+			if (!m_filesystem)
 				throw std::invalid_argument(__FUNCTION__);
 		}
 
