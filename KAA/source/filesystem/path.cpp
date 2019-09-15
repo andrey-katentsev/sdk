@@ -80,9 +80,9 @@ namespace KAA
 				return !(left == right);
 			}
 
-			file operator + (const directory& directory, const std::wstring& filename)
+			file operator + (const directory& directory, std::wstring filename)
 			{
-				return append_trailing_backslash(directory.to_wstring()) + filename;
+				return append_trailing_backslash(directory.to_wstring()) + std::move(filename);
 			}
 
 			std::wstring append_trailing_backslash(const std::wstring directory_path)

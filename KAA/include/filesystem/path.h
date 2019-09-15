@@ -93,7 +93,7 @@ namespace KAA
 			bool operator != (const directory&, const directory&);
 
 			// EXAMPLE: D:\Temp + file.dat = D:\Temp\file.dat
-			file operator + (const directory&, const std::wstring& filename);
+			file operator + (const directory&, std::wstring filename);
 
 			// EXAMPLE: 'D:\Temp\'
 			std::wstring append_trailing_backslash(std::wstring directory_path);
