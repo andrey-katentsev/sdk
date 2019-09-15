@@ -198,21 +198,6 @@ namespace KAA
 			}
 		}
 
-		/*_fsize_t crt_file_system::iget_file_size(const file& handle) const
-		{
-			RAII::invalid_parameter_handler session(allow_execution);
-			try
-			{
-				const crt_file& crt_handle = dynamic_cast<const crt_file&>(handle);
-				const long size = _filelength(crt_handle.descriptor()); // DEFECT: KAA: 32-bit size.
-				if(-1L == size)
-					throw system_failure(*_errno());
-				return size;
-			}
-			catch(const std::bad_cast&)
-			{ throw std::invalid_argument(__FUNCTION__); }
-		}*/
-
 		void crt_file_system::irename_file(const path::file& from, const path::file& to)
 		{
 			if(0 != _wrename(from.to_wstring().c_str(), to.to_wstring().c_str()))
@@ -255,7 +240,7 @@ namespace KAA
 					const errno_t error = *_errno();
 					throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to determine file permissions, _waccess_s function fails.", error);
 				}
-			}			
+			}
 		}
 
 		// FUTURE: KAA: not implemented.

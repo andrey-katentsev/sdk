@@ -108,8 +108,6 @@ namespace KAA
 			void set_file_permissions(const path::file&, const permission&);
 			access get_file_permissions(const path::file&) const;
 
-			//bool is_path_exists(const std::wstring& path);
-
 		private:
 			virtual void icreate_directory(const path::directory&) = 0;
 			virtual void iremove_directory(const path::directory&) = 0;
@@ -124,8 +122,6 @@ namespace KAA
 
 			virtual void iset_file_permissions(const path::file&, const permission&) = 0;
 			virtual access iget_file_permissions(const path::file&) const = 0;
-
-			//bool iis_path_exists(const std::wstring& path);
 		};
 	}
 }

@@ -36,32 +36,6 @@ namespace KAA
 			return iget_temp_filename();
 		}
 
-		/*_fsize_t driver::get_file_size(const std::wstring& path) const
-		{
-			const mode attributes_only(false, false);
-			const share any_access;
-			const std::auto_ptr<file> handle(open_file(path, attributes_only, any_access));
-			return get_file_size(*handle);
-		}
-
-		_fsize_t driver::get_file_size(const file& handle) const
-		{
-			return iget_file_size(handle);
-		}
-
-		void driver::set_file_size(const std::wstring& path) const
-		{
-			const mode write_only(true, false);
-			const share any_access;
-			const std::auto_ptr<file> handle(open_file(path, write_only, any_access));
-			return set_file_size(*handle);
-		}
-
-		void driver::set_file_size(const file& handle) const
-		{
-			return iset_file_size(handle);
-		}*/
-
 		void driver::rename_file(const path::file& from, const path::file& to)
 		{
 			return irename_file(from, to);
@@ -86,22 +60,5 @@ namespace KAA
 		{
 			return iget_file_permissions(path);
 		}
-
-		// NOTES: KAA: excessive (but very useful).
-		//bool driver::is_path_exists(const std::wstring& path)
-		//{
-			//return iis_path_exists(path);
-		//}
-
-		/*std::auto_ptr<driver> create_file_system(const file_system_t type)
-		{
-			switch(type)
-			{
-			case crt_api:
-				return std::auto_ptr<driver>(new crt_file_system);
-			default:
-				throw std::invalid_argument(__FUNCTION__);
-			}
-		}*/
 	}
 }

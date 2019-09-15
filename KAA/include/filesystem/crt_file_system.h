@@ -17,8 +17,6 @@ namespace KAA
 
 			std::wstring iget_temp_filename(void) const override;
 
-			//_fsize_t iget_file_size(const file&) const;
-
 			void irename_file(const path::file&, const path::file&) override;
 			void iremove_file(const path::file&) override;
 
