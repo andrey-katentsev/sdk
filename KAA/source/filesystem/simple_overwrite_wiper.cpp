@@ -72,10 +72,10 @@ namespace KAA
 			return m_filesystem->remove_file(path);
 		}
 
-		std::shared_ptr<file_progress_handler> simple_owerwrite_wiper::iset_progress_handler(const std::shared_ptr<file_progress_handler> handler)
+		std::shared_ptr<file_progress_handler> simple_owerwrite_wiper::iset_progress_handler(std::shared_ptr<file_progress_handler> handler)
 		{
-			auto previous = progress_handler;
-			progress_handler = handler;
+			auto previous = std::move(progress_handler);
+			progress_handler = std::move(handler);
 			return previous;
 		}
 

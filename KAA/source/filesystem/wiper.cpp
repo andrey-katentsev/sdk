@@ -20,9 +20,9 @@ namespace KAA
 			return iremove_file(irename_file(path));
 		}
 
-		std::shared_ptr<file_progress_handler> wiper::set_progress_handler(const std::shared_ptr<file_progress_handler> handler)
+		std::shared_ptr<file_progress_handler> wiper::set_progress_handler(std::shared_ptr<file_progress_handler> handler)
 		{
-			return iset_progress_handler(handler);
+			return iset_progress_handler(std::move(handler));
 		}
 
 		void wiper::ioverwrite_file(const path::file&)

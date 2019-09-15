@@ -14,9 +14,9 @@ namespace KAA
 			return m_filesystem->remove_file(path);
 		}
 
-		std::shared_ptr<file_progress_handler> ordinary_file_remover::iset_progress_handler(const std::shared_ptr<file_progress_handler>)
+		std::shared_ptr<file_progress_handler> ordinary_file_remover::iset_progress_handler(std::shared_ptr<file_progress_handler>)
 		{
-			return nullptr;
+			return {};
 		}
 	}
 }
