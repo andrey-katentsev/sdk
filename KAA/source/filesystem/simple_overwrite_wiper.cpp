@@ -29,25 +29,20 @@ namespace KAA
 		{
 			const driver::mode binary_sequential_overwrite(true, false, true, false);
 			const auto file_to_overwrite = m_filesystem->open_file(path, binary_sequential_overwrite, exclusive_access);
-
 			{
 				const size_t chunk_size = (64 * 1024) - 1;
 				const std::vector<uint8_t> chunk_data(chunk_size, m_aggregate);
-
 				{
 					const _fsize_t file_size = file_to_overwrite->get_size();
-
 					{
 						size_t total_bytes_written = 0;
 						const unsigned total_chunks = file_size / chunk_size;
-
 						for(unsigned chunk = 0; chunk < total_chunks; ++chunk)
 						{
 							total_bytes_written += file_to_overwrite->write(&chunk_data[0], chunk_size);
 							chunk_processed(total_bytes_written, file_size); // FUTURE: KAA: provide with progres_quiet support and etc.
 						}
 					}
-
 					{
 						const size_t last_chunk_size = file_size % chunk_size;
 						file_to_overwrite->write(&chunk_data[0], last_chunk_size);
@@ -55,7 +50,6 @@ namespace KAA
 					}
 				}
 			}
-
 			file_to_overwrite->commit();
 		}
 
@@ -63,7 +57,6 @@ namespace KAA
 		{
 			const driver::mode truncate(true, false, true, false, false, true);
 			const auto file_to_remove = m_filesystem->open_file(path, truncate, exclusive_access);
-			//file_to_remove->set_size(0);
 			file_to_remove->commit();
 		}
 
@@ -81,7 +74,7 @@ namespace KAA
 
 		std::shared_ptr<file_progress_handler> simple_owerwrite_wiper::iset_progress_handler(const std::shared_ptr<file_progress_handler> handler)
 		{
-			const auto previous = progress_handler;
+			auto previous = progress_handler;
 			progress_handler = handler;
 			return previous;
 		}
