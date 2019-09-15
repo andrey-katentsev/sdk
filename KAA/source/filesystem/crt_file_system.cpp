@@ -185,17 +185,16 @@ namespace KAA
 				throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to create file, icreate_file function fails.", code);
 		}
 
+		// FIX: KAA: base (tmp) must be a file path.
 		std::wstring crt_file_system::iget_temp_filename(void) const
 		{
 			RAII::invalid_parameter_handler session(allow_execution);
 			{
-				const std::wstring filename_format(L"tmpXXXXXX");
-				std::vector<wchar_t> buffer(filename_format.begin(), filename_format.end());
-				buffer.push_back(L'\0');
-				const errno_t code = _wmktemp_s(&buffer[0], buffer.size());
+				wchar_t format[] = L"tmpXXXXXX";
+				const auto code = _wmktemp_s(format);
 				if(0 != code)
 					throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to create a unique file name, _wmktemp_s function fails.", code);
-				return std::wstring(buffer.begin(), buffer.end());
+				return format;
 			}
 		}
 
