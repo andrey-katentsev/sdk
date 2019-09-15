@@ -13,7 +13,7 @@ namespace
 	constexpr auto slash = L'/';
 	constexpr auto backslash = L'\\';
 
-	// Replaces all backslashes with slashes.
+	// Replaces all slashes with backslashes.
 	// EXAMPLE: D:\Temp\file.dat
 	std::wstring make_consistent(std::wstring path)
 	{
