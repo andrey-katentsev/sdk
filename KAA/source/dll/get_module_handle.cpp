@@ -22,7 +22,6 @@ namespace KAA
 				const DWORD error = ::GetLastError();
 				throw windows_api_failure(__FUNCTIONW__, L"Unable to retrieve a module handle for the file used to create the calling process.", error);
 			}
-
 			return handle;
 		}
 
@@ -35,7 +34,6 @@ namespace KAA
 				const DWORD error = ::GetLastError();
 				throw windows_api_failure(__FUNCTIONW__, L"Unable to retrieve a module handle for the specified module.", error);
 			}
-
 			return handle;
 		}
 	}

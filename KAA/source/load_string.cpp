@@ -24,7 +24,6 @@ namespace KAA
 		std::wstring load_string(const UINT string_resource_index, HINSTANCE module)
 		{
 			enum { receive_a_read_only_pointer_to_the_resource_itself = 0 };
-
 			wchar_t* raw_string = nullptr;
 			const int length = ::LoadStringW(module, string_resource_index, reinterpret_cast<LPWSTR>(&raw_string), receive_a_read_only_pointer_to_the_resource_itself);
 			if(0 == length)
@@ -32,7 +31,6 @@ namespace KAA
 				const DWORD error = ::GetLastError();
 				throw windows_api_failure(__FUNCTIONW__, L"Unable to load a string resource from the executable file associated with a specified module.", error);
 			}
-
 			return std::wstring(raw_string, length);
 		}
 	}

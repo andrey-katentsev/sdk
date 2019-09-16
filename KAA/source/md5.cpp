@@ -31,7 +31,6 @@ namespace KAA
 			{
 				output << std::hex << std::setw(2) << digest.byte[i];
 			}
-
 			return output.str();
 		}
 	}
@@ -61,7 +60,6 @@ namespace KAA
 		{
 			const provider csp { nullptr, MS_DEF_PROV, PROV_RSA_FULL, CRYPT_SILENT | CRYPT_VERIFYCONTEXT };
 			const hash algorithm { csp, CALG_MD5, 0, 0 };
-
 			if(FALSE == ::CryptHashData(algorithm, reinterpret_cast<const BYTE*>(data), data_size, 0))
 			{
 				const DWORD code = ::GetLastError();
@@ -70,13 +68,11 @@ namespace KAA
 
 			md5 digest;
 			DWORD digest_size = sizeof(digest);
-
 			if(FALSE == ::CryptGetHashParam(algorithm, HP_HASHVAL, reinterpret_cast<BYTE*>(&digest), &digest_size, 0))
 			{
 				const DWORD code = ::GetLastError();
 				throw windows_api_failure(__FUNCTIONW__, L"Unable to retrieve the actual hash value.", code);
 			}
-
 			return digest;
 		}
 	}

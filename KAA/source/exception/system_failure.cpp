@@ -49,7 +49,6 @@ namespace KAA
 			{
 				throw system_failure(__FUNCTIONW__, L"Unable to get a system error message.", error);
 			}
-
 			return std::wstring(&buffer[0]);
 		}
 	}

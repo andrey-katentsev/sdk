@@ -71,7 +71,6 @@ namespace
 		{
 			throw KAA::windows_api_failure(__FUNCTIONW__, L"Unable to open system registry key.", code);
 		}
-
 		return requested_key;
 	}
 
@@ -90,7 +89,6 @@ namespace
 		{
 			throw KAA::windows_api_failure(__FUNCTIONW__, L"Unable to create system registry key.", code);
 		}
-
 		return std::make_pair(requested_key, disposition);
 	}
 }

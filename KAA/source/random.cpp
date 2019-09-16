@@ -37,7 +37,6 @@ namespace
 			{
 				throw KAA::system_failure(__FUNCTIONW__, L"Unable to copy bytes between buffers.", error);
 			}
-
 			return bytes_to_write;
 		}
 	}
@@ -61,7 +60,6 @@ namespace KAA
 				{
 					throw system_failure(__FUNCTIONW__, L"Unable to generate a pseudorandom number.", error);
 				}
-
 				return value;
 			}
 		}
@@ -80,7 +78,6 @@ namespace KAA
 				throw operation_failure { __FUNCTIONW__, L"failed to generate random bytes", operation_failure::R_INVALID_ARGUMENT, operation_failure::S_ERROR };
 
 			size_t bytes_written = 0U;
-
 			if (0 < bytes_to_generate)
 			{
 				unsigned int random_data = 0U;
@@ -91,7 +88,6 @@ namespace KAA
 					bytes_written += copy_memory(&random_data, chunk_size, static_cast<uint8_t*>(memory_write_to) + offset, bytes_to_generate - offset);
 				}
 			}
-
 			return bytes_written;
 		}
 	}

@@ -47,11 +47,6 @@ namespace KAA
 			_close(m_descriptor);
 		}
 
-		/*int crt_file::get_descriptor(void) const
-		{
-			return m_descriptor;
-		}*/
-
 		size_t crt_file::iread(const size_t bytes_to_read, void* buffer) const
 		{
 			const RAII::invalid_parameter_handler session(allow_execution);

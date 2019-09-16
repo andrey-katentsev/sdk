@@ -10,7 +10,6 @@
 #include "../include/convert.h"
 
 #include <vector>
-
 #include <cstdlib>
 
 #include "../include/exception/system_failure.h"
@@ -36,7 +35,6 @@ namespace
 			{
 				throw KAA::system_failure(__FUNCTIONW__, L"EXCEPTION: Unable to determine appropriate buffer size.", code);
 			}
-
 			return buffer_size;
 		}
 	}
@@ -55,7 +53,6 @@ namespace
 			{
 				throw KAA::system_failure(__FUNCTIONW__, L"EXCEPTION: Unable to determine appropriate buffer size.", code);
 			}
-
 			return buffer_size;
 		}
 	}
@@ -130,7 +127,6 @@ namespace KAA
 				{
 					throw system_failure(__FUNCTIONW__, L"EXCEPTION: Unable to convert wide string to multibyte string.", code);
 				}
-
 				return std::string(&buffer[0]);
 			}
 		}
@@ -161,7 +157,6 @@ namespace KAA
 				{
 					throw system_failure(__FUNCTIONW__, L"EXCEPTION: Unable to convert a long integer to a string.", error);
 				}
-
 				return std::wstring(&buffer[0]);
 			}
 		}
@@ -175,13 +170,15 @@ namespace KAA
 				throw system_failure(__FUNCTIONW__, L"'radix' argument is out of range [2,36]", EINVAL);
 
 			RAII::invalid_parameter_handler session(allow_execution);
-
-			std::vector<wchar_t> buffer(sizeof(value) * 8 + 1, 0); // binary (radix = 2)
-			const auto error = _ultow_s(value, &buffer[0], buffer.size(), radix);
-			if (0 != error)
-				throw system_failure(__FUNCTIONW__, L"Failed to convert an unsigned long integer to a wstring.", error);
-
-			return std::wstring(&buffer[0]);
+			{
+				std::vector<wchar_t> buffer(sizeof(value) * 8 + 1, 0); // binary (radix = 2)
+				const auto error = _ultow_s(value, &buffer[0], buffer.size(), radix);
+				if (0 != error)
+				{
+					throw system_failure(__FUNCTIONW__, L"Failed to convert an unsigned long integer to a wstring.", error);
+				}
+				return std::wstring(&buffer[0]);
+			}
 		}
 
 		// THROWS: system_failure
@@ -197,7 +194,6 @@ namespace KAA
 				{
 					throw system_failure(__FUNCTIONW__, L"EXCEPTION: Unable to convert multibyte string to wide string.", code);
 				}
-
 				return std::wstring(&buffer[0]);
 			}
 		}

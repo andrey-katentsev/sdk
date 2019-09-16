@@ -8,7 +8,6 @@
 //
 
 #include "../../include/UI/cursor.h"
-
 #include "../../include/exception/windows_api_failure.h"
 
 namespace KAA
@@ -29,7 +28,6 @@ namespace KAA
 					const auto error = ::GetLastError();
 					throw KAA::windows_api_failure(__FUNCTIONW__, L"Unable to retrieve the position of the mouse cursor.", error);
 				}
-
 				return position;
 			}
 

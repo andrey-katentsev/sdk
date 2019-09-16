@@ -34,28 +34,24 @@ namespace
 	BOOL CALLBACK find_by_window_id(const HWND child_window, LPARAM search_context)
 	{
 		auto& context = *(reinterpret_cast<find_by_window_id_context*>(search_context));
-
 		const auto child_window_identifier = ::GetWindowLongPtrW(child_window, GWLP_ID);
 		if(child_window_identifier == context.child_window_identifier)
 		{
 			context.child_window = child_window;
 			return stop_enumeration;
 		}
-
 		return continue_enumeration;
 	}
 
 	HWND get_child_window(const HWND parent_window, const int child_window_identifier)
 	{
 		find_by_window_id_context context = { nullptr, child_window_identifier };
-
 		::EnumChildWindows(parent_window, find_by_window_id, reinterpret_cast<LPARAM>(&context));
 		if(nullptr == context.child_window)
 		{
 			// FUTURE: this is not a win32 failure.
 			throw KAA::windows_api_failure(__FUNCTIONW__, L"Unable to find control within a window.", ERROR_CONTROL_ID_NOT_FOUND, FACILITY_NULL, KAA::windows_api_failure::S_WARNING, true);
 		}
-
 		return context.child_window;
 	}
 
@@ -82,7 +78,6 @@ namespace KAA
 		std::wstring get_window_text(const HWND window)
 		{
 			std::vector<wchar_t> buffer(::GetWindowTextLengthW(window) + 1, L'\0');
-
 			if(0 == ::GetWindowTextW(window, &buffer[0], buffer.size()))
 			{
 				const auto error = ::GetLastError();
@@ -91,7 +86,6 @@ namespace KAA
 					throw windows_api_failure(__FUNCTIONW__, L"Unable to retrieve the window's text.", error);
 				}
 			}
-
 			return std::wstring(&buffer[0]);
 		}
 
@@ -104,7 +98,6 @@ namespace KAA
 		void set_control_text(const HWND window, const int control_identifier, const std::wstring& text)
 		{
 			const auto control = get_child_window(window, control_identifier);
-
 			if(0 == ::SetWindowTextW(control, text.c_str()))
 			{
 				const auto error = ::GetLastError();
@@ -127,7 +120,6 @@ namespace KAA
 				const auto code = ::GetLastError();
 				throw KAA::windows_api_failure(__FUNCTIONW__, L"failed to get the number of items in the list box of a combo box", code);
 			}
-
 			return number_of_items;
 		}
 
@@ -139,7 +131,6 @@ namespace KAA
 				const auto code = ::GetLastError();
 				throw KAA::windows_api_failure(__FUNCTIONW__, L"failed to retrieve the index of the currently selected item: no item is selected", code);
 			}
-
 			return item_index;
 		}
 
@@ -169,7 +160,6 @@ namespace KAA
 				const auto code = ::GetLastError();
 				throw KAA::windows_api_failure(__FUNCTIONW__, L"failed to add a string to the list box of a combo box: insufficient space is available to store the new string", code);
 			}
-
 			return index;
 		}
 
@@ -181,7 +171,6 @@ namespace KAA
 				const auto code = ::GetLastError();
 				throw KAA::windows_api_failure(__FUNCTIONW__, L"failed to retrieve the value associated with the item in a combo box", code);
 			}
-
 			return assotiated_value;
 		}
 

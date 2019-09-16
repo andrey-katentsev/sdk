@@ -1,9 +1,7 @@
 // Feb 13, 2014
 
 #include "../include/windows_registry_key.h"
-
 #include <vector>
-
 #include "../include/exception/windows_api_failure.h"
 
 namespace
@@ -20,7 +18,6 @@ namespace
 		{
 			throw KAA::windows_api_failure(__FUNCTIONW__, L"Unable to determine the system's registry value size.", code);
 		}
-
 		return value_size;
 	}
 
@@ -40,7 +37,6 @@ namespace
 		{
 			throw KAA::windows_api_failure(__FUNCTIONW__, L"Unable to retrieve a string value from the system registry.", ERROR_DATATYPE_MISMATCH, FACILITY_NULL, KAA::windows_api_failure::S_WARNING, true); // ERROR_BAD_TOKEN_TYPE; ERROR_UNSUPPORTED_TYPE; ERROR_INVALID_DATATYPE; RPC_S_ENTRY_TYPE_MISMATCH; // FUTURE: this is not a win32 failure.
 		}
-
 		return std::wstring(&buffer[0]);
 	}
 
@@ -68,7 +64,6 @@ namespace
 		{
 			throw KAA::windows_api_failure(__FUNCTIONW__, L"Unable to retrieve a dword value from the system registry.", ERROR_DATATYPE_MISMATCH, FACILITY_NULL, KAA::windows_api_failure::S_WARNING, true); // FUTURE: this is not a win32 failure.
 		}
-
 		return value;
 	}
 

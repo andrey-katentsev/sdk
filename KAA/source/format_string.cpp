@@ -8,8 +8,10 @@
 //
 
 #include "../include/format_string.h"
+
 #include <vector>
 #include <cstdarg>
+
 #include "../include/exception/system_failure.h"
 #include "../include/RAII/invalid_parameter_handler.h"
 #include "../include/RAII/variable_argument_list.h"
@@ -45,7 +47,6 @@ namespace KAA
 					const errno_t error = *_errno();
 					throw system_failure(__FUNCTIONW__, L"Unable to write formatted output to the memory buffer.",  error);
 				}
-
 				return std::wstring(&buffer[0], formatted_string_lenght);
 			}
 		}

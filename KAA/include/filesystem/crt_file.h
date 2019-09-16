@@ -12,8 +12,6 @@ namespace KAA
 			explicit crt_file(int descriptor);
 			~crt_file();
 
-			//int get_descriptor(void) const;
-
 		private:
 			int m_descriptor;
 

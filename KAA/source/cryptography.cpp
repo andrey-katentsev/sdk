@@ -60,13 +60,15 @@ namespace KAA
 			}
 
 			const RAII::local_memory memory { ciphertext.pbData };
-
-			// FUTURE: KAA: consider to use memcpy or etc.
-			std::vector<uint8_t> data(ciphertext.cbData);
-			for (auto i = 0U; i < ciphertext.cbData; ++i)
-				data[i] = ciphertext.pbData[i];
-
-			return data;
+			{
+				// FUTURE: KAA: consider to use memcpy or etc.
+				std::vector<uint8_t> data(ciphertext.cbData);
+				for (auto i = 0U; i < ciphertext.cbData; ++i)
+				{
+					data[i] = ciphertext.pbData[i];
+				}
+				return data;
+			}
 		}
 
 		std::vector<uint8_t> unprotect_data(const void* source, const size_t size)
@@ -81,13 +83,15 @@ namespace KAA
 			}
 
 			const RAII::local_memory memory { plaintext.pbData };
-
-			// FUTURE: KAA: consider to use memcpy or etc.
-			std::vector<uint8_t> data(plaintext.cbData);
-			for (auto i = 0U; i < plaintext.cbData; ++i)
-				data[i] = plaintext.pbData[i];
-
-			return data;
+			{
+				// FUTURE: KAA: consider to use memcpy or etc.
+				std::vector<uint8_t> data(plaintext.cbData);
+				for (auto i = 0U; i < plaintext.cbData; ++i)
+				{
+					data[i] = plaintext.pbData[i];
+				}
+				return data;
+			}
 		}
 	}
 }

@@ -28,7 +28,6 @@ namespace KAA
 				static std::atomic<unsigned int> id = 0;
 
 				NOTIFYICONDATAW properties = { 0 };
-
 				properties.cbSize = sizeof(NOTIFYICONDATAW);
 				properties.hWnd = owner;
 				properties.uID = ++id;
@@ -47,18 +46,15 @@ namespace KAA
 					const auto code = ::GetLastError();
 					throw windows_api_failure(__FUNCTIONW__, L"Unable to add icon to the notification area.", code);
 				}
-
 				return id;
 			}
 
 			void remove_icon(HWND owner, unsigned int id)
 			{
 				NOTIFYICONDATAW properties = { 0 };
-
 				properties.cbSize = sizeof(NOTIFYICONDATAW);
 				properties.hWnd = owner;
 				properties.uID = id;
-
 				const auto success = ::Shell_NotifyIconW(NIM_DELETE, &properties);
 				if(TRUE != success)
 				{
@@ -70,11 +66,9 @@ namespace KAA
 			void update_icon(HWND owner, unsigned int id, HICON icon)
 			{
 				NOTIFYICONDATAW properties = { 0 };
-
 				properties.cbSize = sizeof(NOTIFYICONDATAW);
 				properties.hWnd = owner;
 				properties.uID = id;
-
 				if(icon)
 				{
 					properties.hIcon = icon;
@@ -92,11 +86,9 @@ namespace KAA
 			void update_icon_tip(HWND owner, unsigned int id, const std::wstring& tip)
 			{
 				NOTIFYICONDATAW properties = { 0 };
-
 				properties.cbSize = sizeof(NOTIFYICONDATAW);
 				properties.hWnd = owner;
 				properties.uID = id;
-
 				properties.uFlags = NIF_TIP;
 				const auto error = ::StringCchCopyW(properties.szTip, _countof(properties.szTip), tip.c_str());
 				if(FAILED(error))

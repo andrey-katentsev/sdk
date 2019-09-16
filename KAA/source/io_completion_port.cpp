@@ -39,10 +39,8 @@ namespace KAA
 					// Invalid ::GetQueuedCompletionStatus call.
 				}
 			}
-
 			throw windows_api_failure(__FUNCTIONW__, L"Unable to dequeue an I/O completion packet from the specified I/O completion port.", error);
 		}
-
 		return packet;
 	}
 
