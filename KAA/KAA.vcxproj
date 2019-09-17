@@ -164,7 +164,6 @@
     <ClInclude Include="include\format_string.h" />
     <ClInclude Include="include\io_completion_packet.h" />
     <ClInclude Include="include\io_completion_port.h" />
-    <ClInclude Include="include\keywords.h" />
     <ClInclude Include="include\load_string.h" />
     <ClInclude Include="include\lock.h" />
     <ClInclude Include="include\md5.h" />

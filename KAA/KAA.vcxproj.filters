@@ -183,9 +183,6 @@
     <ClInclude Include="include\io_completion_port.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\keywords.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\load_string.h">
       <Filter>Header Files</Filter>
     </ClInclude>
