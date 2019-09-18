@@ -74,13 +74,32 @@ namespace
 		return requested_key;
 	}
 
+	enum class disposition_t
+	{
+		created_new, // The key did not exist and was created.
+		opened_existing // The key existed and was simply opened without being changed.
+	};
+
+	disposition_t to_disposition(const DWORD disposition)
+	{
+		switch (disposition)
+		{
+		case REG_CREATED_NEW_KEY:
+			return disposition_t::created_new;
+		case REG_OPENED_EXISTING_KEY:
+			return disposition_t::opened_existing;
+		default:
+			throw std::invalid_argument("unknown registry key disposition");
+		}
+	}
+
 	// FUTURE: KAA: generalize query / set.
 
 	// THROWS: windows_api_failure
 	// SAFE GUARANTEE: strong
 	// SIDE EFFECTS: -
 	// RETURNS: <handle to the opened or created key, disposition> (see MSDN for RegCreateKeyEx for details)
-	std::pair<HKEY, DWORD> create_key(const HKEY key, const std::wstring& sub_key, const DWORD options, const REGSAM desired_access, const SECURITY_ATTRIBUTES* desired_security)
+	std::pair<HKEY, disposition_t> create_key(const HKEY key, const std::wstring& sub_key, const DWORD options, const REGSAM desired_access, const SECURITY_ATTRIBUTES* desired_security)
 	{
 		HKEY requested_key = nullptr;
 		DWORD disposition = 0;
@@ -89,7 +108,7 @@ namespace
 		{
 			throw KAA::windows_api_failure(__FUNCTIONW__, L"Unable to create system registry key.", code);
 		}
-		return std::make_pair(requested_key, disposition);
+		return std::make_pair(requested_key, to_disposition(disposition));
 	}
 }
 
