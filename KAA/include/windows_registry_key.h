@@ -3,11 +3,7 @@
 #pragma once
 
 #include "registry_key.h"
-
 #include "./RAII/windows_registry_key_handle.h"
-
-// FUTURE: KAA: consider to remove this header.
-#include <windows.h>
 
 namespace KAA
 {
@@ -17,6 +13,10 @@ namespace KAA
 		{
 		public:
 			explicit windows_registry_key(HKEY);
+			windows_registry_key(windows_registry_key&&) = delete;
+			windows_registry_key(const windows_registry_key&) = delete;
+			windows_registry_key& operator = (windows_registry_key&&) = delete;
+			windows_registry_key& operator = (const windows_registry_key&) = delete;
 			~windows_registry_key();
 
 		private:
@@ -27,9 +27,6 @@ namespace KAA
 
 			uint32_t iquery_dword_value(const std::wstring& value_name) const override;
 			void iset_dword_value(const std::wstring& value_name, uint32_t value) override;
-
-			windows_registry_key(const windows_registry_key&);
-			windows_registry_key& operator = (const windows_registry_key&);
 		};
 	}
 }
