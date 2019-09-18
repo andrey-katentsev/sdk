@@ -89,8 +89,8 @@ namespace KAA
 			void create_directory(const path::directory&);
 			void remove_directory(const path::directory&);
 
-			std::auto_ptr<file> open_file(const path::file&, const mode&, const share&) const;
-			std::auto_ptr<file> create_file(const path::file&, const create_mode&, const mode&, const share&, const permission&);
+			std::unique_ptr<file> open_file(const path::file&, const mode&, const share&) const;
+			std::unique_ptr<file> create_file(const path::file&, const create_mode&, const mode&, const share&, const permission&);
 
 			path::file get_temp_filename(const path::directory&) const;
 
@@ -106,8 +106,8 @@ namespace KAA
 			virtual void icreate_directory(const path::directory&) = 0;
 			virtual void iremove_directory(const path::directory&) = 0;
 
-			virtual std::auto_ptr<file> iopen_file(const path::file&, const mode&, const share&) const = 0;
-			virtual std::auto_ptr<file> icreate_file(const path::file&, const create_mode&, const mode&, const share&, const permission&) = 0;
+			virtual std::unique_ptr<file> iopen_file(const path::file&, const mode&, const share&) const = 0;
+			virtual std::unique_ptr<file> icreate_file(const path::file&, const create_mode&, const mode&, const share&, const permission&) = 0;
 
 			virtual path::file iget_temp_filename(const path::directory&) const = 0;
 

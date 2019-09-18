@@ -38,19 +38,19 @@ namespace KAA
 				throw std::runtime_error { "directory does not exist" };
 		}
 
-		std::auto_ptr<file> in_memory_file_system::iopen_file(const path::file& path, const mode& operations_allowed, const share& sharing_allowed) const
+		std::unique_ptr<file> in_memory_file_system::iopen_file(const path::file&, const mode&, const share&) const
 		{
 			throw std::runtime_error { "not implemented" };
 		}
 
-		std::auto_ptr<file> in_memory_file_system::icreate_file(const path::file& path, const create_mode& lifetime, const mode& operations_allowed, const share& sharing_allowed, const permission& attributes)
+		std::unique_ptr<file> in_memory_file_system::icreate_file(const path::file& path, const create_mode& lifetime, const mode& operations_allowed, const share& sharing_allowed, const permission& attributes)
 		{
 			const auto filename = path.to_wstring();
 			if (vfs.end() == vfs.find(filename))
 			{
 				auto& descriptor = vfs[filename];
 				descriptor.reset(new std::vector<uint8_t>());
-				return std::auto_ptr<file>(new in_memory_file(descriptor));
+				return std::make_unique<in_memory_file>(descriptor);
 			}
 			else
 				throw std::runtime_error { "directory already exists" };

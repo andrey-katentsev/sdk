@@ -157,31 +157,35 @@ namespace KAA
 			}
 		}
 
-		std::auto_ptr<file> crt_file_system::iopen_file(const path::file& path, const mode& operations_allowed, const share& sharing_allowed) const
+		std::unique_ptr<file> crt_file_system::iopen_file(const path::file& path, const mode& operations_allowed, const share& sharing_allowed) const
 		{
 			RAII::invalid_parameter_handler session(allow_execution);
-			const int open = get_crt_open_flags(operations_allowed);
-			const int share = get_crt_share_flags(sharing_allowed);
-			int handle = 0;
-			const auto code = _wsopen_s(&handle, path.to_wstring().c_str(), open, share, 0);
-			if(0 == code)
-				return std::auto_ptr<file>(new crt_file(handle));
-			else
-				throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to open file, _wsopen_s function fails.", code);
+			{
+				const int open = get_crt_open_flags(operations_allowed);
+				const int share = get_crt_share_flags(sharing_allowed);
+				int handle = 0;
+				const auto code = _wsopen_s(&handle, path.to_wstring().c_str(), open, share, 0);
+				if(0 == code)
+					return std::make_unique<crt_file>(handle);
+				else
+					throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to open file, _wsopen_s function fails.", code);
+			}
 		}
 
-		std::auto_ptr<file> crt_file_system::icreate_file(const path::file& path, const create_mode& lifetime, const mode& operations_allowed, const share& sharing_allowed, const permission& attributes)
+		std::unique_ptr<file> crt_file_system::icreate_file(const path::file& path, const create_mode& lifetime, const mode& operations_allowed, const share& sharing_allowed, const permission& attributes)
 		{
 			RAII::invalid_parameter_handler session(allow_execution);
-			const int create = get_crt_create_flags(lifetime, operations_allowed);
-			const int share = get_crt_share_flags(sharing_allowed);
-			const int permissions = get_crt_permission_flags(attributes);
-			int handle = 0;
-			const auto code = _wsopen_s(&handle, path.to_wstring().c_str(), create, share, permissions);
-			if(0 == code)
-				return std::auto_ptr<file>(new crt_file(handle));
-			else
-				throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to create file, icreate_file function fails.", code);
+			{
+				const int create = get_crt_create_flags(lifetime, operations_allowed);
+				const int share = get_crt_share_flags(sharing_allowed);
+				const int permissions = get_crt_permission_flags(attributes);
+				int handle = 0;
+				const auto code = _wsopen_s(&handle, path.to_wstring().c_str(), create, share, permissions);
+				if(0 == code)
+					return std::make_unique<crt_file>(handle);
+				else
+					throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to create file, icreate_file function fails.", code);
+			}
 		}
 
 		path::file crt_file_system::iget_temp_filename(const path::directory& path) const

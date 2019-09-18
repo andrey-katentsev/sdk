@@ -12,8 +12,8 @@ namespace KAA
 			void icreate_directory(const path::directory&) override;
 			void iremove_directory(const path::directory&) override;
 
-			std::auto_ptr<file> iopen_file(const path::file&, const mode&, const share&) const override;
-			std::auto_ptr<file> icreate_file(const path::file&, const create_mode&, const mode&, const share&, const permission&) override;
+			std::unique_ptr<file> iopen_file(const path::file&, const mode&, const share&) const override;
+			std::unique_ptr<file> icreate_file(const path::file&, const create_mode&, const mode&, const share&, const permission&) override;
 
 			path::file iget_temp_filename(const path::directory&) const override;
 

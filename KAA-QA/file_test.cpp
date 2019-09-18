@@ -20,6 +20,6 @@ using namespace KAA::filesystem;
 TEST(file, get_size)
 {
 	crt_file_system filesystem;
-	const std::auto_ptr<file> handle(filesystem.open_file(kibibyte, read_attributes_only, share_any_access));
-	EXPECT_EQ(1024, handle->get_size());
+	auto file = filesystem.open_file(kibibyte, read_attributes_only, share_any_access);
+	EXPECT_EQ(1024U, file->get_size());
 }

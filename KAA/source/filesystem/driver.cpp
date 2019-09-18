@@ -20,12 +20,12 @@ namespace KAA
 			return iremove_directory(path);
 		}
 
-		std::auto_ptr<file> driver::open_file(const path::file& path, const mode& operations_allowed, const share& sharing_allowed) const
+		std::unique_ptr<file> driver::open_file(const path::file& path, const mode& operations_allowed, const share& sharing_allowed) const
 		{
 			return iopen_file(path, operations_allowed, sharing_allowed);
 		}
 
-		std::auto_ptr<file> driver::create_file(const path::file& path, const create_mode& lifetime, const mode& operations_allowed, const share& sharing_allowed, const permission& attributes)
+		std::unique_ptr<file> driver::create_file(const path::file& path, const create_mode& lifetime, const mode& operations_allowed, const share& sharing_allowed, const permission& attributes)
 		{
 			return icreate_file(path, lifetime, operations_allowed, sharing_allowed, attributes);
 		}
