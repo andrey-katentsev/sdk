@@ -26,7 +26,7 @@ namespace KAA
 			::RegCloseKey(handle);
 		}
 
-		windows_registry_key_handle::operator HKEY (void) const
+		windows_registry_key_handle::operator HKEY (void) const noexcept
 		{
 			return handle;
 		}

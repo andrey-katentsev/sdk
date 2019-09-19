@@ -25,7 +25,7 @@ namespace KAA
 			windows_registry_key_handle& operator = (windows_registry_key_handle&&) = delete;
 			~windows_registry_key_handle();
 
-			operator HKEY (void) const;
+			operator HKEY (void) const noexcept;
 
 		private:
 			HKEY handle;
