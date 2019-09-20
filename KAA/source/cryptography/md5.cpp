@@ -16,6 +16,18 @@
 #include "../../include/cryptography/provider.h"
 #include "../../include/exception/windows_api_failure.h"
 
+namespace
+{
+	void add_data_to_hash(HCRYPTHASH hash, const BYTE* data, DWORD size)
+	{
+		if (FALSE == ::CryptHashData(hash, data, size, 0U))
+		{
+			const auto error = ::GetLastError();
+			throw KAA::windows_api_failure(__FUNCTIONW__, L"cannot add data to a specified hash object", error);
+		}
+	}
+}
+
 namespace KAA
 {
 	namespace convert
@@ -60,11 +72,7 @@ namespace KAA
 		{
 			const provider csp { nullptr, MS_DEF_PROV, PROV_RSA_FULL, CRYPT_SILENT | CRYPT_VERIFYCONTEXT };
 			const hash algorithm { csp, CALG_MD5, 0, 0 };
-			if(FALSE == ::CryptHashData(algorithm, reinterpret_cast<const BYTE*>(data), data_size, 0))
-			{
-				const DWORD code = ::GetLastError();
-				throw windows_api_failure(__FUNCTIONW__, L"Unable to add data to a specified hash object.", code);
-			}
+			add_data_to_hash(algorithm, reinterpret_cast<const BYTE*>(data), data_size);
 
 			md5_t digest;
 			DWORD digest_size = sizeof(digest);
