@@ -7,14 +7,14 @@
 // Copyright © Andrey A. Katentsev, 2013
 //
 
-#include "../include/md5.h"
+#include "../../include/cryptography/md5.h"
 
 #include <iomanip>
 #include <sstream>
 
-#include "../include/cryptography/hash.h"
-#include "../include/cryptography/provider.h"
-#include "../include/exception/windows_api_failure.h"
+#include "../../include/cryptography/hash.h"
+#include "../../include/cryptography/provider.h"
+#include "../../include/exception/windows_api_failure.h"
 
 namespace KAA
 {

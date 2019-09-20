@@ -186,9 +186,6 @@
     <ClInclude Include="include\load_string.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\md5.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\progress_state.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -224,6 +221,9 @@
     </ClInclude>
     <ClInclude Include="include\dll\module_context.h">
       <Filter>Header Files\dll</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cryptography\md5.h">
+      <Filter>Header Files\cryptography</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -283,9 +283,6 @@
     </ClCompile>
     <ClCompile Include="source\dll\get_module_handle.cpp">
       <Filter>Source Files\dll</Filter>
-    </ClCompile>
-    <ClCompile Include="source\md5.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\RAII\windows_registry_key_handle.cpp">
       <Filter>Source Files\RAII</Filter>
@@ -385,6 +382,9 @@
     </ClCompile>
     <ClCompile Include="source\dll\module_context.cpp">
       <Filter>Source Files\exception</Filter>
+    </ClCompile>
+    <ClCompile Include="source\cryptography\md5.cpp">
+      <Filter>Source Files\cryptography</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

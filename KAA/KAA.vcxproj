@@ -137,6 +137,7 @@
     <ClInclude Include="include\critical_section.h" />
     <ClInclude Include="include\cryptography.h" />
     <ClInclude Include="include\cryptography\hash.h" />
+    <ClInclude Include="include\cryptography\md5.h" />
     <ClInclude Include="include\cryptography\provider.h" />
     <ClInclude Include="include\dll\get_module_handle.h" />
     <ClInclude Include="include\dll\module_context.h" />
@@ -166,7 +167,6 @@
     <ClInclude Include="include\io_completion_port.h" />
     <ClInclude Include="include\load_string.h" />
     <ClInclude Include="include\lock.h" />
-    <ClInclude Include="include\md5.h" />
     <ClInclude Include="include\progress_state.h" />
     <ClInclude Include="include\RAII\com_initializer.h" />
     <ClInclude Include="include\RAII\com_task_memory.h" />
@@ -194,6 +194,7 @@
     <ClCompile Include="source\critical_section.cpp" />
     <ClCompile Include="source\cryptography.cpp" />
     <ClCompile Include="source\cryptography\hash.cpp" />
+    <ClCompile Include="source\cryptography\md5.cpp" />
     <ClCompile Include="source\cryptography\provider.cpp" />
     <ClCompile Include="source\dll\get_module_handle.cpp" />
     <ClCompile Include="source\dll\module_context.cpp" />
@@ -223,7 +224,6 @@
     <ClCompile Include="source\io_completion_port.cpp" />
     <ClCompile Include="source\load_string.cpp" />
     <ClCompile Include="source\lock.cpp" />
-    <ClCompile Include="source\md5.cpp" />
     <ClCompile Include="source\RAII\com_initializer.cpp" />
     <ClCompile Include="source\RAII\com_task_memory.cpp" />
     <ClCompile Include="source\RAII\crt_heap_memory.cpp" />

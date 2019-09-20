@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 
 #include "../KAA/include/convert.h"
-#include "../KAA/include/md5.h"
+#include "../KAA/include/cryptography/md5.h"
 #include "../KAA/include/exception/system_failure.h"
 
 using namespace KAA;
