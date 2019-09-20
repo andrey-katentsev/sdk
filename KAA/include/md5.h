@@ -16,7 +16,7 @@ namespace KAA
 {
 	namespace cryptography
 	{
-		struct md5
+		struct md5_t
 		{
 			union
 			{
@@ -27,15 +27,15 @@ namespace KAA
 			};
 		};
 
-		bool operator == (const md5&, const md5&);
-		bool operator != (const md5&, const md5&);
+		bool operator == (const md5_t&, const md5_t&);
+		bool operator != (const md5_t&, const md5_t&);
 
 		// TODO: KAA: support multiple times call to compute the hash of long or discontinuous data streams.
-		md5 calculate_md5(const void* data, size_t data_size);
+		md5_t calculate_md5(const void* data, size_t data_size);
 	}
 
 	namespace convert
 	{
-		std::wstring to_wstring(const cryptography::md5&);
+		std::wstring to_wstring(const cryptography::md5_t&);
 	}
 }

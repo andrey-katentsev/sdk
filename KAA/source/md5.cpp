@@ -23,9 +23,9 @@ namespace KAA
 		// THROWS: -
 		// SAFE GUARANTEE: strong
 		// SIDE EFFECTS: -
-		std::wstring to_wstring(const cryptography::md5& digest)
+		std::wstring to_wstring(const cryptography::md5_t& digest)
 		{
-			std::wstringstream output;
+			std::wostringstream output;
 			output << std::setfill(L'0');
 			for (size_t i = 0; i < sizeof(digest); ++i)
 			{
@@ -40,7 +40,7 @@ namespace KAA
 		// THROWS: -
 		// SAFE GUARANTEE: no fail
 		// SIDE EFFECTS: -
-		bool operator == (const md5& left, const md5& right)
+		bool operator == (const md5_t& left, const md5_t& right)
 		{
 			return left.qword[0] == right.qword[0] && left.qword[1] == right.qword[1];
 		}
@@ -48,7 +48,7 @@ namespace KAA
 		// THROWS: -
 		// SAFE GUARANTEE: no fail
 		// SIDE EFFECTS: -
-		bool operator != (const md5& left, const md5& right)
+		bool operator != (const md5_t& left, const md5_t& right)
 		{
 			return !(left == right);
 		}
@@ -56,7 +56,7 @@ namespace KAA
 		// THROWS: windows_api_failure
 		// SAFE GUARANTEE: strong
 		// SIDE EFFECTS: -
-		md5 calculate_md5(const void* data, const size_t data_size)
+		md5_t calculate_md5(const void* data, const size_t data_size)
 		{
 			const provider csp { nullptr, MS_DEF_PROV, PROV_RSA_FULL, CRYPT_SILENT | CRYPT_VERIFYCONTEXT };
 			const hash algorithm { csp, CALG_MD5, 0, 0 };
@@ -66,7 +66,7 @@ namespace KAA
 				throw windows_api_failure(__FUNCTIONW__, L"Unable to add data to a specified hash object.", code);
 			}
 
-			md5 digest;
+			md5_t digest;
 			DWORD digest_size = sizeof(digest);
 			if(FALSE == ::CryptGetHashParam(algorithm, HP_HASHVAL, reinterpret_cast<BYTE*>(&digest), &digest_size, 0))
 			{
