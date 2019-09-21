@@ -11,6 +11,7 @@
 
 #include <iomanip>
 #include <sstream>
+#include <cassert>
 
 #include "../../include/cryptography/hash.h"
 #include "../../include/cryptography/provider.h"
@@ -25,6 +26,19 @@ namespace
 			const auto error = ::GetLastError();
 			throw KAA::windows_api_failure(__FUNCTIONW__, L"cannot add data to a specified hash object", error);
 		}
+	}
+
+	KAA::cryptography::md5_t complete_hash(HCRYPTHASH hash)
+	{
+		KAA::cryptography::md5_t digest;
+		DWORD size = sizeof(digest);
+		if (FALSE == ::CryptGetHashParam(hash, HP_HASHVAL, reinterpret_cast<BYTE*>(&digest), &size, 0U))
+		{
+			const auto error = ::GetLastError();
+			throw KAA::windows_api_failure(__FUNCTIONW__, L"cannot retrieve the actual hash value", error);
+		}
+		assert(sizeof(digest) == size);
+		return digest;
 	}
 }
 
@@ -73,15 +87,7 @@ namespace KAA
 			const provider csp { nullptr, MS_DEF_PROV, PROV_RSA_FULL, CRYPT_SILENT | CRYPT_VERIFYCONTEXT };
 			const hash algorithm { csp, CALG_MD5, 0, 0 };
 			add_data_to_hash(algorithm, reinterpret_cast<const BYTE*>(data), data_size);
-
-			md5_t digest;
-			DWORD digest_size = sizeof(digest);
-			if(FALSE == ::CryptGetHashParam(algorithm, HP_HASHVAL, reinterpret_cast<BYTE*>(&digest), &digest_size, 0))
-			{
-				const DWORD code = ::GetLastError();
-				throw windows_api_failure(__FUNCTIONW__, L"Unable to retrieve the actual hash value.", code);
-			}
-			return digest;
+			return complete_hash(algorithm);
 		}
 	}
 }
