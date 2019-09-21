@@ -17,6 +17,7 @@ namespace KAA
 			class file;
 		}
 
+		bool file_exists(const driver&, const path::file&);
 		_fsize_t get_file_size(const driver&, const path::file&);
 		void set_file_size(const driver&, const path::file&, const _fsize_t);
 	}
