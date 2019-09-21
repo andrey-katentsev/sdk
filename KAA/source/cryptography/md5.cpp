@@ -63,6 +63,24 @@ namespace KAA
 
 	namespace cryptography
 	{
+		md5::md5() : handle { { nullptr, MS_DEF_PROV, PROV_RSA_FULL, CRYPT_SILENT | CRYPT_VERIFYCONTEXT }, CALG_MD5, 0U, 0U }
+		{}
+
+		md5::md5(const std::vector<uint8_t>& data) : md5()
+		{
+			add_data_to_hash(handle, data.data(), data.size());
+		}
+
+		void md5::add_data(const std::vector<uint8_t>& data)
+		{
+			return add_data_to_hash(handle, data.data(), data.size());
+		}
+
+		md5_t md5::complete(void)
+		{
+			return complete_hash(handle);
+		}
+
 		// THROWS: -
 		// SAFE GUARANTEE: no fail
 		// SIDE EFFECTS: -

@@ -10,7 +10,10 @@
 #pragma once
 
 #include <string>
+#include <vector>
 #include <cstdint>
+
+#include "hash.h"
 
 namespace KAA
 {
@@ -27,10 +30,27 @@ namespace KAA
 			};
 		};
 
+		class md5
+		{
+		public:
+			md5();
+			md5(md5&&) = delete;
+			md5(const md5&) = delete;
+			md5(const std::vector<uint8_t>& data);
+			md5& operator = (md5&&) = delete;
+			md5& operator = (const md5&) = delete;
+			~md5() = default;
+
+			void add_data(const std::vector<uint8_t>& data);
+			md5_t complete(void);
+
+		private:
+			hash handle;
+		};
+
 		bool operator == (const md5_t&, const md5_t&);
 		bool operator != (const md5_t&, const md5_t&);
 
-		// TODO: KAA: support multiple times call to compute the hash of long or discontinuous data streams.
 		md5_t calculate_md5(const void* data, size_t data_size);
 	}
 
