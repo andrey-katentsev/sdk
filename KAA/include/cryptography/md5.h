@@ -14,6 +14,7 @@
 #include <cstdint>
 
 #include "hash.h"
+#include "provider.h"
 
 namespace KAA
 {
@@ -45,6 +46,7 @@ namespace KAA
 			md5_t complete(void);
 
 		private:
+			provider csp; // cryptographic service provider
 			hash handle;
 		};
 

@@ -63,9 +63,10 @@ namespace KAA
 
 	namespace cryptography
 	{
-		md5::md5() : handle { { nullptr, MS_DEF_PROV, PROV_RSA_FULL, CRYPT_SILENT | CRYPT_VERIFYCONTEXT }, CALG_MD5, 0U, 0U }
+		md5::md5() : csp { nullptr, MS_DEF_PROV, PROV_RSA_FULL, CRYPT_SILENT | CRYPT_VERIFYCONTEXT }, handle { csp, CALG_MD5, 0U, 0U }
 		{}
 
+		// TODO: KAA: typedef std::vector<uint8_t> blob_t;
 		md5::md5(const std::vector<uint8_t>& data) : md5()
 		{
 			add_data_to_hash(handle, data.data(), data.size());
