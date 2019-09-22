@@ -180,6 +180,7 @@
   <ItemGroup>
     <ClCompile Include="checksum_test.cpp" />
     <ClCompile Include="convert_test.cpp" />
+    <ClCompile Include="crt_file_system_test.cpp" />
     <ClCompile Include="cryptography_test.cpp" />
     <ClCompile Include="debug_test.cpp" />
     <ClCompile Include="digest_test.cpp" />

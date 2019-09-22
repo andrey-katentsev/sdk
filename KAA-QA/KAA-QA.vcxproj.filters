@@ -57,6 +57,9 @@
     <ClCompile Include="debug_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="crt_file_system_test.cpp">
+      <Filter>Source Files\filesystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\KiB.bin">
