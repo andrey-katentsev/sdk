@@ -20,6 +20,8 @@ namespace KAA
 			void irename_file(const path::file&, const path::file&) override;
 			void iremove_file(const path::file&) override;
 
+			bool ifile_exists(const path::file&) const override;
+
 			void iset_file_permissions(const path::file&, const permission&) override;
 			access iget_file_permissions(const path::file&) const override;
 		};

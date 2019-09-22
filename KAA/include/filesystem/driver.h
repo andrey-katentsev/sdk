@@ -99,6 +99,8 @@ namespace KAA
 
 			void delete_file(const path::file&);
 
+			bool file_exists(const path::file&) const;
+
 			void set_file_permissions(const path::file&, const permission&);
 			access get_file_permissions(const path::file&) const;
 
@@ -113,6 +115,8 @@ namespace KAA
 
 			virtual void irename_file(const path::file&, const path::file&) = 0;
 			virtual void iremove_file(const path::file&) = 0;
+
+			virtual bool ifile_exists(const path::file&) const = 0;
 
 			virtual void iset_file_permissions(const path::file&, const permission&) = 0;
 			virtual access iget_file_permissions(const path::file&) const = 0;

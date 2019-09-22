@@ -75,3 +75,20 @@ TEST(in_memory_filesystem, remove_file)
 	EXPECT_NO_THROW(filesystem.remove_file(path));
 	EXPECT_THROW(filesystem.remove_file(path), std::runtime_error);
 }
+
+TEST(in_memory_filesystem, file_exists)
+{
+	const auto path = path::file { LR"(V:\directory\file.dat)" };
+	in_memory_file_system filesystem;
+	EXPECT_FALSE(filesystem.file_exists(path));
+	{
+		driver::create_mode new_persistent_file;
+		driver::mode sequential_binary_read_write;
+		driver::share share_any_access;
+		driver::permission full_access;
+		auto file = filesystem.create_file(path, new_persistent_file, sequential_binary_read_write, share_any_access, full_access);
+	}
+	ASSERT_TRUE(filesystem.file_exists(path));
+	filesystem.remove_file(path);
+	ASSERT_FALSE(filesystem.file_exists(path));
+}

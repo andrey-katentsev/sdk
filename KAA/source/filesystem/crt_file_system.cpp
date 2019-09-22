@@ -233,6 +233,23 @@ namespace KAA
 			}
 		}
 
+		bool crt_file_system::ifile_exists(const path::file& path) const
+		{
+			RAII::invalid_parameter_handler session(allow_execution);
+			{
+				switch (_waccess_s(path.to_wstring().c_str(), crt_access::exist))
+				{
+				case 0:
+					return true;
+				case ENOENT:
+					return false;
+				default:
+					const auto error = *_errno();
+					throw system_failure(__FUNCTIONW__, L"unable to determine the specified file exists, _waccess_s function fails", error);
+				}
+			}
+		}
+
 		bool is_access_allowed(const path::file& path, const crt_access requested_access)
 		{
 			switch(_waccess_s(path.to_wstring().c_str(), requested_access))

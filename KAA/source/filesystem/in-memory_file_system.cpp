@@ -88,6 +88,12 @@ namespace KAA
 				throw std::runtime_error { "file does not exist" };
 		}
 
+		bool in_memory_file_system::ifile_exists(const path::file& path) const
+		{
+			const auto filename = path.to_wstring();
+			return vfs.end() != vfs.find(filename);
+		}
+
 		void in_memory_file_system::iset_file_permissions(const path::file& path, const permission& attributes)
 		{
 			throw std::runtime_error { "not implemented" };

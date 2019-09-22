@@ -50,6 +50,11 @@ namespace KAA
 			return remove_file(path);
 		}
 
+		bool driver::file_exists(const path::file& path) const
+		{
+			return ifile_exists(path);
+		}
+
 		void driver::set_file_permissions(const path::file& path, const permission& attributes)
 		{
 			return iset_file_permissions(path, attributes);
