@@ -57,12 +57,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\cryptography.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\random.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\exception\failure.h">
       <Filter>Header Files\exception</Filter>
     </ClInclude>
@@ -225,11 +219,14 @@
     <ClInclude Include="include\cryptography\md5.h">
       <Filter>Header Files\cryptography</Filter>
     </ClInclude>
+    <ClInclude Include="include\cryptography\cryptography.h">
+      <Filter>Header Files\cryptography</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cryptography\random.h">
+      <Filter>Header Files\cryptography</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\cryptography.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\filesystem\crt_file_system.cpp">
       <Filter>Source Files\filesystem</Filter>
     </ClCompile>
@@ -262,9 +259,6 @@
     </ClCompile>
     <ClCompile Include="source\exception\failure.cpp">
       <Filter>Source Files\exception</Filter>
-    </ClCompile>
-    <ClCompile Include="source\random.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\registry.cpp">
       <Filter>Source Files</Filter>
@@ -384,6 +378,12 @@
       <Filter>Source Files\exception</Filter>
     </ClCompile>
     <ClCompile Include="source\cryptography\md5.cpp">
+      <Filter>Source Files\cryptography</Filter>
+    </ClCompile>
+    <ClCompile Include="source\cryptography\cryptography.cpp">
+      <Filter>Source Files\cryptography</Filter>
+    </ClCompile>
+    <ClCompile Include="source\cryptography\random.cpp">
       <Filter>Source Files\cryptography</Filter>
     </ClCompile>
   </ItemGroup>

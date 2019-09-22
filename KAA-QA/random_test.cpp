@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 
-#include "../KAA/include/random.h"
+#include "../KAA/include/cryptography/random.h"
 #include "../KAA/include/exception/operation_failure.h"
 
 using namespace KAA::cryptography;

@@ -7,13 +7,13 @@
 // Copyright © Andrey A. Katentsev, 2013
 //
 
-#include "../include/cryptography.h"
+#include "../../include/cryptography/cryptography.h"
 
 #include <iso646.h>
 
-#include "../include/cryptography/provider.h"
-#include "../include/exception/windows_api_failure.h"
-#include "../include/RAII/local_memory.h"
+#include "../../include/cryptography/provider.h"
+#include "../../include/exception/windows_api_failure.h"
+#include "../../include/RAII/local_memory.h"
 
 #include <wincrypt.h>
 

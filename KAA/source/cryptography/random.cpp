@@ -9,16 +9,16 @@
 
 #define _CRT_RAND_S
 
-#include "../include/random.h"
+#include "../../include/cryptography/random.h"
 
 #include <algorithm>
 
 #include <memory.h>
 #include <stdlib.h>
 
-#include "../include/exception/operation_failure.h"
-#include "../include/exception/system_failure.h"
-#include "../include/RAII/invalid_parameter_handler.h"
+#include "../../include/exception/operation_failure.h"
+#include "../../include/exception/system_failure.h"
+#include "../../include/RAII/invalid_parameter_handler.h"
 
 namespace
 {

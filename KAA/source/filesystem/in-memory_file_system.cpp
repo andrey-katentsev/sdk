@@ -12,7 +12,7 @@
 #include <stdexcept>
 
 #include "../../include/convert.h"
-#include "../../include/random.h"
+#include "../../include/cryptography/random.h"
 #include "../../include/exception/operation_failure.h"
 #include "../../include/filesystem/in-memory_file.h"
 
