@@ -39,7 +39,7 @@ namespace KAA
 		// THROWS: windows_api_failure
 		// SAFE GUARANTEE: basic
 		// SIDE EFFECTS: -
-		void generate_random(_In_ const provider& csp, void* buffer, const size_t size)
+		void generate_random(const provider& csp, void* buffer, const size_t size)
 		{
 			if(FALSE == ::CryptGenRandom(csp.get_handle(), size, static_cast<BYTE*>(buffer)))
 			{
