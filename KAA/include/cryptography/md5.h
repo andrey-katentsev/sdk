@@ -9,17 +9,19 @@
 
 #pragma once
 
+#include <memory>
 #include <string>
 #include <vector>
 #include <cstdint>
 
 #include "hash.h"
-#include "provider.h"
 
 namespace KAA
 {
 	namespace cryptography
 	{
+		class provider;
+
 		struct md5_t
 		{
 			union
@@ -40,13 +42,13 @@ namespace KAA
 			md5(const std::vector<uint8_t>& data);
 			md5& operator = (md5&&) = delete;
 			md5& operator = (const md5&) = delete;
-			~md5() = default;
+			~md5();
 
 			void add_data(const std::vector<uint8_t>& data);
 			md5_t complete(void);
 
 		private:
-			provider csp; // cryptographic service provider
+			std::unique_ptr<provider> csp; // cryptographic service provider
 			hash handle;
 		};
 

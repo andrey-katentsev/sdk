@@ -10,7 +10,7 @@
 #pragma comment(lib, "advapi32.lib")
 
 #include "../../include/cryptography/hash.h"
-#include "../../include/cryptography/provider.h"
+#include "../../include/cryptography/windows_crypto_api.h"
 #include "../../include/exception/windows_api_failure.h"
 
 namespace KAA
@@ -19,7 +19,7 @@ namespace KAA
 	{
 		hash::hash(const provider& csp, const ALG_ID algorithm, HCRYPTKEY key, const DWORD flags)
 		{
-			if (FALSE == ::CryptCreateHash(csp, algorithm, key, flags, &handle))
+			if (FALSE == ::CryptCreateHash(csp.get_handle(), algorithm, key, flags, &handle))
 			{
 				const auto code = ::GetLastError();
 				throw windows_api_failure(__FUNCTIONW__, L"failed to create a hash object handle.", code);

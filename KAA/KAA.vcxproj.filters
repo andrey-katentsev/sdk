@@ -201,9 +201,6 @@
     <ClInclude Include="include\cryptography\hash.h">
       <Filter>Header Files\cryptography</Filter>
     </ClInclude>
-    <ClInclude Include="include\cryptography\provider.h">
-      <Filter>Header Files\cryptography</Filter>
-    </ClInclude>
     <ClInclude Include="include\checksum.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -219,10 +216,16 @@
     <ClInclude Include="include\cryptography\md5.h">
       <Filter>Header Files\cryptography</Filter>
     </ClInclude>
+    <ClInclude Include="include\cryptography\random.h">
+      <Filter>Header Files\cryptography</Filter>
+    </ClInclude>
     <ClInclude Include="include\cryptography\cryptography.h">
       <Filter>Header Files\cryptography</Filter>
     </ClInclude>
-    <ClInclude Include="include\cryptography\random.h">
+    <ClInclude Include="include\cryptography\provider.h">
+      <Filter>Header Files\cryptography</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cryptography\windows_crypto_api.h">
       <Filter>Header Files\cryptography</Filter>
     </ClInclude>
   </ItemGroup>
@@ -362,9 +365,6 @@
     <ClCompile Include="source\cryptography\hash.cpp">
       <Filter>Source Files\cryptography</Filter>
     </ClCompile>
-    <ClCompile Include="source\cryptography\provider.cpp">
-      <Filter>Source Files\cryptography</Filter>
-    </ClCompile>
     <ClCompile Include="source\checksum.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -380,10 +380,16 @@
     <ClCompile Include="source\cryptography\md5.cpp">
       <Filter>Source Files\cryptography</Filter>
     </ClCompile>
+    <ClCompile Include="source\cryptography\random.cpp">
+      <Filter>Source Files\cryptography</Filter>
+    </ClCompile>
     <ClCompile Include="source\cryptography\cryptography.cpp">
       <Filter>Source Files\cryptography</Filter>
     </ClCompile>
-    <ClCompile Include="source\cryptography\random.cpp">
+    <ClCompile Include="source\cryptography\provider.cpp">
+      <Filter>Source Files\cryptography</Filter>
+    </ClCompile>
+    <ClCompile Include="source\cryptography\windows_crypto_api.cpp">
       <Filter>Source Files\cryptography</Filter>
     </ClCompile>
   </ItemGroup>

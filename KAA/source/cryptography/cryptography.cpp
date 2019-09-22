@@ -11,7 +11,7 @@
 
 #include <iso646.h>
 
-#include "../../include/cryptography/provider.h"
+#include "../../include/cryptography/windows_crypto_api.h"
 #include "../../include/exception/windows_api_failure.h"
 #include "../../include/RAII/local_memory.h"
 
@@ -41,7 +41,7 @@ namespace KAA
 		// SIDE EFFECTS: -
 		void generate_random(_In_ const provider& csp, void* buffer, const size_t size)
 		{
-			if(FALSE == ::CryptGenRandom(csp, size, static_cast<BYTE*>(buffer)))
+			if(FALSE == ::CryptGenRandom(csp.get_handle(), size, static_cast<BYTE*>(buffer)))
 			{
 				const DWORD code = ::GetLastError();
 				throw windows_api_failure(__FUNCTIONW__, L"Unable to fill a buffer with cryptographically random bytes.", code);
