@@ -14,12 +14,11 @@
 #include <vector>
 #include <cstdint>
 
-#include "hash.h"
-
 namespace KAA
 {
 	namespace cryptography
 	{
+		class hash;
 		class provider;
 
 		struct md5_t
@@ -49,7 +48,7 @@ namespace KAA
 
 		private:
 			std::unique_ptr<provider> csp; // cryptographic service provider
-			hash handle;
+			std::unique_ptr<hash> hash;
 		};
 
 		bool operator == (const md5_t&, const md5_t&);

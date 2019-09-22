@@ -228,6 +228,9 @@
     <ClInclude Include="include\cryptography\windows_crypto_api.h">
       <Filter>Header Files\cryptography</Filter>
     </ClInclude>
+    <ClInclude Include="include\cryptography\windows_hash.h">
+      <Filter>Header Files\cryptography</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\filesystem\crt_file_system.cpp">
@@ -390,6 +393,9 @@
       <Filter>Source Files\cryptography</Filter>
     </ClCompile>
     <ClCompile Include="source\cryptography\windows_crypto_api.cpp">
+      <Filter>Source Files\cryptography</Filter>
+    </ClCompile>
+    <ClCompile Include="source\cryptography\windows_hash.cpp">
       <Filter>Source Files\cryptography</Filter>
     </ClCompile>
   </ItemGroup>

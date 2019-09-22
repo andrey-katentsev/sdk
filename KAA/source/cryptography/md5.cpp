@@ -13,8 +13,8 @@
 #include <sstream>
 #include <cassert>
 
-#include "../../include/cryptography/hash.h"
 #include "../../include/cryptography/windows_crypto_api.h"
+#include "../../include/cryptography/windows_hash.h"
 #include "../../include/exception/windows_api_failure.h"
 
 namespace
@@ -65,25 +65,25 @@ namespace KAA
 	{
 		md5::md5() :
 			csp { std::make_unique<windows_crypto_api>(nullptr, MS_DEF_PROV, PROV_RSA_FULL, CRYPT_SILENT | CRYPT_VERIFYCONTEXT) },
-			handle { *csp, CALG_MD5, 0U, 0U }
+			hash { std::make_unique<windows_hash>(csp->get_handle(), CALG_MD5, 0U, 0U) }
 		{}
 
 		// TODO: KAA: typedef std::vector<uint8_t> blob_t;
 		md5::md5(const std::vector<uint8_t>& data) : md5()
 		{
-			add_data_to_hash(handle, data.data(), data.size());
+			add_data_to_hash(hash->get_handle(), data.data(), data.size());
 		}
 
 		md5::~md5() = default;
 
 		void md5::add_data(const std::vector<uint8_t>& data)
 		{
-			return add_data_to_hash(handle, data.data(), data.size());
+			return add_data_to_hash(hash->get_handle(), data.data(), data.size());
 		}
 
 		md5_t md5::complete(void)
 		{
-			return complete_hash(handle);
+			return complete_hash(hash->get_handle());
 		}
 
 		// THROWS: -
@@ -108,7 +108,7 @@ namespace KAA
 		md5_t calculate_md5(const void* data, const size_t data_size)
 		{
 			const windows_crypto_api csp { nullptr, MS_DEF_PROV, PROV_RSA_FULL, CRYPT_SILENT | CRYPT_VERIFYCONTEXT };
-			const hash algorithm { csp, CALG_MD5, 0, 0 };
+			const windows_hash algorithm { csp, CALG_MD5, 0, 0 };
 			add_data_to_hash(algorithm, reinterpret_cast<const BYTE*>(data), data_size);
 			return complete_hash(algorithm);
 		}

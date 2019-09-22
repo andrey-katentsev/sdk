@@ -141,6 +141,7 @@
     <ClInclude Include="include\cryptography\provider.h" />
     <ClInclude Include="include\cryptography\windows_crypto_api.h" />
     <ClInclude Include="include\cryptography\random.h" />
+    <ClInclude Include="include\cryptography\windows_hash.h" />
     <ClInclude Include="include\dll\get_module_handle.h" />
     <ClInclude Include="include\dll\module_context.h" />
     <ClInclude Include="include\exception\com_failure.h" />
@@ -199,6 +200,7 @@
     <ClCompile Include="source\cryptography\provider.cpp" />
     <ClCompile Include="source\cryptography\windows_crypto_api.cpp" />
     <ClCompile Include="source\cryptography\random.cpp" />
+    <ClCompile Include="source\cryptography\windows_hash.cpp" />
     <ClCompile Include="source\dll\get_module_handle.cpp" />
     <ClCompile Include="source\dll\module_context.cpp" />
     <ClCompile Include="source\exception\com_failure.cpp" />
