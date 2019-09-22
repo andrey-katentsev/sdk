@@ -252,14 +252,15 @@ namespace KAA
 
 		bool is_access_allowed(const path::file& path, const crt_access requested_access)
 		{
-			switch(_waccess_s(path.to_wstring().c_str(), requested_access))
+			RAII::invalid_parameter_handler session(allow_execution);
 			{
-			case 0:
-				return true;
-			case EACCES:
-				return false;
-			default:
+				switch(_waccess_s(path.to_wstring().c_str(), requested_access))
 				{
+				case 0:
+					return true;
+				case EACCES:
+					return false;
+				default:
 					const errno_t error = *_errno();
 					throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to determine file permissions, _waccess_s function fails.", error);
 				}
@@ -267,15 +268,11 @@ namespace KAA
 		}
 
 		// FUTURE: KAA: not implemented.
-		driver::access crt_file_system::iget_file_permissions(const path::file& path) const
+		driver::permission crt_file_system::iget_file_permissions(const path::file& path) const
 		{
-			RAII::invalid_parameter_handler session(allow_execution);
-			{
-				const auto is_exists = is_access_allowed(path, crt_access::exist);
-				const auto is_read_permission = is_access_allowed(path, crt_access::read);
-				const auto is_write_permission = is_access_allowed(path, crt_access::write);
-				return access(is_read_permission, is_write_permission, is_exists);
-			}
+			const auto read = is_access_allowed(path, crt_access::read);
+			const auto write = is_access_allowed(path, crt_access::write);
+			return { write, read };
 		}
 	}
 }

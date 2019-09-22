@@ -75,15 +75,6 @@ namespace KAA
 				{}
 			};
 
-			class access
-			{
-			public:
-				access(bool read, bool write, bool exist);
-
-				bool m_exist; // existence only
-				permission m_permission;
-			};
-
 			virtual ~driver() = default;
 
 			void create_directory(const path::directory&);
@@ -102,7 +93,7 @@ namespace KAA
 			bool file_exists(const path::file&) const;
 
 			void set_file_permissions(const path::file&, const permission&);
-			access get_file_permissions(const path::file&) const;
+			permission get_file_permissions(const path::file&) const;
 
 		private:
 			virtual void icreate_directory(const path::directory&) = 0;
@@ -119,7 +110,7 @@ namespace KAA
 			virtual bool ifile_exists(const path::file&) const = 0;
 
 			virtual void iset_file_permissions(const path::file&, const permission&) = 0;
-			virtual access iget_file_permissions(const path::file&) const = 0;
+			virtual permission iget_file_permissions(const path::file&) const = 0;
 		};
 	}
 }

@@ -39,7 +39,7 @@ namespace KAA
 			bool ifile_exists(const path::file&) const override;
 
 			void iset_file_permissions(const path::file&, const permission&) override;
-			access iget_file_permissions(const path::file&) const override;
+			permission iget_file_permissions(const path::file&) const override;
 
 			std::map<std::wstring, std::shared_ptr<std::vector<uint8_t>>> vfs;
 		};

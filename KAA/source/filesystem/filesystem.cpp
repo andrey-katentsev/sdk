@@ -16,11 +16,12 @@ namespace KAA
 {
 	namespace filesystem
 	{
-		// TODO: KAA: consider the filesystem::driver to not throw in this case (or reimplement as a part of filesystem::driver).
+		// TODO: KAA: consider to remove this function.
 		bool file_exists(const driver& filesystem, const path::file& path)
 		try
 		{
-			return filesystem.get_file_permissions(path).m_exist;
+			filesystem.get_file_permissions(path);
+			return true;
 		}
 		catch (const KAA::system_failure& error)
 		{

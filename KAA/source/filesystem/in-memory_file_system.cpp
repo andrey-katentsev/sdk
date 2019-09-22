@@ -99,7 +99,7 @@ namespace KAA
 			throw std::runtime_error { "not implemented" };
 		}
 
-		driver::access in_memory_file_system::iget_file_permissions(const path::file& path) const
+		driver::permission in_memory_file_system::iget_file_permissions(const path::file&) const
 		{
 			throw std::runtime_error { "not implemented" };
 		}

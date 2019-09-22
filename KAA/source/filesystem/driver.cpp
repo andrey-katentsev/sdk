@@ -5,11 +5,6 @@ namespace KAA
 {
 	namespace filesystem
 	{
-		driver::access::access(bool read, bool write, bool exist) :
-		m_exist(exist),
-		m_permission(write, read)
-		{}
-
 		void driver::create_directory(const path::directory& path)
 		{
 			return icreate_directory(path);
@@ -60,7 +55,7 @@ namespace KAA
 			return iset_file_permissions(path, attributes);
 		}
 
-		driver::access driver::get_file_permissions(const path::file& path) const
+		driver::permission driver::get_file_permissions(const path::file& path) const
 		{
 			return iget_file_permissions(path);
 		}
