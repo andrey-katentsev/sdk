@@ -18,6 +18,8 @@ namespace KAA
 			uint32_t query_dword_value(const std::wstring& value_name) const;
 			void set_dword_value(const std::wstring& value_name, uint32_t value);
 
+			virtual ~registry_key() = default;
+
 		private:
 			virtual std::wstring iquery_string_value(const std::wstring& value_name) const = 0;
 			virtual void iset_string_value(const std::wstring& value_name, const std::wstring& value) = 0;

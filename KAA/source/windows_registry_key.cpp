@@ -92,9 +92,6 @@ namespace KAA
 		key(handle)
 		{}
 
-		windows_registry_key::~windows_registry_key()
-		{}
-
 		std::wstring windows_registry_key::iquery_string_value(const std::wstring& value_name) const
 		{
 			return ::query_string_value(key, value_name);

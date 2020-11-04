@@ -17,7 +17,7 @@ namespace KAA
 			windows_registry_key(const windows_registry_key&) = delete;
 			windows_registry_key& operator = (windows_registry_key&&) = delete;
 			windows_registry_key& operator = (const windows_registry_key&) = delete;
-			~windows_registry_key();
+			~windows_registry_key() override = default;
 
 		private:
 			RAII::windows_registry_key_handle key;
