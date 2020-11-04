@@ -54,7 +54,7 @@ namespace KAA
 		bool operator == (const md5_t&, const md5_t&);
 		bool operator != (const md5_t&, const md5_t&);
 
-		md5_t calculate_md5(const void* data, size_t data_size);
+		md5_t calculate_md5(const void* data, size_t size);
 	}
 
 	namespace convert

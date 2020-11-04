@@ -105,12 +105,12 @@ namespace KAA
 		// THROWS: windows_api_failure
 		// SAFE GUARANTEE: strong
 		// SIDE EFFECTS: -
-		md5_t calculate_md5(const void* data, const size_t data_size)
+		md5_t calculate_md5(const void* data, const size_t size)
 		{
 			const windows_crypto_api csp { nullptr, MS_DEF_PROV, PROV_RSA_FULL, CRYPT_SILENT | CRYPT_VERIFYCONTEXT };
-			const windows_hash algorithm { csp, CALG_MD5, 0, 0 };
-			add_data_to_hash(algorithm, reinterpret_cast<const BYTE*>(data), data_size);
-			return complete_hash(algorithm);
+			const windows_hash hash { csp, CALG_MD5, 0, 0 };
+			add_data_to_hash(hash, reinterpret_cast<const BYTE*>(data), size);
+			return complete_hash(hash);
 		}
 	}
 }
