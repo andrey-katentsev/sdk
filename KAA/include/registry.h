@@ -10,7 +10,6 @@ namespace KAA
 	namespace system
 	{
 		class registry_key;
-
 		class registry
 		{
 		public:
@@ -47,6 +46,8 @@ namespace KAA
 
 			std::unique_ptr<registry_key> open_key(root_key section, const std::wstring& sub_key, const key_access& desired_access);
 			std::unique_ptr<registry_key> create_key(root_key section, const std::wstring& sub_key, key_options options, const key_access& desired_access, const void* desired_security = nullptr);
+
+			virtual ~registry() = default;
 
 		private:
 			virtual std::unique_ptr<registry_key> iopen_key(root_key section, const std::wstring& sub_key, const key_access& desired_access) = 0;

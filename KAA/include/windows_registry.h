@@ -10,6 +10,9 @@ namespace KAA
 	{
 		class windows_registry final : public registry
 		{
+		public:
+			~windows_registry() override = default;
+
 		private:
 			std::unique_ptr<registry_key> iopen_key(root_key section, const std::wstring& sub_key, const key_access& desired_access) override;
 			std::unique_ptr<registry_key> icreate_key(root_key section, const std::wstring& sub_key, key_options options, const key_access& desired_access, const void* desired_security) override;
