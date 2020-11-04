@@ -44,7 +44,7 @@ TEST(current_working_directory, set)
 	// ARRANGE
 	const auto environment = std::make_unique<crt_directory_control>();
 	const auto current_working_directory = environment->get_current_working_directory();
-	const auto new_working_directory = KAA::filesystem::path::directory { LR"(C:\Temp)" }; // FIX: KAA: must exists!
+	const auto new_working_directory = KAA::filesystem::path::directory { LR"(D:\Temp)" }; // FIX: KAA: must exists!
 
 	// ACT
 	const working_directory_session session { new_working_directory };
@@ -61,7 +61,7 @@ TEST(working_directory_session, sets_and_restores_current_working_directory)
 
 	// ACT
 	{
-		const auto new_working_directory = KAA::filesystem::path::directory { LR"(C:\Temp)" }; // FIX: KAA: must exists!
+		const auto new_working_directory = KAA::filesystem::path::directory { LR"(D:\Temp)" }; // FIX: KAA: must exists!
 		const working_directory_session session { new_working_directory };
 		EXPECT_EQ(new_working_directory, environment->get_current_working_directory());
 	}
