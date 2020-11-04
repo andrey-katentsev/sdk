@@ -231,6 +231,9 @@
     <ClInclude Include="include\cryptography\windows_hash.h">
       <Filter>Header Files\cryptography</Filter>
     </ClInclude>
+    <ClInclude Include="include\unicode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\filesystem\crt_file_system.cpp">
@@ -397,6 +400,9 @@
     </ClCompile>
     <ClCompile Include="source\cryptography\windows_hash.cpp">
       <Filter>Source Files\cryptography</Filter>
+    </ClCompile>
+    <ClCompile Include="source\unicode.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

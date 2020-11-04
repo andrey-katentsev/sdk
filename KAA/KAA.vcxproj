@@ -187,6 +187,7 @@
     <ClInclude Include="include\UI\cursor.h" />
     <ClInclude Include="include\UI\menu.h" />
     <ClInclude Include="include\UI\notification_area.h" />
+    <ClInclude Include="include\unicode.h" />
     <ClInclude Include="include\windows_registry.h" />
     <ClInclude Include="include\windows_registry_key.h" />
   </ItemGroup>
@@ -244,6 +245,7 @@
     <ClCompile Include="source\UI\cursor.cpp" />
     <ClCompile Include="source\UI\menu.cpp" />
     <ClCompile Include="source\UI\notification_area.cpp" />
+    <ClCompile Include="source\unicode.cpp" />
     <ClCompile Include="source\windows_registry.cpp" />
     <ClCompile Include="source\windows_registry_key.cpp" />
   </ItemGroup>
