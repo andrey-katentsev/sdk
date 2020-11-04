@@ -50,7 +50,7 @@ namespace
 
 	void set_string_value(const HKEY key, const std::wstring& name, const std::wstring& data)
 	{
-		const auto error = ::RegSetValueExW(key, name.c_str(), 0, REG_SZ, reinterpret_cast<const BYTE*>(data.c_str()), (data.length() + 1) * sizeof(wchar_t));
+		const auto error = ::RegSetValueExW(key, name.c_str(), 0, REG_SZ, reinterpret_cast<const BYTE*>(data.c_str()), static_cast<::DWORD>((data.length() + 1) * sizeof(wchar_t)));
 		if(error != ERROR_SUCCESS) [[unlikely]]
 		{
 			throw KAA::windows_api_failure { __FUNCTIONW__, L"cannot write the string value to the system registry", error };
