@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 
-#include "../KAA/include/random.h"
+#include "../KAA/include/cryptography/random.h"
 #include "../KAA/include/filesystem/crt_file_system.h"
 #include "../KAA/include/filesystem/filesystem.h"
 #include "../KAA/include/filesystem/path.h"

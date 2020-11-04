@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 
-#include "../KAA/include/cryptography.h"
+#include "../KAA/include/cryptography/cryptography.h"
 
 TEST(cryptography, gamma)
 {
