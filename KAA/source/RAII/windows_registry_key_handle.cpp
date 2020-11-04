@@ -8,8 +8,21 @@
 //
 
 #include "../../include/RAII/windows_registry_key_handle.h"
+#include "../../include/exception/windows_api_failure.h"
 
 #include <stdexcept>
+
+namespace
+{
+	void close_handle(::HKEY handle)
+	{
+		const auto error = ::RegCloseKey(handle);
+		if (error != ERROR_SUCCESS) [[unlikely]]
+		{
+			throw KAA::windows_api_failure { __FUNCTIONW__, L"cannot close a handle to the specified registry key", error };
+		}
+	}
+}
 
 namespace KAA
 {
@@ -23,7 +36,12 @@ namespace KAA
 
 		windows_registry_key_handle::~windows_registry_key_handle()
 		{
-			::RegCloseKey(handle);
+			try
+			{
+				close_handle(handle);
+			}
+			catch (const windows_api_failure&)
+			{ }
 		}
 
 		windows_registry_key_handle::operator HKEY (void) const noexcept
