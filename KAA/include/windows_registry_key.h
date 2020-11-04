@@ -9,7 +9,7 @@ namespace KAA
 {
 	namespace system
 	{
-		class windows_registry_key : public registry_key
+		class windows_registry_key final : public registry_key
 		{
 		public:
 			explicit windows_registry_key(HKEY);

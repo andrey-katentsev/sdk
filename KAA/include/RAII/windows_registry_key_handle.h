@@ -15,7 +15,7 @@ namespace KAA
 {
 	namespace RAII
 	{
-		class windows_registry_key_handle
+		class windows_registry_key_handle final
 		{
 		public:
 			explicit windows_registry_key_handle(HKEY);
