@@ -192,6 +192,7 @@
     <ClCompile Include="random_test.cpp" />
     <ClCompile Include="split_path_test.cpp" />
     <ClCompile Include="unicode_test.cpp" />
+    <ClCompile Include="windows_registry_test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KAA\KAA.vcxproj">
