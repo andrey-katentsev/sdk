@@ -267,7 +267,6 @@ namespace KAA
 			}
 		}
 
-		// FUTURE: KAA: not implemented.
 		driver::permission crt_file_system::iget_file_permissions(const path::file& path) const
 		{
 			const auto read = is_access_allowed(path, crt_access::read);

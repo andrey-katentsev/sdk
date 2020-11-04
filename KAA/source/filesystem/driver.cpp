@@ -1,5 +1,4 @@
 #include "../../include/filesystem/driver.h"
-#include <stdexcept>
 
 namespace KAA
 {

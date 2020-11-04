@@ -15,8 +15,6 @@ namespace KAA
 {
 	namespace cryptography
 	{
-		class provider;
-
 		class hash
 		{
 		public:
