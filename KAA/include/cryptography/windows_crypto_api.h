@@ -18,6 +18,7 @@ namespace KAA
 {
 	namespace cryptography
 	{
+		// Acquires a handle to a particular key container within a particular cryptographic service provider (CSP).
 		class windows_crypto_api final : public provider
 		{
 		public:
