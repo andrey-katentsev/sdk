@@ -8,7 +8,7 @@ namespace KAA
 {
 	namespace system
 	{
-		class windows_registry : public registry
+		class windows_registry final : public registry
 		{
 		private:
 			std::unique_ptr<registry_key> iopen_key(root_key section, const std::wstring& sub_key, const key_access& desired_access) override;
