@@ -13,24 +13,24 @@ namespace KAA
 {
 	namespace system
 	{
-		std::wstring registry_key::query_string_value(const std::wstring& value_name) const
+		std::wstring registry_key::query_string_value(const std::wstring& name) const
 		{
-			return iquery_string_value(value_name);
+			return iquery_string_value(name);
 		}
 
-		void registry_key::set_string_value(const std::wstring& value_name, const std::wstring& value)
+		void registry_key::set_string_value(const std::wstring& name, const std::wstring& data)
 		{
-			return iset_string_value(value_name, value);
+			return iset_string_value(name, data);
 		}
 
-		uint32_t registry_key::query_dword_value(const std::wstring& value_name) const
+		uint32_t registry_key::query_dword_value(const std::wstring& name) const
 		{
-			return iquery_dword_value(value_name);
+			return iquery_dword_value(name);
 		}
 
-		void registry_key::set_dword_value(const std::wstring& value_name, const uint32_t value)
+		void registry_key::set_dword_value(const std::wstring& name, const uint32_t data)
 		{
-			return iset_dword_value(value_name, value);
+			return iset_dword_value(name, data);
 		}
 	}
 }

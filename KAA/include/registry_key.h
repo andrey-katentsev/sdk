@@ -19,20 +19,20 @@ namespace KAA
 		class registry_key
 		{
 		public:
-			std::wstring query_string_value(const std::wstring& value_name) const;
-			void set_string_value(const std::wstring& value_name, const std::wstring& value);
+			std::wstring query_string_value(const std::wstring& name) const;
+			void set_string_value(const std::wstring& name, const std::wstring& data);
 
-			uint32_t query_dword_value(const std::wstring& value_name) const;
-			void set_dword_value(const std::wstring& value_name, uint32_t value);
+			uint32_t query_dword_value(const std::wstring& name) const;
+			void set_dword_value(const std::wstring& name, uint32_t data);
 
 			virtual ~registry_key() = default;
 
 		private:
-			virtual std::wstring iquery_string_value(const std::wstring& value_name) const = 0;
-			virtual void iset_string_value(const std::wstring& value_name, const std::wstring& value) = 0;
+			virtual std::wstring iquery_string_value(const std::wstring& name) const = 0;
+			virtual void iset_string_value(const std::wstring& name, const std::wstring& data) = 0;
 
-			virtual uint32_t iquery_dword_value(const std::wstring& value_name) const = 0;
-			virtual void iset_dword_value(const std::wstring& value_name, uint32_t value) = 0;
+			virtual uint32_t iquery_dword_value(const std::wstring& name) const = 0;
+			virtual void iset_dword_value(const std::wstring& name, uint32_t data) = 0;
 		};
 	}
 }

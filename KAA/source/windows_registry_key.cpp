@@ -99,24 +99,24 @@ namespace KAA
 		key(handle)
 		{}
 
-		std::wstring windows_registry_key::iquery_string_value(const std::wstring& value_name) const
+		std::wstring windows_registry_key::iquery_string_value(const std::wstring& name) const
 		{
-			return ::query_string_value(key, value_name);
+			return ::query_string_value(key, name);
 		}
 
-		void windows_registry_key::iset_string_value(const std::wstring& value_name, const std::wstring& value)
+		void windows_registry_key::iset_string_value(const std::wstring& name, const std::wstring& data)
 		{
-			return ::set_string_value(key, value_name, value);
+			return ::set_string_value(key, name, data);
 		}
 
-		uint32_t windows_registry_key::iquery_dword_value(const std::wstring& value_name) const
+		uint32_t windows_registry_key::iquery_dword_value(const std::wstring& name) const
 		{
-			return ::query_dword_value(key, value_name);
+			return ::query_dword_value(key, name);
 		}
 
-		void windows_registry_key::iset_dword_value(const std::wstring& value_name, uint32_t value)
+		void windows_registry_key::iset_dword_value(const std::wstring& name, uint32_t data)
 		{
-			return ::set_dword_value(key, value_name, value);
+			return ::set_dword_value(key, name, data);
 		}
 	}
 }

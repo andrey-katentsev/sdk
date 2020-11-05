@@ -70,10 +70,10 @@ namespace
 	// THROWS: windows_api_failure
 	// SAFE GUARANTEE: strong
 	// SIDE EFFECTS: -
-	HKEY open_key(const HKEY key, const std::wstring& sub_key, const REGSAM desired_access)
+	HKEY open_key(const HKEY key, const std::wstring& subkey, const REGSAM desired_access)
 	{
 		HKEY requested_key = nullptr;
-		const LSTATUS code = ::RegOpenKeyExW(key, sub_key.c_str(), 0, desired_access, &requested_key);
+		const LSTATUS code = ::RegOpenKeyExW(key, subkey.c_str(), 0, desired_access, &requested_key);
 		if(ERROR_SUCCESS != code)
 		{
 			throw KAA::windows_api_failure(__FUNCTIONW__, L"Unable to open system registry key.", code);
@@ -106,11 +106,11 @@ namespace
 	// SAFE GUARANTEE: strong
 	// SIDE EFFECTS: -
 	// RETURNS: <handle to the opened or created key, disposition> (see MSDN for RegCreateKeyEx for details)
-	std::pair<HKEY, disposition_t> create_key(const HKEY key, const std::wstring& sub_key, const DWORD options, const REGSAM desired_access, const SECURITY_ATTRIBUTES* desired_security)
+	std::pair<HKEY, disposition_t> create_key(const HKEY key, const std::wstring& subkey, const DWORD options, const REGSAM desired_access, const SECURITY_ATTRIBUTES* desired_security)
 	{
 		HKEY requested_key = nullptr;
 		DWORD disposition = 0;
-		const LSTATUS code = ::RegCreateKeyExW(key, sub_key.c_str(), 0, nullptr, options, desired_access, const_cast<LPSECURITY_ATTRIBUTES>(desired_security), &requested_key, &disposition);
+		const LSTATUS code = ::RegCreateKeyExW(key, subkey.c_str(), 0, nullptr, options, desired_access, const_cast<LPSECURITY_ATTRIBUTES>(desired_security), &requested_key, &disposition);
 		if(ERROR_SUCCESS != code)
 		{
 			throw KAA::windows_api_failure(__FUNCTIONW__, L"Unable to create system registry key.", code);
@@ -123,20 +123,20 @@ namespace KAA
 {
 	namespace system
 	{
-		std::unique_ptr<registry_key> windows_registry::iopen_key(const root_key section, const std::wstring& sub_key, const key_access& desired_access)
+		std::unique_ptr<registry_key> windows_registry::iopen_key(const root_key section, const std::wstring& subkey, const key_access& desired_access)
 		{
 			const HKEY windows_section = get_windows_registry_root_key(section);
 			const REGSAM windows_desired_access = get_windows_registry_key_security_access_mask(desired_access);
-			return std::make_unique<windows_registry_key>(::open_key(windows_section, sub_key, windows_desired_access));
+			return std::make_unique<windows_registry_key>(::open_key(windows_section, subkey, windows_desired_access));
 		}
 
-		std::unique_ptr<registry_key> windows_registry::icreate_key(const root_key section, const std::wstring& sub_key, const key_options options, const key_access& desired_access, const void* const desired_security)
+		std::unique_ptr<registry_key> windows_registry::icreate_key(const root_key section, const std::wstring& subkey, const key_options options, const key_access& desired_access, const void* const desired_security)
 		{
 			const HKEY windows_section = get_windows_registry_root_key(section);
 			const DWORD windows_options = get_windows_registry_key_options(options);
 			const REGSAM windows_desired_access = get_windows_registry_key_security_access_mask(desired_access);
 			const SECURITY_ATTRIBUTES* windows_desired_security = reinterpret_cast<const SECURITY_ATTRIBUTES*>(desired_security);
-			return std::make_unique<windows_registry_key>(::create_key(windows_section, sub_key, windows_options, windows_desired_access, windows_desired_security).first);
+			return std::make_unique<windows_registry_key>(::create_key(windows_section, subkey, windows_options, windows_desired_access, windows_desired_security).first);
 		}
 	}
 }

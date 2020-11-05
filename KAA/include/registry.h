@@ -51,14 +51,14 @@ namespace KAA
 				in_memory // REG_OPTION_VOLATILE : All keys created by the function are volatile. The information is stored in memory and is not preserved when the corresponding registry hive is unloaded. For HKEY_LOCAL_MACHINE, this occurs when the system is shut down. For registry keys loaded by the RegLoadKey function, this occurs when the corresponding RegUnLoadKey is performed. The RegSaveKey function does not save volatile keys. This flag is ignored for keys that already exist.
 			};
 
-			std::unique_ptr<registry_key> open_key(root_key section, const std::wstring& sub_key, const key_access& desired_access);
-			std::unique_ptr<registry_key> create_key(root_key section, const std::wstring& sub_key, key_options options, const key_access& desired_access, const void* desired_security = nullptr);
+			std::unique_ptr<registry_key> open_key(root_key section, const std::wstring& subkey, const key_access& desired_access);
+			std::unique_ptr<registry_key> create_key(root_key section, const std::wstring& subkey, key_options options, const key_access& desired_access, const void* desired_security = nullptr);
 
 			virtual ~registry() = default;
 
 		private:
-			virtual std::unique_ptr<registry_key> iopen_key(root_key section, const std::wstring& sub_key, const key_access& desired_access) = 0;
-			virtual std::unique_ptr<registry_key> icreate_key(root_key section, const std::wstring& sub_key, key_options options, const key_access& desired_access, const void* desired_security) = 0;
+			virtual std::unique_ptr<registry_key> iopen_key(root_key section, const std::wstring& subkey, const key_access& desired_access) = 0;
+			virtual std::unique_ptr<registry_key> icreate_key(root_key section, const std::wstring& subkey, key_options options, const key_access& desired_access, const void* desired_security) = 0;
 		};
 	}
 }
