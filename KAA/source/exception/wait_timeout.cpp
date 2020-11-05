@@ -6,17 +6,17 @@ namespace KAA
 	base(std::move(source), std::move(description), WAIT_TIMEOUT)
 	{}
 
-	std::wstring wait_timeout::iget_source(void) const
+	std::string wait_timeout::iget_source(void) const
 	{
 		return base.get_source();
 	}
 
-	std::wstring wait_timeout::iget_description(void) const
+	std::string wait_timeout::iget_description(void) const
 	{
 		return base.get_description();
 	}
 
-	std::wstring wait_timeout::iget_system_message(void) const
+	std::string wait_timeout::iget_system_message(void) const
 	{
 		return base.get_system_message();
 	}

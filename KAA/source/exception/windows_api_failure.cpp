@@ -8,9 +8,12 @@
 //
 
 #include "../../include/exception/windows_api_failure.h"
-#include <vector>
 #include "../../include/exception/operation_failure.h"
+
+#include "../../include/unicode.h"
 #include "../../include/RAII/local_memory.h"
+
+#include <vector>
 
 //
 //  Values are 32 bit values laid out as follows:
@@ -38,6 +41,8 @@
 //
 //      Code - is the facility's status code
 //
+
+using namespace KAA::unicode;
 
 namespace
 {
@@ -147,17 +152,17 @@ namespace KAA
 		return win32_api_error.value;
 	}
 
-	std::wstring windows_api_failure::iget_source(void) const
+	std::string windows_api_failure::iget_source(void) const
 	{
-		return source;
+		return to_UTF8(source);
 	}
 
-	std::wstring windows_api_failure::iget_description(void) const
+	std::string windows_api_failure::iget_description(void) const
 	{
-		return description;
+		return to_UTF8(description);
 	}
 
-	std::wstring windows_api_failure::iget_system_message(void) const
+	std::string windows_api_failure::iget_system_message(void) const
 	{
 		enum { predefined_language_order = 0 };
 		const DWORD options = FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS;
@@ -168,6 +173,6 @@ namespace KAA
 			const DWORD error = ::GetLastError();
 			throw windows_api_failure(__FUNCTIONW__, L"", error);
 		}
-		return std::wstring(&buffer[0], length - 2); // FIX: KAA: remove trailing \r\n
+		return to_UTF8(std::wstring(&buffer[0], length - 2)); // FIX: KAA: remove trailing \r\n
 	}
 }

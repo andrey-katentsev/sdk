@@ -38,8 +38,8 @@ namespace KAA
 		status_code_t status_code;
 		severity_t severity;
 
-		std::wstring iget_source(void) const override;
-		std::wstring iget_description(void) const override;
-		std::wstring iget_system_message(void) const override;
+		std::string iget_source(void) const override;
+		std::string iget_description(void) const override;
+		std::string iget_system_message(void) const override;
 	};
 }

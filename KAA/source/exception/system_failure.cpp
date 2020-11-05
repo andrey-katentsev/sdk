@@ -8,8 +8,13 @@
 //
 
 #include "../../include/exception/system_failure.h"
-#include <vector>
+
+#include "../../include/unicode.h"
 #include "../../include/RAII/invalid_parameter_handler.h"
+
+#include <vector>
+
+using namespace KAA::unicode;
 
 namespace
 {
@@ -29,17 +34,17 @@ namespace KAA
 		return error_code;
 	}
 
-	std::wstring system_failure::iget_source(void) const
+	std::string system_failure::iget_source(void) const
 	{
-		return source;
+		return to_UTF8(source);
 	}
 
-	std::wstring system_failure::iget_description(void) const
+	std::string system_failure::iget_description(void) const
 	{
-		return description;
+		return to_UTF8(description);
 	}
 
-	std::wstring system_failure::iget_system_message(void) const
+	std::string system_failure::iget_system_message(void) const
 	{
 		const RAII::invalid_parameter_handler session(allow_execution);
 		{
@@ -49,7 +54,7 @@ namespace KAA
 			{
 				throw system_failure(__FUNCTIONW__, L"Unable to get a system error message.", error);
 			}
-			return std::wstring(&buffer[0]);
+			return to_UTF8(std::wstring(&buffer[0]));
 		}
 	}
 }

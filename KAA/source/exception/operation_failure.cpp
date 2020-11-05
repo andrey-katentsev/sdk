@@ -9,6 +9,9 @@
 
 #include "../../include/exception/operation_failure.h"
 #include "../../include/exception/windows_api_failure.h"
+#include "../../include/unicode.h"
+
+using namespace KAA::unicode;
 
 namespace
 {
@@ -52,17 +55,17 @@ namespace KAA
 	severity(severity)
 	{}
 
-	std::wstring operation_failure::iget_source(void) const
+	std::string operation_failure::iget_source(void) const
 	{
-		return source;
+		return to_UTF8(source);
 	}
 
-	std::wstring operation_failure::iget_description(void) const
+	std::string operation_failure::iget_description(void) const
 	{
-		return description;
+		return to_UTF8(description);
 	}
 
-	std::wstring operation_failure::iget_system_message(void) const
+	std::string operation_failure::iget_system_message(void) const
 	{
 		enum { custom_exception = true };
 		const windows_api_failure error(source, description, to_windows_api_status_code(status_code), FACILITY_NULL, to_windows_api_severity(severity), custom_exception);

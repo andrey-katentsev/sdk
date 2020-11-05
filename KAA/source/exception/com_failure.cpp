@@ -9,6 +9,8 @@
 
 #include "../../include/exception/com_failure.h"
 #include "../../include/exception/windows_api_failure.h"
+
+#include "../../include/unicode.h"
 #include "../../include/RAII/local_memory.h"
 
 //
@@ -44,6 +46,8 @@
 //
 //      Code - is the facility's status code
 //
+
+using namespace KAA::unicode;
 
 namespace
 {
@@ -98,17 +102,17 @@ namespace KAA
 		return com_error.value;
 	}
 
-	std::wstring com_failure::iget_source(void) const
+	std::string com_failure::iget_source(void) const
 	{
-		return source;
+		return to_UTF8(source);
 	}
 
-	std::wstring com_failure::iget_description(void) const
+	std::string com_failure::iget_description(void) const
 	{
-		return description;
+		return to_UTF8(description);
 	}
 
-	std::wstring com_failure::iget_system_message(void) const
+	std::string com_failure::iget_system_message(void) const
 	{
 		enum { predefined_language_order = 0 };
 		const DWORD options = FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS;
@@ -120,6 +124,6 @@ namespace KAA
 		}
 
 		const KAA::RAII::local_memory acquired_memory(buffer);
-		return std::wstring(reinterpret_cast<wchar_t*>(buffer));
+		return to_UTF8(std::wstring(reinterpret_cast<wchar_t*>(buffer)));
 	}
 }

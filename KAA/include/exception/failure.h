@@ -18,13 +18,13 @@ namespace KAA
 	public:
 		virtual ~failure() = default;
 
-		std::wstring get_source(void) const;
-		std::wstring get_description(void) const;
-		std::wstring get_system_message(void) const;
+		std::string get_source(void) const;
+		std::string get_description(void) const;
+		std::string get_system_message(void) const;
 
 	private:
-		virtual std::wstring iget_source(void) const = 0;
-		virtual std::wstring iget_description(void) const = 0;
-		virtual std::wstring iget_system_message(void) const = 0;
+		virtual std::string iget_source(void) const = 0;
+		virtual std::string iget_description(void) const = 0;
+		virtual std::string iget_system_message(void) const = 0;
 	};
 }

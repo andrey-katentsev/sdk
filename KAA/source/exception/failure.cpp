@@ -11,17 +11,17 @@
 
 namespace KAA
 {
-	std::wstring failure::get_source(void) const
+	std::string failure::get_source(void) const
 	{
 		return iget_source();
 	}
 
-	std::wstring failure::get_description(void) const
+	std::string failure::get_description(void) const
 	{
 		return iget_description();
 	}
 
-	std::wstring failure::get_system_message(void) const
+	std::string failure::get_system_message(void) const
 	{
 		return iget_system_message();
 	}
