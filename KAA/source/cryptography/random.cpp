@@ -75,7 +75,11 @@ namespace KAA
 		size_t generate(const size_t bytes_to_generate, void* memory_write_to)
 		{
 			if (!memory_write_to)
-				throw operation_failure { __FUNCTIONW__, L"failed to generate random bytes", operation_failure::R_INVALID_ARGUMENT, operation_failure::S_ERROR };
+			{
+				constexpr auto reason = operation_failure::status_code_t::invalid_argument;
+				constexpr auto severity = operation_failure::severity_t::error;
+				throw operation_failure { __FUNCTIONW__, L"failed to generate random bytes", reason, severity };
+			}
 
 			size_t bytes_written = 0U;
 			if (0 < bytes_to_generate)

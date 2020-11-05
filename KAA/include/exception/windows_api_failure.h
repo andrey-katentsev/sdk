@@ -17,12 +17,12 @@ namespace KAA
 	class windows_api_failure final : public failure
 	{
 	public:
-		enum severity_t
+		enum class severity_t
 		{
-			S_SUCCESS = 0,
-			S_INFORMATION = 1,
-			S_WARNING = 2,
-			S_ERROR = 3
+			success,
+			information,
+			warning,
+			error
 		};
 
 		windows_api_failure(std::wstring source, std::wstring description, long);

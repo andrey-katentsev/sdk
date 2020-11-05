@@ -21,9 +21,9 @@ namespace
 	{
 		if(-1 == ::EnableMenuItem(menu, item_identifier, MF_BYCOMMAND | mode))
 		{
-			const auto code = KAA::operation_failure::R_NOT_FOUND;
-			const auto severity = KAA::operation_failure::S_ERROR;
-			throw KAA::operation_failure(__FUNCTIONW__, L"The menu item does not exist.", code, severity);
+			constexpr auto reason = KAA::operation_failure::status_code_t::not_found;
+			constexpr auto severity = KAA::operation_failure::severity_t::error;
+			throw KAA::operation_failure { __FUNCTIONW__, L"The menu item does not exist.", reason, severity };
 		}
 	}
 }

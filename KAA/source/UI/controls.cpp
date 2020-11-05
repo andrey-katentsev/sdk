@@ -49,8 +49,9 @@ namespace
 		::EnumChildWindows(parent_window, find_by_window_id, reinterpret_cast<LPARAM>(&context));
 		if(nullptr == context.child_window)
 		{
+			constexpr auto severity = KAA::windows_api_failure::severity_t::warning;
 			// FUTURE: this is not a win32 failure.
-			throw KAA::windows_api_failure(__FUNCTIONW__, L"Unable to find control within a window.", ERROR_CONTROL_ID_NOT_FOUND, FACILITY_NULL, KAA::windows_api_failure::S_WARNING, true);
+			throw KAA::windows_api_failure { __FUNCTIONW__, L"Unable to find control within a window.", ERROR_CONTROL_ID_NOT_FOUND, FACILITY_NULL, severity, true };
 		}
 		return context.child_window;
 	}

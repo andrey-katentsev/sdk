@@ -19,16 +19,18 @@ namespace
 	{
 		switch(value)
 		{
-		case KAA::operation_failure::S_SUCCESS:
-			return KAA::windows_api_failure::S_SUCCESS;
-		case KAA::operation_failure::S_INFORMATION:
-			return KAA::windows_api_failure::S_INFORMATION;
-		case KAA::operation_failure::S_WARNING:
-			return KAA::windows_api_failure::S_WARNING;
-		case KAA::operation_failure::S_ERROR:
-			return KAA::windows_api_failure::S_ERROR;
+		case KAA::operation_failure::severity_t::success:
+			return KAA::windows_api_failure::severity_t::success;
+		case KAA::operation_failure::severity_t::information:
+			return KAA::windows_api_failure::severity_t::information;
+		case KAA::operation_failure::severity_t::warning:
+			return KAA::windows_api_failure::severity_t::warning;
+		case KAA::operation_failure::severity_t::error:
+			return KAA::windows_api_failure::severity_t::error;
 		default:
-			throw KAA::operation_failure(__FUNCTIONW__, L"Unknown failure severity specified.", KAA::operation_failure::R_INVALID_PARAMETER, KAA::operation_failure::S_ERROR);
+			constexpr auto reason = KAA::operation_failure::status_code_t::invalid_argument;
+			constexpr auto severity = KAA::operation_failure::severity_t::error;
+			throw KAA::operation_failure { __FUNCTIONW__, L"Unknown failure severity specified.", reason, severity };
 		}
 	}
 
@@ -36,12 +38,14 @@ namespace
 	{
 		switch(value)
 		{
-		case KAA::operation_failure::R_INVALID_PARAMETER:
+		case KAA::operation_failure::status_code_t::invalid_parameter:
 			return ERROR_INVALID_PARAMETER;
-		case KAA::operation_failure::R_NOT_FOUND:
+		case KAA::operation_failure::status_code_t::not_found:
 			return ERROR_NOT_FOUND;
 		default:
-			throw KAA::operation_failure(__FUNCTIONW__, L"Unknown status code specified.", KAA::operation_failure::R_INVALID_PARAMETER, KAA::operation_failure::S_ERROR);
+			constexpr auto reason = KAA::operation_failure::status_code_t::invalid_argument;
+			constexpr auto severity = KAA::operation_failure::severity_t::error;
+			throw KAA::operation_failure { __FUNCTIONW__, L"Unknown status code specified.", reason, severity };
 		}
 	}
 }

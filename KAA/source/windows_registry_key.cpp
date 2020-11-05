@@ -53,8 +53,9 @@ namespace
 			}
 			throw KAA::windows_api_failure { __FUNCTIONW__, L"cannot retrieve the string value from the system registry", error };
 		}
+		constexpr auto severity = KAA::windows_api_failure::severity_t::warning;
 		// ERROR_BAD_TOKEN_TYPE; ERROR_UNSUPPORTED_TYPE; ERROR_INVALID_DATATYPE; RPC_S_ENTRY_TYPE_MISMATCH;
-		throw KAA::windows_api_failure { __FUNCTIONW__, L"cannot retrieve the string value from the system registry", ERROR_DATATYPE_MISMATCH, FACILITY_NULL, KAA::windows_api_failure::S_WARNING, true }; // FUTURE: this is not a win32 failure.
+		throw KAA::windows_api_failure { __FUNCTIONW__, L"cannot retrieve the string value from the system registry", ERROR_DATATYPE_MISMATCH, FACILITY_NULL, severity, true }; // FUTURE: this is not a win32 failure.
 	}
 
 	void set_string_value(const HKEY key, const std::wstring& name, const std::wstring& data)
@@ -80,7 +81,8 @@ namespace
 		{
 			return data;
 		}
-		throw KAA::windows_api_failure { __FUNCTIONW__, L"cannot retrieve the dword value from the system registry", ERROR_DATATYPE_MISMATCH, FACILITY_NULL, KAA::windows_api_failure::S_WARNING, true }; // FUTURE: this is not a win32 failure.
+		constexpr auto severity = KAA::windows_api_failure::severity_t::warning;
+		throw KAA::windows_api_failure { __FUNCTIONW__, L"cannot retrieve the dword value from the system registry", ERROR_DATATYPE_MISMATCH, FACILITY_NULL, severity, true }; // FUTURE: this is not a win32 failure.
 	}
 
 	void set_dword_value(const HKEY key, const std::wstring& name, const DWORD data)

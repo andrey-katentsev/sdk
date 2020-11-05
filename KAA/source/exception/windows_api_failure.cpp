@@ -63,16 +63,14 @@ namespace
 	{
 		switch(severity_code)
 		{
-		case 0:
-			return KAA::windows_api_failure::S_SUCCESS;
-		case 1:
-			return KAA::windows_api_failure::S_INFORMATION;
-		case 2:
-			return KAA::windows_api_failure::S_WARNING;
-		case 3:
-			return KAA::windows_api_failure::S_ERROR;
+		case 0: return KAA::windows_api_failure::severity_t::success;
+		case 1: return KAA::windows_api_failure::severity_t::information;
+		case 2: return KAA::windows_api_failure::severity_t::warning;
+		case 3: return KAA::windows_api_failure::severity_t::error;
 		default:
-			throw KAA::operation_failure(__FUNCTIONW__, L"Unknown severity code specified.", KAA::operation_failure::R_INVALID_PARAMETER, KAA::operation_failure::S_ERROR);
+			constexpr auto reason = KAA::operation_failure::status_code_t::invalid_argument;
+			constexpr auto severity = KAA::operation_failure::severity_t::error;
+			throw KAA::operation_failure { __FUNCTIONW__, L"Unknown severity code specified.", reason, severity };
 		}
 	}
 
@@ -80,16 +78,14 @@ namespace
 	{
 		switch(severity)
 		{
-		case KAA::windows_api_failure::S_SUCCESS:
-			return 0;
-		case KAA::windows_api_failure::S_INFORMATION:
-			return 1;
-		case KAA::windows_api_failure::S_WARNING:
-			return 2;
-		case KAA::windows_api_failure::S_ERROR:
-			return 3;
+		case KAA::windows_api_failure::severity_t::success: return 0;
+		case KAA::windows_api_failure::severity_t::information: return 1;
+		case KAA::windows_api_failure::severity_t::warning: return 2;
+		case KAA::windows_api_failure::severity_t::error: return 3;
 		default:
-			throw KAA::operation_failure(__FUNCTIONW__, L"Unknown failure severity specified.", KAA::operation_failure::R_INVALID_PARAMETER, KAA::operation_failure::S_ERROR);
+			constexpr auto reason = KAA::operation_failure::status_code_t::invalid_argument;
+			constexpr auto severity = KAA::operation_failure::severity_t::error;
+			throw KAA::operation_failure { __FUNCTIONW__, L"Unknown failure severity specified.", reason, severity };
 		}
 	}
 }
@@ -101,7 +97,7 @@ namespace KAA
 	description(std::move(description)),
 	status_code(ERROR_SUCCESS),
 	facility_code(FACILITY_NULL),
-	failure_severity(S_SUCCESS),
+	failure_severity(severity_t::success),
 	custom(true)
 	{
 		parse_error(error);
@@ -112,7 +108,7 @@ namespace KAA
 	description(std::move(description)),
 	status_code(ERROR_SUCCESS),
 	facility_code(FACILITY_NULL),
-	failure_severity(S_SUCCESS),
+	failure_severity(severity_t::success),
 	custom(true)
 	{
 		parse_error(error);

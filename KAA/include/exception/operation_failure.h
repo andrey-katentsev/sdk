@@ -14,20 +14,20 @@ namespace KAA
 	class operation_failure final : public failure
 	{
 	public:
-		enum status_code_t
+		enum class status_code_t
 		{
-			R_INVALID_ARGUMENT,
-			R_INVALID_PARAMETER = R_INVALID_ARGUMENT,
-			R_NOT_FOUND,
-			R_NOT_IMPLEMENTED
+			invalid_argument,
+			invalid_parameter = invalid_argument,
+			not_found,
+			not_implemented
 		};
 
-		enum severity_t
+		enum class severity_t
 		{
-			S_SUCCESS = 0,
-			S_INFORMATION = 1,
-			S_WARNING = 2,
-			S_ERROR = 3
+			success,
+			information,
+			warning,
+			error
 		};
 
 		operation_failure(std::wstring source, std::wstring description, status_code_t, severity_t);
