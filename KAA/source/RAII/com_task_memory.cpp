@@ -21,7 +21,7 @@ namespace KAA
 		{
 			if(nullptr == memory)
 			{
-				throw KAA::com_failure(__FUNCTIONW__, L"Unable to allocate a block of task memory.", E_OUTOFMEMORY); // NOTE: KAA: see CoTaskMemAlloc return value (MSDN)
+				throw KAA::com_failure { __FUNCTION__, "cannot allocate a block of task memory", E_OUTOFMEMORY }; // NOTE: KAA: see CoTaskMemAlloc return value (MSDN)
 			}
 		}
 

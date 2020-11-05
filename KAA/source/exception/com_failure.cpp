@@ -66,7 +66,7 @@ namespace
 
 namespace KAA
 {
-	com_failure::com_failure(std::wstring source, std::wstring description, const HRESULT error) :
+	com_failure::com_failure(std::string source, std::string description, const HRESULT error) :
 	source(std::move(source)),
 	description(std::move(description)),
 	status_code(S_OK),
@@ -80,7 +80,7 @@ namespace KAA
 		success = com_error.layout.severity == 0 ? true : false;
 	}
 
-	com_failure::com_failure(std::wstring source, std::wstring description, const WORD status_code, const WORD facility_code, const bool success) :
+	com_failure::com_failure(std::string source, std::string description, const WORD status_code, const WORD facility_code, const bool success) :
 	source(std::move(source)),
 	description(std::move(description)),
 	status_code(status_code),
@@ -104,12 +104,12 @@ namespace KAA
 
 	std::string com_failure::iget_source(void) const
 	{
-		return to_UTF8(source);
+		return source;
 	}
 
 	std::string com_failure::iget_description(void) const
 	{
-		return to_UTF8(description);
+		return description;
 	}
 
 	std::string com_failure::iget_system_message(void) const

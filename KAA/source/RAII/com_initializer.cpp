@@ -21,7 +21,7 @@ namespace KAA
 			const HRESULT code = ::CoInitializeEx(nullptr, options);
 			if(FAILED(code))
 			{
-				throw com_failure(__FUNCTIONW__, L"Unable to initialize the COM library.", code);
+				throw com_failure { __FUNCTION__, "cannot initialize the COM library", code };
 			}
 		}
 

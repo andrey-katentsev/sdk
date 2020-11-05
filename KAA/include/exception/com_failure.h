@@ -16,14 +16,14 @@ namespace KAA
 	class com_failure final : public failure
 	{
 	public:
-		com_failure(std::wstring source, std::wstring description, HRESULT);
-		com_failure(std::wstring source, std::wstring description, WORD status_code, WORD facility_code, bool success);
+		com_failure(std::string source, std::string description, HRESULT);
+		com_failure(std::string source, std::string description, WORD status_code, WORD facility_code, bool success);
 
 		operator HRESULT (void) const noexcept;
 
 	private:
-		std::wstring source;
-		std::wstring description;
+		std::string source;
+		std::string description;
 		WORD status_code;
 		WORD facility_code;
 		bool success;

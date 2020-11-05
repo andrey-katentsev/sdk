@@ -37,7 +37,7 @@ namespace KAA
 				const auto error = ::StringCchCopyW(properties.szTip, _countof(properties.szTip), tip.c_str());
 				if(FAILED(error))
 				{
-					throw com_failure(__FUNCTIONW__, L"Unable to copy tip to the icon properties.", error);
+					throw com_failure { __FUNCTION__, "cannot copy tip to the icon properties", error };
 				}
 
 				const auto success = ::Shell_NotifyIconW(NIM_ADD, &properties);
@@ -93,7 +93,7 @@ namespace KAA
 				const auto error = ::StringCchCopyW(properties.szTip, _countof(properties.szTip), tip.c_str());
 				if(FAILED(error))
 				{
-					throw com_failure(__FUNCTIONW__, L"Unable to copy tip to the icon properties.", error);
+					throw com_failure { __FUNCTION__, "cannot copy tip to the icon properties", error };
 				}
 
 				const auto success = ::Shell_NotifyIconW(NIM_MODIFY, &properties);
