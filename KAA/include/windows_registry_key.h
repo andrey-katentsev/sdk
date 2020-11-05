@@ -1,4 +1,11 @@
-// Feb 13, 2014
+//
+// File: windows_registry_key.h
+// Description: retrieves and stores the data for the specified value name associated with an open registry key
+// Created: February 13, 2014
+// Author: Andrey A. Katentsev
+//
+// Copyright © Andrey A. Katentsev, 2014
+//
 
 #pragma once
 

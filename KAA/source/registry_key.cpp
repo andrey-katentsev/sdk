@@ -1,4 +1,11 @@
-// Feb 12, 2014
+//
+// File: registry_key.cpp
+// Description: retrieves and stores the data for the specified value name associated with an open registry key
+// Created: February 12, 2014
+// Author: Andrey A. Katentsev
+//
+// Copyright © Andrey A. Katentsev, 2014
+//
 
 #include "../include/registry_key.h"
 

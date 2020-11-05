@@ -1,4 +1,11 @@
-// 01/02/2014
+//
+// File: registry.cpp
+// Description: the registry is a system-defined database in which applications and system components store and retrieve configuration data
+// Created: February 1, 2014
+// Author: Andrey A. Katentsev
+//
+// Copyright © Andrey A. Katentsev, 2014
+//
 
 #include "../include/registry.h"
 #include "../include/registry_key.h"

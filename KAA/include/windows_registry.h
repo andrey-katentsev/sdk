@@ -1,4 +1,11 @@
-// Feb 01, 2014
+//
+// File: windows_registry.h
+// Description: the registry is a system-defined database in which applications and system components store and retrieve configuration data
+// Created: February 1, 2014
+// Author: Andrey A. Katentsev
+//
+// Copyright © Andrey A. Katentsev, 2014
+//
 
 #pragma once
 
