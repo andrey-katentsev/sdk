@@ -122,12 +122,12 @@ namespace KAA
 			const RAII::invalid_parameter_handler session(allow_execution);
 			{
 				std::vector<char> buffer(get_buffer_size(string_to_convert), '\0');
-				const errno_t code = wcstombs_s(nullptr, &buffer[0], buffer.size(), string_to_convert.c_str(), _TRUNCATE);
+				const errno_t code = wcstombs_s(nullptr, buffer.data(), buffer.size(), string_to_convert.c_str(), _TRUNCATE);
 				if(0 != code)
 				{
 					throw system_failure(__FUNCTIONW__, L"EXCEPTION: Unable to convert wide string to multibyte string.", code);
 				}
-				return std::string(&buffer[0]);
+				return buffer.data();
 			}
 		}
 
@@ -152,12 +152,12 @@ namespace KAA
 			RAII::invalid_parameter_handler session(allow_execution);
 			{
 				std::vector<wchar_t> buffer(sizeof(value) * 8 + 1, 0); // binary (radix = 2)
-				const errno_t error = _ltow_s(value, &buffer[0], buffer.size(), radix);
+				const errno_t error = _ltow_s(value, buffer.data(), buffer.size(), radix);
 				if(0 != error)
 				{
 					throw system_failure(__FUNCTIONW__, L"EXCEPTION: Unable to convert a long integer to a string.", error);
 				}
-				return std::wstring(&buffer[0]);
+				return buffer.data();
 			}
 		}
 
@@ -172,12 +172,12 @@ namespace KAA
 			RAII::invalid_parameter_handler session(allow_execution);
 			{
 				std::vector<wchar_t> buffer(sizeof(value) * 8 + 1, 0); // binary (radix = 2)
-				const auto error = _ultow_s(value, &buffer[0], buffer.size(), radix);
+				const auto error = _ultow_s(value, buffer.data(), buffer.size(), radix);
 				if (0 != error)
 				{
 					throw system_failure(__FUNCTIONW__, L"Failed to convert an unsigned long integer to a wstring.", error);
 				}
-				return std::wstring(&buffer[0]);
+				return buffer.data();
 			}
 		}
 
@@ -189,12 +189,12 @@ namespace KAA
 			RAII::invalid_parameter_handler session(allow_execution);
 			{
 				std::vector<wchar_t> buffer(get_buffer_size(string_to_convert), L'\0');
-				const errno_t code = mbstowcs_s(nullptr, &buffer[0], buffer.size(), string_to_convert.c_str(), _TRUNCATE);
+				const errno_t code = mbstowcs_s(nullptr, buffer.data(), buffer.size(), string_to_convert.c_str(), _TRUNCATE);
 				if(0 != code)
 				{
 					throw system_failure(__FUNCTIONW__, L"EXCEPTION: Unable to convert multibyte string to wide string.", code);
 				}
-				return std::wstring(&buffer[0]);
+				return buffer.data();
 			}
 		}
 	}

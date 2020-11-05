@@ -78,7 +78,7 @@ namespace KAA
 		std::wstring get_window_text(const HWND window)
 		{
 			std::vector<wchar_t> buffer(::GetWindowTextLengthW(window) + 1, L'\0');
-			if(0 == ::GetWindowTextW(window, &buffer[0], buffer.size()))
+			if(0 == ::GetWindowTextW(window, buffer.data(), buffer.size()))
 			{
 				const auto error = ::GetLastError();
 				if(ERROR_SUCCESS != error) // the window has no title bar or text, or the title bar is empty
@@ -86,7 +86,7 @@ namespace KAA
 					throw windows_api_failure(__FUNCTIONW__, L"Unable to retrieve the window's text.", error);
 				}
 			}
-			return std::wstring(&buffer[0]);
+			return buffer.data();
 		}
 
 		std::wstring get_control_text(const HWND window, const int control_identifier)

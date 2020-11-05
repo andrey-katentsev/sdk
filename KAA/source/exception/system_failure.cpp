@@ -49,12 +49,12 @@ namespace KAA
 		const RAII::invalid_parameter_handler session(allow_execution);
 		{
 			std::vector<wchar_t> buffer(256, L'\0');
-			const errno_t error = _wcserror_s(&buffer[0], buffer.size(), error_code);
+			const errno_t error = _wcserror_s(buffer.data(), buffer.size(), error_code);
 			if(0 != error)
 			{
 				throw system_failure(__FUNCTIONW__, L"Unable to get a system error message.", error);
 			}
-			return to_UTF8(std::wstring(&buffer[0]));
+			return to_UTF8(buffer.data());
 		}
 	}
 }

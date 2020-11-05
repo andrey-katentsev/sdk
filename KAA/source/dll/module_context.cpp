@@ -44,7 +44,7 @@ namespace KAA
 		std::wstring module_context::get_module_base_name(void) const
 		{
 			std::vector<wchar_t> buffer(MAX_PATH);
-			const DWORD name_length = ::GetModuleBaseNameW(::GetCurrentProcess(), m_module, &buffer[0], buffer.size());
+			const DWORD name_length = ::GetModuleBaseNameW(::GetCurrentProcess(), m_module, buffer.data(), buffer.size());
 			if(0 == name_length)
 			{
 				const DWORD error = ::GetLastError();

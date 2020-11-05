@@ -167,12 +167,12 @@ namespace KAA
 		enum { predefined_language_order = 0 };
 		const DWORD options = FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS;
 		std::vector<wchar_t> buffer(32 * 1024, L'\0'); // maximum supported buffer size - 64 KiB
-		const DWORD length = ::FormatMessageW(options, nullptr, status_code, predefined_language_order, reinterpret_cast<LPWSTR>(&buffer[0]), buffer.size(), nullptr);
+		const DWORD length = ::FormatMessageW(options, nullptr, status_code, predefined_language_order, reinterpret_cast<LPWSTR>(buffer.data()), buffer.size(), nullptr);
 		if(0 == length)
 		{
 			const DWORD error = ::GetLastError();
 			throw windows_api_failure(__FUNCTIONW__, L"", error);
 		}
-		return to_UTF8(std::wstring(&buffer[0], length - 2)); // FIX: KAA: remove trailing \r\n
+		return to_UTF8(std::wstring(buffer.data(), length - 2)); // FIX: KAA: remove trailing \r\n
 	}
 }

@@ -42,12 +42,12 @@ namespace KAA
 				}
 
 				std::vector<wchar_t> buffer(formatted_string_lenght + 1, L'\0');
-				if(formatted_string_lenght != vswprintf_s(&buffer[0], buffer.size(), format.c_str(), arguments))
+				if(formatted_string_lenght != vswprintf_s(buffer.data(), buffer.size(), format.c_str(), arguments))
 				{
 					const errno_t error = *_errno();
 					throw system_failure(__FUNCTIONW__, L"Unable to write formatted output to the memory buffer.",  error);
 				}
-				return std::wstring(&buffer[0], formatted_string_lenght);
+				return std::wstring(buffer.data(), formatted_string_lenght);
 			}
 		}
 	}
