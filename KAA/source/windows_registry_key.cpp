@@ -8,6 +8,8 @@
 //
 
 #include "../include/windows_registry_key.h"
+
+#include "../include/unicode.h"
 #include "../include/exception/windows_api_failure.h"
 
 #include <vector>
@@ -93,30 +95,31 @@ namespace
 
 namespace KAA
 {
+	using namespace unicode;
 	namespace system
 	{
 		windows_registry_key::windows_registry_key(const HKEY handle) :
 		key(handle)
 		{}
 
-		std::wstring windows_registry_key::iquery_string_value(const std::wstring& name) const
+		std::string windows_registry_key::iquery_string_value(const std::string& name) const
 		{
-			return ::query_string_value(key, name);
+			return to_UTF8(::query_string_value(key, to_UTF16(name)));
 		}
 
-		void windows_registry_key::iset_string_value(const std::wstring& name, const std::wstring& data)
+		void windows_registry_key::iset_string_value(const std::string& name, const std::string& data)
 		{
-			return ::set_string_value(key, name, data);
+			return ::set_string_value(key, to_UTF16(name), to_UTF16(data));
 		}
 
-		uint32_t windows_registry_key::iquery_dword_value(const std::wstring& name) const
+		uint32_t windows_registry_key::iquery_dword_value(const std::string& name) const
 		{
-			return ::query_dword_value(key, name);
+			return ::query_dword_value(key, to_UTF16(name));
 		}
 
-		void windows_registry_key::iset_dword_value(const std::wstring& name, uint32_t data)
+		void windows_registry_key::iset_dword_value(const std::string& name, uint32_t data)
 		{
-			return ::set_dword_value(key, name, data);
+			return ::set_dword_value(key, to_UTF16(name), data);
 		}
 	}
 }

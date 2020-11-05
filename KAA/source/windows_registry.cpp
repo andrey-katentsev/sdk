@@ -9,10 +9,11 @@
 
 #include "../include/windows_registry.h"
 
-#include <stdexcept>
-
+#include "../include/unicode.h"
 #include "../include/windows_registry_key.h"
 #include "../include/exception/windows_api_failure.h"
+
+#include <stdexcept>
 
 #include <windows.h>
 
@@ -121,22 +122,23 @@ namespace
 
 namespace KAA
 {
+	using namespace unicode;
 	namespace system
 	{
-		std::unique_ptr<registry_key> windows_registry::iopen_key(const root_key section, const std::wstring& subkey, const key_access& desired_access)
+		std::unique_ptr<registry_key> windows_registry::iopen_key(const root_key section, const std::string& subkey, const key_access& desired_access)
 		{
 			const HKEY windows_section = get_windows_registry_root_key(section);
 			const REGSAM windows_desired_access = get_windows_registry_key_security_access_mask(desired_access);
-			return std::make_unique<windows_registry_key>(::open_key(windows_section, subkey, windows_desired_access));
+			return std::make_unique<windows_registry_key>(::open_key(windows_section, to_UTF16(subkey), windows_desired_access));
 		}
 
-		std::unique_ptr<registry_key> windows_registry::icreate_key(const root_key section, const std::wstring& subkey, const key_options options, const key_access& desired_access, const void* const desired_security)
+		std::unique_ptr<registry_key> windows_registry::icreate_key(const root_key section, const std::string& subkey, const key_options options, const key_access& desired_access, const void* const desired_security)
 		{
 			const HKEY windows_section = get_windows_registry_root_key(section);
 			const DWORD windows_options = get_windows_registry_key_options(options);
 			const REGSAM windows_desired_access = get_windows_registry_key_security_access_mask(desired_access);
 			const SECURITY_ATTRIBUTES* windows_desired_security = reinterpret_cast<const SECURITY_ATTRIBUTES*>(desired_security);
-			return std::make_unique<windows_registry_key>(::create_key(windows_section, subkey, windows_options, windows_desired_access, windows_desired_security).first);
+			return std::make_unique<windows_registry_key>(::create_key(windows_section, to_UTF16(subkey), windows_options, windows_desired_access, windows_desired_security).first);
 		}
 	}
 }

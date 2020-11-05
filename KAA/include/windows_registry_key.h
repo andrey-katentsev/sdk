@@ -29,11 +29,11 @@ namespace KAA
 		private:
 			RAII::windows_registry_key_handle key;
 
-			std::wstring iquery_string_value(const std::wstring& name) const override;
-			void iset_string_value(const std::wstring& name, const std::wstring& value) override;
+			std::string iquery_string_value(const std::string& name) const override;
+			void iset_string_value(const std::string& name, const std::string& value) override;
 
-			uint32_t iquery_dword_value(const std::wstring& name) const override;
-			void iset_dword_value(const std::wstring& name, uint32_t value) override;
+			uint32_t iquery_dword_value(const std::string& name) const override;
+			void iset_dword_value(const std::string& name, uint32_t value) override;
 		};
 	}
 }
