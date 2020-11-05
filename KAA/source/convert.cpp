@@ -33,7 +33,7 @@ namespace
 			const errno_t code = wcstombs_s(&buffer_size, nullptr, 0, string_to_convert.c_str(), 0);
 			if(0 != code)
 			{
-				throw KAA::system_failure(__FUNCTIONW__, L"EXCEPTION: Unable to determine appropriate buffer size.", code);
+				throw KAA::system_failure { __FUNCTION__, "cannot determine the required buffer size", code };
 			}
 			return buffer_size;
 		}
@@ -51,7 +51,7 @@ namespace
 			const errno_t code = mbstowcs_s(&buffer_size, nullptr, 0, string_to_convert.c_str(), 0);
 			if(0 != code)
 			{
-				throw KAA::system_failure(__FUNCTIONW__, L"EXCEPTION: Unable to determine appropriate buffer size.", code);
+				throw KAA::system_failure { __FUNCTION__, "cannot determine the required buffer size", code };
 			}
 			return buffer_size;
 		}
@@ -100,7 +100,7 @@ namespace KAA
 		long to_long(const std::wstring& value, const int radix)
 		{
 			if (2 > radix || 36 < radix)
-				throw system_failure(__FUNCTIONW__, L"'radix' argument is out of range [2,36]", EINVAL);
+				throw system_failure { __FUNCTION__, "'radix' argument is out of range [2,36]", EINVAL };
 			return ::to_long_ex(value, radix);
 		}
 
@@ -110,7 +110,7 @@ namespace KAA
 		unsigned long to_ulong(const std::wstring& value, const int radix)
 		{
 			if (2 > radix || 36 < radix)
-				throw system_failure(__FUNCTIONW__, L"'radix' argument is out of range [2,36]", EINVAL);
+				throw system_failure { __FUNCTION__, "'radix' argument is out of range [2,36]", EINVAL };
 			return ::to_ulong_ex(value, radix);
 		}
 
@@ -125,7 +125,7 @@ namespace KAA
 				const errno_t code = wcstombs_s(nullptr, buffer.data(), buffer.size(), string_to_convert.c_str(), _TRUNCATE);
 				if(0 != code)
 				{
-					throw system_failure(__FUNCTIONW__, L"EXCEPTION: Unable to convert wide string to multibyte string.", code);
+					throw system_failure { __FUNCTION__, "cannot convert a sequence of wide characters to a corresponding sequence of multibyte characters", code };
 				}
 				return buffer.data();
 			}
@@ -147,7 +147,7 @@ namespace KAA
 		std::wstring to_wstring(const long value, const int radix)
 		{
 			if (2 > radix || 36 < radix)
-				throw system_failure(__FUNCTIONW__, L"'radix' argument is out of range [2,36]", EINVAL);
+				throw system_failure { __FUNCTION__, "'radix' argument is out of range [2,36]", EINVAL };
 
 			RAII::invalid_parameter_handler session(allow_execution);
 			{
@@ -155,7 +155,7 @@ namespace KAA
 				const errno_t error = _ltow_s(value, buffer.data(), buffer.size(), radix);
 				if(0 != error)
 				{
-					throw system_failure(__FUNCTIONW__, L"EXCEPTION: Unable to convert a long integer to a string.", error);
+					throw system_failure { __FUNCTION__, "cannot convert a long integer to a string", error };
 				}
 				return buffer.data();
 			}
@@ -167,7 +167,7 @@ namespace KAA
 		std::wstring to_wstring(const unsigned long value, const int radix)
 		{
 			if (2 > radix || 36 < radix)
-				throw system_failure(__FUNCTIONW__, L"'radix' argument is out of range [2,36]", EINVAL);
+				throw system_failure { __FUNCTION__, "'radix' argument is out of range [2,36]", EINVAL };
 
 			RAII::invalid_parameter_handler session(allow_execution);
 			{
@@ -175,7 +175,7 @@ namespace KAA
 				const auto error = _ultow_s(value, buffer.data(), buffer.size(), radix);
 				if (0 != error)
 				{
-					throw system_failure(__FUNCTIONW__, L"Failed to convert an unsigned long integer to a wstring.", error);
+					throw system_failure { __FUNCTION__, "cannot convert an unsigned long integer to a string", error };
 				}
 				return buffer.data();
 			}
@@ -192,7 +192,7 @@ namespace KAA
 				const errno_t code = mbstowcs_s(nullptr, buffer.data(), buffer.size(), string_to_convert.c_str(), _TRUNCATE);
 				if(0 != code)
 				{
-					throw system_failure(__FUNCTIONW__, L"EXCEPTION: Unable to convert multibyte string to wide string.", code);
+					throw system_failure { __FUNCTION__, "cannot convert a sequence of multibyte characters to a corresponding sequence of wide characters", code };
 				}
 				return buffer.data();
 			}

@@ -23,7 +23,7 @@ namespace
 
 namespace KAA
 {
-	system_failure::system_failure(std::wstring source, std::wstring description, const errno_t error_code) :
+	system_failure::system_failure(std::string source, std::string description, const errno_t error_code) :
 	source(std::move(source)),
 	description(std::move(description)),
 	error_code(error_code)
@@ -36,12 +36,12 @@ namespace KAA
 
 	std::string system_failure::iget_source(void) const
 	{
-		return to_UTF8(source);
+		return source;
 	}
 
 	std::string system_failure::iget_description(void) const
 	{
-		return to_UTF8(description);
+		return description;
 	}
 
 	std::string system_failure::iget_system_message(void) const
@@ -52,7 +52,7 @@ namespace KAA
 			const errno_t error = _wcserror_s(buffer.data(), buffer.size(), error_code);
 			if(0 != error)
 			{
-				throw system_failure(__FUNCTIONW__, L"Unable to get a system error message.", error);
+				throw system_failure { __FUNCTION__, "cannot get a system error message", error };
 			}
 			return to_UTF8(buffer.data());
 		}

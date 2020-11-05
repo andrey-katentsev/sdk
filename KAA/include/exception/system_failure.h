@@ -18,13 +18,13 @@ namespace KAA
 	class system_failure final : public failure
 	{
 	public:
-		system_failure(std::wstring source, std::wstring description, errno_t);
+		system_failure(std::string source, std::string description, errno_t);
 
 		operator errno_t (void) const noexcept;
 
 	private:
-		std::wstring source;
-		std::wstring description;
+		std::string source;
+		std::string description;
 		errno_t error_code;
 
 		std::string iget_source(void) const override;

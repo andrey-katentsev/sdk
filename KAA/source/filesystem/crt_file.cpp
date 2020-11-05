@@ -54,7 +54,7 @@ namespace KAA
 			if(-1 == bytes_read)
 			{
 				const errno_t error = *_errno();
-				throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to read data from a file, _read function fails.", error);
+				throw system_failure { __FUNCTION__, "cannot read data from a file", error };
 			}
 			return bytes_read;
 		}
@@ -66,7 +66,7 @@ namespace KAA
 			if(-1 == bytes_written)
 			{
 				const errno_t error = *_errno();
-				throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to write data to a file, _write function fails.", error);
+				throw system_failure { __FUNCTION__, "cannot write data to a file", error };
 			}
 			return bytes_written;
 		}
@@ -78,7 +78,7 @@ namespace KAA
 			if(-1 == code)
 			{
 				const errno_t error = *_errno();
-				throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to flush a file buffer, _commit function fails.", error);
+				throw system_failure { __FUNCTION__, "cannot flush a file directly to disk", error };
 			}
 		}
 
@@ -89,7 +89,7 @@ namespace KAA
 			if(-1L == size)
 			{
 				const errno_t error = *_errno();
-				throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to retrieve a file size, _filelength function fails.", error);
+				throw system_failure { __FUNCTION__, "cannot get the length of a file", error };
 			}
 			return size;
 		}
@@ -100,7 +100,7 @@ namespace KAA
 			if(0 != _chsize(m_descriptor, size)) // DEFECT: KAA: 32-bit size.
 			{
 				const errno_t error = *_errno();
-				throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to change a file size, _chsize function fails.", error);
+				throw system_failure { __FUNCTION__, "cannot change the size of a file", error };
 			}
 		}
 
@@ -111,7 +111,7 @@ namespace KAA
 			if(-1L == current_position)
 			{
 				const errno_t error = *_errno();
-				throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to retrieve the position of the file pointer, _tell function fails.", error);
+				throw system_failure { __FUNCTION__, "cannot get the position of the file pointer", error };
 			}
 			return current_position;
 		}
@@ -123,7 +123,7 @@ namespace KAA
 			if(-1L == new_position)
 			{
 				const errno_t error = *_errno();
-				throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to set the position of the file pointer, _lseek function fails.", error);
+				throw system_failure { __FUNCTION__, "cannot move a file pointer to the specified location", error };
 			}
 		}
 	}

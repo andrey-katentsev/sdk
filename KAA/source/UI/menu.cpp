@@ -23,7 +23,7 @@ namespace
 		{
 			constexpr auto reason = KAA::operation_failure::status_code_t::not_found;
 			constexpr auto severity = KAA::operation_failure::severity_t::error;
-			throw KAA::operation_failure { __FUNCTIONW__, L"The menu item does not exist.", reason, severity };
+			throw KAA::operation_failure { __FUNCTION__, "the menu item does not exist", reason, severity };
 		}
 	}
 }

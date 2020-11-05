@@ -35,7 +35,7 @@ namespace
 			const errno_t error = memcpy_s(destination, size, source, bytes_to_write);
 			if (0 != error)
 			{
-				throw KAA::system_failure(__FUNCTIONW__, L"Unable to copy bytes between buffers.", error);
+				throw KAA::system_failure { __FUNCTION__, "failed to copy bytes between buffers", error };
 			}
 			return bytes_to_write;
 		}
@@ -58,7 +58,7 @@ namespace KAA
 				const errno_t error = ::rand_s(&value);
 				if(0 != error)
 				{
-					throw system_failure(__FUNCTIONW__, L"Unable to generate a pseudorandom number.", error);
+					throw system_failure { __FUNCTION__, "cannot generate a pseudorandom number", error };
 				}
 				return value;
 			}

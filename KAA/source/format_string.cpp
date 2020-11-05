@@ -38,14 +38,14 @@ namespace KAA
 				if(-1 == formatted_string_lenght)
 				{
 					const errno_t error = *_errno();
-					throw system_failure(__FUNCTIONW__, L"Unable to determine the number of characters in the formatted string.", error);
+					throw system_failure { __FUNCTION__, "cannot determine the number of characters in the formatted string", error };
 				}
 
 				std::vector<wchar_t> buffer(formatted_string_lenght + 1, L'\0');
 				if(formatted_string_lenght != vswprintf_s(buffer.data(), buffer.size(), format.c_str(), arguments))
 				{
 					const errno_t error = *_errno();
-					throw system_failure(__FUNCTIONW__, L"Unable to write formatted output to the memory buffer.",  error);
+					throw system_failure { __FUNCTION__, "cannot write formatted output to the memory buffer", error };
 				}
 				return std::wstring(buffer.data(), formatted_string_lenght);
 			}

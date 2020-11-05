@@ -143,7 +143,7 @@ namespace KAA
 			if(0 != code)
 			{
 				const errno_t error = *_errno();
-				throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to create directory, _wmkdir function fails.", error);
+				throw system_failure { __FUNCTION__, "cannot create a new directory", error };
 			}
 		}
 
@@ -153,7 +153,7 @@ namespace KAA
 			if(0 != code)
 			{
 				const errno_t error = *_errno();
-				throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to remove directory, _wrmdir function fails.", error);
+				throw system_failure { __FUNCTION__, "cannot delete a directory", error };
 			}
 		}
 
@@ -168,7 +168,7 @@ namespace KAA
 				if(0 == code)
 					return std::make_unique<crt_file>(handle);
 				else
-					throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to open file, _wsopen_s function fails.", code);
+					throw system_failure { __FUNCTION__, "cannot open a file for sharing", code };
 			}
 		}
 
@@ -184,7 +184,7 @@ namespace KAA
 				if(0 == code)
 					return std::make_unique<crt_file>(handle);
 				else
-					throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to create file, icreate_file function fails.", code);
+					throw system_failure { __FUNCTION__, "cannot create a file for sharing", code };
 			}
 		}
 
@@ -199,7 +199,7 @@ namespace KAA
 				buffer.push_back(L'\0');
 				const auto code = _wmktemp_s(buffer.data(), buffer.size());
 				if(0 != code)
-					throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to create a unique file name, _wmktemp_s function fails.", code);
+					throw system_failure { __FUNCTION__, "cannot create a unique file name", code };
 				return buffer.data();
 			}
 		}
@@ -209,7 +209,7 @@ namespace KAA
 			if(0 != _wrename(from.to_wstring().c_str(), to.to_wstring().c_str()))
 			{
 				const errno_t error = *_errno();
-				throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to rename file, _wrename function fails.", error);
+				throw system_failure { __FUNCTION__, "cannot rename a file", error };
 			}
 		}
 
@@ -218,7 +218,7 @@ namespace KAA
 			if(0 != _wremove(path.to_wstring().c_str()))
 			{
 				const errno_t error = *_errno();
-				throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to remove file, _wremove function fails.", error);
+				throw system_failure { __FUNCTION__, "cannot delete a file", error };
 			}
 		}
 
@@ -229,7 +229,7 @@ namespace KAA
 			if(0 != _wchmod(path.to_wstring().c_str(), get_crt_permission_flags(new_attributes)))
 			{
 				const errno_t error = *_errno();
-				throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to set file permissions, _wchmod function fails.", error);
+				throw system_failure { __FUNCTION__, "cannot change the file-permission settings", error };
 			}
 		}
 
@@ -245,7 +245,7 @@ namespace KAA
 					return false;
 				default:
 					const auto error = *_errno();
-					throw system_failure(__FUNCTIONW__, L"unable to determine the specified file exists, _waccess_s function fails", error);
+					throw system_failure { __FUNCTION__, "cannot determine file read/write permissions", error };
 				}
 			}
 		}
@@ -262,7 +262,7 @@ namespace KAA
 					return false;
 				default:
 					const errno_t error = *_errno();
-					throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to determine file permissions, _waccess_s function fails.", error);
+					throw system_failure { __FUNCTION__, "cannot determine file read/write permissions", error };
 				}
 			}
 		}

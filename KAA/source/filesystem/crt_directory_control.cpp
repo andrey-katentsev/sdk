@@ -31,7 +31,7 @@ namespace KAA
 			catch (const std::invalid_argument&)
 			{
 				const errno_t error = *_errno();
-				throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to get the current working directory, _wgetcwd function fails.", error);
+				throw system_failure { __FUNCTION__, "cannot get the current working directory", error };
 			}
 		}
 
@@ -41,7 +41,7 @@ namespace KAA
 			if (0 != _wchdir(path.to_wstring().c_str()))
 			{
 				const errno_t error = *_errno();
-				throw system_failure(__FUNCTIONW__, L"EXCEPTION: unable to change the current working directory, _wchdir function fails.", error);
+				throw system_failure { __FUNCTION__, "cannot change the current working directory", error };
 			}
 		}
 	}

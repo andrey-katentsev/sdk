@@ -23,7 +23,7 @@ namespace KAA
 				const errno_t code = _wsplitpath_s(path.c_str(), &drive[0], drive.size(), nullptr, 0, nullptr, 0, nullptr, 0);
 				if(0 != code)
 				{
-					throw KAA::system_failure(__FUNCTIONW__, L"EXCEPTION: unable to split the drive component from the path, _wsplitpath_s function fails.", code);
+					throw KAA::system_failure { __FUNCTION__, "cannot split the drive component from the path", code };
 				}
 				return std::wstring(&drive[0]);
 			}
@@ -38,7 +38,7 @@ namespace KAA
 				const errno_t code = _wsplitpath_s(path.c_str(), &drive[0], drive.size(), &directory[0], directory.size(), nullptr, 0, nullptr, 0);
 				if(0 != code)
 				{
-					throw KAA::system_failure(__FUNCTIONW__, L"EXCEPTION: unable to split the qualified directory path from the path, _wsplitpath_s function fails.", code);
+					throw KAA::system_failure { __FUNCTION__, "cannot split the qualified directory path from the path", code };
 				}
 				return std::wstring(&drive[0]) + std::wstring(&directory[0]);
 			}
@@ -53,7 +53,7 @@ namespace KAA
 				const errno_t code = _wsplitpath_s(path.c_str(), nullptr, 0, nullptr, 0, &filename[0], filename.size(), &extension[0], extension.size());
 				if(0 != code)
 				{
-					throw KAA::system_failure(__FUNCTIONW__, L"EXCEPTION: unable to split the qualified filename from the path, _wsplitpath_s function fails.", code);
+					throw KAA::system_failure { __FUNCTION__, "cannot split the qualified filename from the path", code };
 				}
 				return std::wstring(&filename[0]) + std::wstring(&extension[0]);
 			}
@@ -67,7 +67,7 @@ namespace KAA
 				const errno_t code = _wsplitpath_s(path.c_str(), nullptr, 0, nullptr, 0, nullptr, 0, &extension[0], extension.size());
 				if(0 != code)
 				{
-					throw KAA::system_failure(__FUNCTIONW__, L"EXCEPTION: unable to split the extension component from the path, _wsplitpath_s function fails.", code);
+					throw KAA::system_failure { __FUNCTION__, "cannot split the extension component from the path", code };
 				}
 				return std::wstring(&extension[0]);
 			}
