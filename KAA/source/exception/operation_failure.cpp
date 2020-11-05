@@ -30,7 +30,7 @@ namespace
 		default:
 			constexpr auto reason = KAA::operation_failure::status_code_t::invalid_argument;
 			constexpr auto severity = KAA::operation_failure::severity_t::error;
-			throw KAA::operation_failure { __FUNCTIONW__, L"Unknown failure severity specified.", reason, severity };
+			throw KAA::operation_failure { __FUNCTION__, "unknown failure severity specified", reason, severity };
 		}
 	}
 
@@ -45,14 +45,14 @@ namespace
 		default:
 			constexpr auto reason = KAA::operation_failure::status_code_t::invalid_argument;
 			constexpr auto severity = KAA::operation_failure::severity_t::error;
-			throw KAA::operation_failure { __FUNCTIONW__, L"Unknown status code specified.", reason, severity };
+			throw KAA::operation_failure { __FUNCTION__, "unknown status code specified", reason, severity };
 		}
 	}
 }
 
 namespace KAA
 {
-	operation_failure::operation_failure(std::wstring source, std::wstring description, const status_code_t status_code, const severity_t severity) :
+	operation_failure::operation_failure(std::string source, std::string description, const status_code_t status_code, const severity_t severity) :
 	source(std::move(source)),
 	description(std::move(description)),
 	status_code(status_code),
@@ -61,18 +61,18 @@ namespace KAA
 
 	std::string operation_failure::iget_source(void) const
 	{
-		return to_UTF8(source);
+		return source;
 	}
 
 	std::string operation_failure::iget_description(void) const
 	{
-		return to_UTF8(description);
+		return description;
 	}
 
 	std::string operation_failure::iget_system_message(void) const
 	{
 		enum { custom_exception = true };
-		const windows_api_failure error(source, description, to_windows_api_status_code(status_code), FACILITY_NULL, to_windows_api_severity(severity), custom_exception);
+		const windows_api_failure error(to_UTF16(source), to_UTF16(description), to_windows_api_status_code(status_code), FACILITY_NULL, to_windows_api_severity(severity), custom_exception);
 		return error.get_system_message();
 	}
 }

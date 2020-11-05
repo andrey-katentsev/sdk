@@ -70,7 +70,7 @@ namespace
 		default:
 			constexpr auto reason = KAA::operation_failure::status_code_t::invalid_argument;
 			constexpr auto severity = KAA::operation_failure::severity_t::error;
-			throw KAA::operation_failure { __FUNCTIONW__, L"Unknown severity code specified.", reason, severity };
+			throw KAA::operation_failure { __FUNCTION__, "unknown severity code specified", reason, severity };
 		}
 	}
 
@@ -85,7 +85,7 @@ namespace
 		default:
 			constexpr auto reason = KAA::operation_failure::status_code_t::invalid_argument;
 			constexpr auto severity = KAA::operation_failure::severity_t::error;
-			throw KAA::operation_failure { __FUNCTIONW__, L"Unknown failure severity specified.", reason, severity };
+			throw KAA::operation_failure { __FUNCTION__, "unknown failure severity specified", reason, severity };
 		}
 	}
 }

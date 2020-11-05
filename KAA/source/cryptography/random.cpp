@@ -78,7 +78,7 @@ namespace KAA
 			{
 				constexpr auto reason = operation_failure::status_code_t::invalid_argument;
 				constexpr auto severity = operation_failure::severity_t::error;
-				throw operation_failure { __FUNCTIONW__, L"failed to generate random bytes", reason, severity };
+				throw operation_failure { __FUNCTION__, "failed to generate random bytes", reason, severity };
 			}
 
 			size_t bytes_written = 0U;

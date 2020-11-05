@@ -30,11 +30,11 @@ namespace KAA
 			error
 		};
 
-		operation_failure(std::wstring source, std::wstring description, status_code_t, severity_t);
+		operation_failure(std::string source, std::string description, status_code_t, severity_t);
 
 	private:
-		std::wstring source;
-		std::wstring description;
+		std::string source;
+		std::string description;
 		status_code_t status_code;
 		severity_t severity;
 
