@@ -381,7 +381,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\dll\module_context.cpp">
-      <Filter>Source Files\exception</Filter>
+      <Filter>Source Files\dll</Filter>
     </ClCompile>
     <ClCompile Include="source\cryptography\md5.cpp">
       <Filter>Source Files\cryptography</Filter>
