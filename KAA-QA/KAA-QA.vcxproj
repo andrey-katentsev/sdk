@@ -186,6 +186,7 @@
     <ClCompile Include="digest_test.cpp" />
     <ClCompile Include="directory_control_test.cpp" />
     <ClCompile Include="file_test.cpp" />
+    <ClCompile Include="format_string_test.cpp" />
     <ClCompile Include="in-memory_file_system_test.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="path_test.cpp" />
