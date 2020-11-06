@@ -8,10 +8,13 @@
 //
 
 #include "../../include/dll/get_module_handle.h"
+
+#include "../../include/unicode.h"
 #include "../../include/exception/windows_api_failure.h"
 
 namespace KAA
 {
+	using namespace unicode;
 	namespace dll
 	{
 		HINSTANCE get_calling_process_module_handle(void)
@@ -25,10 +28,9 @@ namespace KAA
 			return handle;
 		}
 
-		// TODO: KAA: consider to replace const std::wstring& with the std::move(std::wstring).
-		HINSTANCE get_module_handle(const std::wstring& name)
+		HINSTANCE get_module_handle(const std::string& name)
 		{
-			HINSTANCE handle = ::GetModuleHandleW(name.c_str());
+			HINSTANCE handle = ::GetModuleHandleW(to_UTF16(name).c_str());
 			if(nullptr == handle)
 			{
 				const DWORD error = ::GetLastError();

@@ -1,15 +1,17 @@
 #include "../../include/dll/module_context.h"
 
+#include "../../include/unicode.h"
+#include "../../include/exception/windows_api_failure.h"
+
 #include <stdexcept>
 #include <vector>
-
-#include "../../include/exception/windows_api_failure.h"
 
 #include <psapi.h>
 #pragma comment(lib, "psapi.lib")
 
 namespace KAA
 {
+	using namespace unicode;
 	namespace dll
 	{
 		module_context::module_context() : m_module(nullptr)
@@ -41,7 +43,7 @@ namespace KAA
 		// THROWS: windows_api_failure
 		// SAFE GUARANTEE: strong
 		// SIDE EFFECTS: -
-		std::wstring module_context::get_module_base_name(void) const
+		std::string module_context::get_module_base_name(void) const
 		{
 			std::vector<wchar_t> buffer(MAX_PATH);
 			const DWORD name_length = ::GetModuleBaseNameW(::GetCurrentProcess(), m_module, buffer.data(), buffer.size());
@@ -50,7 +52,7 @@ namespace KAA
 				const DWORD error = ::GetLastError();
 				throw windows_api_failure { __FUNCTION__, "cannot retrieve the base name of the specified module", error };
 			}
-			return std::wstring(buffer.begin(), buffer.begin() + name_length);
+			return to_UTF8(std::wstring(buffer.begin(), buffer.begin() + name_length));
 		}
 
 		HINSTANCE module_context::get_module_handle(void) const throw()

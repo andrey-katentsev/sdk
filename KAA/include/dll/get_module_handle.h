@@ -27,6 +27,6 @@ namespace KAA
 		// SIDE EFFECTS: -
 		// Retrieves a module handle for the specified module.
 		// The module must have been loaded by the calling process.
-		HINSTANCE get_module_handle(const std::wstring& name);
+		HINSTANCE get_module_handle(const std::string& name);
 	}
 }
