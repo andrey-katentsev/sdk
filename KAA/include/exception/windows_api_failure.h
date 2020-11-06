@@ -25,15 +25,15 @@ namespace KAA
 			error
 		};
 
-		windows_api_failure(std::wstring source, std::wstring description, long);
-		windows_api_failure(std::wstring source, std::wstring description, DWORD);
-		windows_api_failure(std::wstring source, std::wstring description, WORD status_code, WORD facility_code, severity_t severity, bool custom);
+		windows_api_failure(std::string source, std::string description, long);
+		windows_api_failure(std::string source, std::string description, DWORD);
+		windows_api_failure(std::string source, std::string description, WORD status_code, WORD facility_code, severity_t severity, bool custom);
 
 		operator DWORD (void) const noexcept;
 
 	private:
-		std::wstring source;
-		std::wstring description;
+		std::string source;
+		std::string description;
 		WORD status_code;
 		WORD facility_code;
 		severity_t failure_severity;

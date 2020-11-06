@@ -22,7 +22,7 @@ namespace
 		if (0 == size)
 		{
 			const auto error = ::GetLastError();
-			throw KAA::windows_api_failure { __FUNCTIONW__, L"cannot determine the required buffer size for UTF8 string", error };
+			throw KAA::windows_api_failure { __FUNCTION__, "cannot determine the required buffer size", error };
 		}
 		return size;
 	}
@@ -33,7 +33,7 @@ namespace
 		if (0 == size)
 		{
 			const auto error = ::GetLastError();
-			throw KAA::windows_api_failure { __FUNCTIONW__, L"cannot determine the required buffer length for UTF16 string", error };
+			throw KAA::windows_api_failure { __FUNCTION__, "cannot determine the required buffer size", error };
 		}
 		return size;
 	}
@@ -50,7 +50,7 @@ namespace KAA
 			if (0 == bytes_written)
 			{
 				const auto error = ::GetLastError();
-				throw KAA::windows_api_failure { __FUNCTIONW__, L"cannot map a UTF-16 (wide character) string to a UTF-8 (narrow character) string", error };
+				throw KAA::windows_api_failure { __FUNCTION__, "cannot map a UTF-16 (wide character) string to a UTF-8 (narrow character) string", error };
 			}
 			return { UTF8.data(), static_cast<size_t>(bytes_written) };
 		}
@@ -62,7 +62,7 @@ namespace KAA
 			if (0 == characters_written)
 			{
 				const auto error = ::GetLastError();
-				throw KAA::windows_api_failure { __FUNCTIONW__, L"cannot map a UTF-16 (wide character) string to a UTF-8 (narrow character) string", error };
+				throw KAA::windows_api_failure { __FUNCTION__, "cannot map a UTF-16 (wide character) string to a UTF-8 (narrow character) string", error };
 			}
 			return { UTF16.data(), static_cast<size_t>(characters_written) };
 		}

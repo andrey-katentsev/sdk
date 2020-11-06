@@ -24,7 +24,7 @@ namespace
 		if (FALSE == ::CryptHashData(hash, data, size, 0U))
 		{
 			const auto error = ::GetLastError();
-			throw KAA::windows_api_failure(__FUNCTIONW__, L"cannot add data to a specified hash object", error);
+			throw KAA::windows_api_failure { __FUNCTION__, "cannot add data to a specified hash object", error };
 		}
 	}
 
@@ -35,7 +35,7 @@ namespace
 		if (FALSE == ::CryptGetHashParam(hash, HP_HASHVAL, reinterpret_cast<BYTE*>(&digest), &size, 0U))
 		{
 			const auto error = ::GetLastError();
-			throw KAA::windows_api_failure(__FUNCTIONW__, L"cannot retrieve the actual hash value", error);
+			throw KAA::windows_api_failure { __FUNCTION__, "cannot retrieve the actual hash value", error };
 		}
 		assert(sizeof(digest) == size);
 		return digest;

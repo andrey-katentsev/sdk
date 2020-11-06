@@ -44,7 +44,7 @@ namespace KAA
 			if(FALSE == ::CryptGenRandom(csp.get_handle(), size, static_cast<BYTE*>(buffer)))
 			{
 				const DWORD code = ::GetLastError();
-				throw windows_api_failure(__FUNCTIONW__, L"Unable to fill a buffer with cryptographically random bytes.", code);
+				throw windows_api_failure { __FUNCTION__, "cannot fill a buffer with cryptographically random bytes", code };
 			}
 		}
 
@@ -56,7 +56,7 @@ namespace KAA
 			if (FALSE == ::CryptProtectData(const_cast<::DATA_BLOB*>(&plaintext), nullptr, nullptr, nullptr, nullptr, 0UL, &ciphertext))
 			{
 				const auto code = ::GetLastError();
-				throw windows_api_failure(__FUNCTIONW__, L"failed to protect data with the user session key", code);
+				throw windows_api_failure { __FUNCTION__, "cannot encrypt the data with the user session key", code };
 			}
 
 			const RAII::local_memory memory { ciphertext.pbData };
@@ -79,7 +79,7 @@ namespace KAA
 			if (FALSE == ::CryptUnprotectData(const_cast<::DATA_BLOB*>(&ciphertext), nullptr, nullptr, nullptr, nullptr, 0UL, &plaintext))
 			{
 				const auto code = ::GetLastError();
-				throw windows_api_failure(__FUNCTIONW__, L"failed to protect data with the user session key", code);
+				throw windows_api_failure { __FUNCTION__, "cannot decrypt the data with the user session key", code };
 			}
 
 			const RAII::local_memory memory { plaintext.pbData };

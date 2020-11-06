@@ -77,7 +77,7 @@ namespace
 		const LSTATUS code = ::RegOpenKeyExW(key, subkey.c_str(), 0, desired_access, &requested_key);
 		if(ERROR_SUCCESS != code)
 		{
-			throw KAA::windows_api_failure(__FUNCTIONW__, L"Unable to open system registry key.", code);
+			throw KAA::windows_api_failure { __FUNCTION__, "cannot open the specified registry key", code };
 		}
 		return requested_key;
 	}
@@ -114,7 +114,7 @@ namespace
 		const LSTATUS code = ::RegCreateKeyExW(key, subkey.c_str(), 0, nullptr, options, desired_access, const_cast<LPSECURITY_ATTRIBUTES>(desired_security), &requested_key, &disposition);
 		if(ERROR_SUCCESS != code)
 		{
-			throw KAA::windows_api_failure(__FUNCTIONW__, L"Unable to create system registry key.", code);
+			throw KAA::windows_api_failure { __FUNCTION__, "cannot create the specified registry key", code };
 		}
 		return std::make_pair(requested_key, to_disposition(disposition));
 	}

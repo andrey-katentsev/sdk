@@ -35,7 +35,7 @@ namespace
 		{
 			return { size, type };
 		}
-		throw KAA::windows_api_failure { __FUNCTIONW__, L"cannot determine the system registry value's size", error };
+		throw KAA::windows_api_failure { __FUNCTION__, "cannot retrieve the type for the specified value name associated with an open registry key", error };
 	}
 
 	std::wstring query_string_value(const HKEY key, const std::wstring& name)
@@ -51,11 +51,11 @@ namespace
 			{
 				return buffer.data();
 			}
-			throw KAA::windows_api_failure { __FUNCTIONW__, L"cannot retrieve the string value from the system registry", error };
+			throw KAA::windows_api_failure { __FUNCTION__, "cannot retrieve the data for the specified value name associated with an open registry key", error };
 		}
 		constexpr auto severity = KAA::windows_api_failure::severity_t::warning;
 		// ERROR_BAD_TOKEN_TYPE; ERROR_UNSUPPORTED_TYPE; ERROR_INVALID_DATATYPE; RPC_S_ENTRY_TYPE_MISMATCH;
-		throw KAA::windows_api_failure { __FUNCTIONW__, L"cannot retrieve the string value from the system registry", ERROR_DATATYPE_MISMATCH, FACILITY_NULL, severity, true }; // FUTURE: this is not a win32 failure.
+		throw KAA::windows_api_failure { __FUNCTION__, "cannot retrieve the data for the specified value name associated with an open registry key", ERROR_DATATYPE_MISMATCH, FACILITY_NULL, severity, true }; // FUTURE: this is not a win32 failure.
 	}
 
 	void set_string_value(const HKEY key, const std::wstring& name, const std::wstring& data)
@@ -63,7 +63,7 @@ namespace
 		const auto error = ::RegSetValueExW(key, name.c_str(), 0, REG_SZ, reinterpret_cast<const BYTE*>(data.c_str()), static_cast<::DWORD>((data.length() + 1) * sizeof(wchar_t)));
 		if(error != ERROR_SUCCESS) [[unlikely]]
 		{
-			throw KAA::windows_api_failure { __FUNCTIONW__, L"cannot write the string value to the system registry", error };
+			throw KAA::windows_api_failure { __FUNCTION__, "cannot set the data and type of a specified value under a registry key", error };
 		}
 	}
 
@@ -75,14 +75,14 @@ namespace
 		const auto error = ::RegQueryValueExW(key, name.c_str(), nullptr, &type, reinterpret_cast<LPBYTE>(&data), &size);
 		if(error != ERROR_SUCCESS) [[unlikely]]
 		{
-			throw KAA::windows_api_failure { __FUNCTIONW__, L"cannot retrieve the dword value from the system registry", error };
+			throw KAA::windows_api_failure { __FUNCTION__, "cannot retrieve the data for the specified value name associated with an open registry key", error };
 		}
 		if(REG_DWORD == type)
 		{
 			return data;
 		}
 		constexpr auto severity = KAA::windows_api_failure::severity_t::warning;
-		throw KAA::windows_api_failure { __FUNCTIONW__, L"cannot retrieve the dword value from the system registry", ERROR_DATATYPE_MISMATCH, FACILITY_NULL, severity, true }; // FUTURE: this is not a win32 failure.
+		throw KAA::windows_api_failure { __FUNCTION__, "cannot retrieve the data for the specified value name associated with an open registry key", ERROR_DATATYPE_MISMATCH, FACILITY_NULL, severity, true }; // FUTURE: this is not a win32 failure.
 	}
 
 	void set_dword_value(const HKEY key, const std::wstring& name, const DWORD data)
@@ -90,7 +90,7 @@ namespace
 		const auto error = ::RegSetValueExW(key, name.c_str(), 0, REG_DWORD, reinterpret_cast<const BYTE*>(&data), sizeof(data));
 		if(error != ERROR_SUCCESS) [[unlikely]]
 		{
-			throw KAA::windows_api_failure { __FUNCTIONW__, L"Unable to set the dword value to the system registry.", error };
+			throw KAA::windows_api_failure { __FUNCTION__, "cannot set the data and type of a specified value under a registry key", error };
 		}
 	}
 }

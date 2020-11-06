@@ -21,7 +21,7 @@ namespace KAA
 			if (FALSE == ::CryptCreateHash(csp, algorithm, key, flags, &handle))
 			{
 				const auto code = ::GetLastError();
-				throw windows_api_failure(__FUNCTIONW__, L"failed to create a windows hash object handle", code);
+				throw windows_api_failure { __FUNCTION__, "cannot create a windows hash object handle", code };
 			}
 		}
 

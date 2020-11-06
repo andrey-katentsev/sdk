@@ -51,7 +51,7 @@ namespace
 		{
 			constexpr auto severity = KAA::windows_api_failure::severity_t::warning;
 			// FUTURE: this is not a win32 failure.
-			throw KAA::windows_api_failure { __FUNCTIONW__, L"Unable to find control within a window.", ERROR_CONTROL_ID_NOT_FOUND, FACILITY_NULL, severity, true };
+			throw KAA::windows_api_failure { __FUNCTION__, "cannot find the child window that belongs to the specified parent window", ERROR_CONTROL_ID_NOT_FOUND, FACILITY_NULL, severity, true };
 		}
 		return context.child_window;
 	}
@@ -84,7 +84,7 @@ namespace KAA
 				const auto error = ::GetLastError();
 				if(ERROR_SUCCESS != error) // the window has no title bar or text, or the title bar is empty
 				{
-					throw windows_api_failure(__FUNCTIONW__, L"Unable to retrieve the window's text.", error);
+					throw windows_api_failure { __FUNCTION__, "cannot copy the text of the specified control (or window's title bar) into a buffer", error };
 				}
 			}
 			return buffer.data();
@@ -102,7 +102,7 @@ namespace KAA
 			if(0 == ::SetWindowTextW(control, text.c_str()))
 			{
 				const auto error = ::GetLastError();
-				throw windows_api_failure(__FUNCTIONW__, L"Unable to set the window's text.", error);
+				throw windows_api_failure { __FUNCTION__, "cannot change the text of the specified control (or window's title bar)", error };
 			}
 		}
 
@@ -119,7 +119,7 @@ namespace KAA
 			if (CB_ERR == number_of_items)
 			{
 				const auto code = ::GetLastError();
-				throw KAA::windows_api_failure(__FUNCTIONW__, L"failed to get the number of items in the list box of a combo box", code);
+				throw KAA::windows_api_failure { __FUNCTION__, "cannot get the number of items in the list box of a combo box", code };
 			}
 			return number_of_items;
 		}
@@ -130,7 +130,7 @@ namespace KAA
 			if (CB_ERR == item_index) // if no item is selected, it is CB_ERR
 			{
 				const auto code = ::GetLastError();
-				throw KAA::windows_api_failure(__FUNCTIONW__, L"failed to retrieve the index of the currently selected item: no item is selected", code);
+				throw KAA::windows_api_failure { __FUNCTION__, "cannot retrieve the index of the currently selected item: no item is selected", code };
 			}
 			return item_index;
 		}
@@ -143,7 +143,7 @@ namespace KAA
 			if (CB_ERR == ::SendMessageW(combo_box_control, CB_SETCURSEL, item_index, 0))
 			{
 				const auto code = ::GetLastError();
-				throw KAA::windows_api_failure(__FUNCTIONW__, L"failed to select a string in the list of a combo box", code);
+				throw KAA::windows_api_failure { __FUNCTION__, "cannot select a string in the list of a combo box", code };
 			}
 		}
 
@@ -153,13 +153,13 @@ namespace KAA
 			if (CB_ERR == index)
 			{
 				const auto code = ::GetLastError();
-				throw KAA::windows_api_failure(__FUNCTIONW__, L"failed to add a string to the list box of a combo box", code);
+				throw KAA::windows_api_failure { __FUNCTION__, "cannot add a string to the list box of a combo box", code };
 			}
 
 			if (CB_ERRSPACE == index)
 			{
 				const auto code = ::GetLastError();
-				throw KAA::windows_api_failure(__FUNCTIONW__, L"failed to add a string to the list box of a combo box: insufficient space is available to store the new string", code);
+				throw KAA::windows_api_failure { __FUNCTION__, "cannot add a string to the list box of a combo box: insufficient space is available to store the new string", code };
 			}
 			return index;
 		}
@@ -170,7 +170,7 @@ namespace KAA
 			if (CB_ERR == assotiated_value)
 			{
 				const auto code = ::GetLastError();
-				throw KAA::windows_api_failure(__FUNCTIONW__, L"failed to retrieve the value associated with the item in a combo box", code);
+				throw KAA::windows_api_failure { __FUNCTION__, "cannot retrieve the application-supplied value associated with the specified item in the combo box", code };
 			}
 			return assotiated_value;
 		}
@@ -180,7 +180,7 @@ namespace KAA
 			if (CB_ERR == ::SendMessageW(combo_box_control, CB_SETITEMDATA, item_index, data))
 			{
 				const auto code = ::GetLastError();
-				throw KAA::windows_api_failure(__FUNCTIONW__, L"failed to set the value associated with the item in a combo box", code);
+				throw KAA::windows_api_failure { __FUNCTION__, "cannot set the value associated with the specified item in a combo box", code };
 			}
 		}
 	}

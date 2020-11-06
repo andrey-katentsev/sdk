@@ -29,7 +29,7 @@ namespace KAA
 			if(0 == length)
 			{
 				const DWORD error = ::GetLastError();
-				throw windows_api_failure(__FUNCTIONW__, L"Unable to load a string resource from the executable file associated with a specified module.", error);
+				throw windows_api_failure { __FUNCTION__, "cannot load a string resource from the executable file associated with a specified module", error };
 			}
 			return std::wstring(raw_string, length);
 		}

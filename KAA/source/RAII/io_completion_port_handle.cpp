@@ -11,7 +11,7 @@ namespace KAA
 			if(nullptr == raw_handle)
 			{
 				const DWORD error = ::GetLastError();
-				throw KAA::windows_api_failure(__FUNCTIONW__, L"Unable to create an I/O completion port.", error);
+				throw KAA::windows_api_failure { __FUNCTION__, "cannot create an I/O completion port", error };
 			}
 		}
 

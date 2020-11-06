@@ -44,7 +44,7 @@ namespace KAA
 				if(TRUE != success)
 				{
 					const auto code = ::GetLastError();
-					throw windows_api_failure(__FUNCTIONW__, L"Unable to add icon to the notification area.", code);
+					throw windows_api_failure { __FUNCTION__, "cannot add an icon to the status area", code };
 				}
 				return id;
 			}
@@ -59,7 +59,7 @@ namespace KAA
 				if(TRUE != success)
 				{
 					const auto code = ::GetLastError();
-					throw windows_api_failure(__FUNCTIONW__, L"Unable to remove icon from the notification area.", code);
+					throw windows_api_failure { __FUNCTION__, "cannot delete an icon from the status area", code };
 				}
 			}
 
@@ -79,7 +79,7 @@ namespace KAA
 				if(TRUE != success)
 				{
 					const auto code = ::GetLastError();
-					throw windows_api_failure(__FUNCTIONW__, L"Unable to update icon in the notification area.", code);
+					throw windows_api_failure { __FUNCTION__, "cannot modify an icon in the status area", code };
 				}
 			}
 
@@ -93,14 +93,14 @@ namespace KAA
 				const auto error = ::StringCchCopyW(properties.szTip, _countof(properties.szTip), tip.c_str());
 				if(FAILED(error))
 				{
-					throw com_failure { __FUNCTION__, "cannot copy tip to the icon properties", error };
+					throw com_failure { __FUNCTION__, "cannot copy one string to another", error };
 				}
 
 				const auto success = ::Shell_NotifyIconW(NIM_MODIFY, &properties);
 				if(TRUE != success)
 				{
 					const auto code = ::GetLastError();
-					throw windows_api_failure(__FUNCTIONW__, L"Unable to update icon tip in the notification area.", code);
+					throw windows_api_failure { __FUNCTION__, "cannot modify an icon in the status area", code };
 				}
 			}
 		}

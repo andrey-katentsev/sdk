@@ -22,7 +22,7 @@ namespace KAA
 			{
 				// FUTURE: KAA: incorrect message from windows_api_failure::get_system_message (see MSDN: NTE_BAD_KEYSET etc.)
 				const auto code = ::GetLastError();
-				throw windows_api_failure(__FUNCTIONW__, L"failed to acquire a windows cryptographic service provider handle", code);
+				throw windows_api_failure { __FUNCTION__, "cannot acquire a windows cryptographic service provider handle", code };
 			}
 		}
 

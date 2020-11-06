@@ -47,7 +47,7 @@ namespace KAA
 				if(0 == ::TrackPopupMenu(menu, flags, position.x, position.y, 0, owner, nullptr))
 				{
 					const auto error = ::GetLastError();
-					throw KAA::windows_api_failure(__FUNCTIONW__, L"Unable to display a shortcut menu at the specified location.", error);
+					throw KAA::windows_api_failure { __FUNCTION__, "cannot display a shortcut menu at the specified location and track the selection of items on the menu", error };
 				}
 				::PostMessageW(owner, WM_NULL, 0, 0); // see MSDN TrackPopupMenu function remarks
 			}
@@ -61,7 +61,7 @@ namespace KAA
 				if(0 == ::SetMenuDefaultItem(menu, item_identifier, FALSE))
 				{
 					const auto error = ::GetLastError();
-					throw KAA::windows_api_failure(__FUNCTIONW__, L"Unable to set the default menu item for the specified menu.", error);
+					throw KAA::windows_api_failure { __FUNCTION__, "cannot set the default menu item for the specified menu", error };
 				}
 			}
 

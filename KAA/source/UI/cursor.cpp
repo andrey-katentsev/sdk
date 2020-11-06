@@ -26,7 +26,7 @@ namespace KAA
 				if(0 == ::GetCursorPos(&position))
 				{
 					const auto error = ::GetLastError();
-					throw KAA::windows_api_failure(__FUNCTIONW__, L"Unable to retrieve the position of the mouse cursor.", error);
+					throw KAA::windows_api_failure { __FUNCTION__, "cannot retrieve the position of the mouse cursor, in screen coordinates", error };
 				}
 				return position;
 			}

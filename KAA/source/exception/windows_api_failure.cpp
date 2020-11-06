@@ -92,7 +92,7 @@ namespace
 
 namespace KAA
 {
-	windows_api_failure::windows_api_failure(std::wstring source, std::wstring description, const long error) : // defined in winerror.h
+	windows_api_failure::windows_api_failure(std::string source, std::string description, const long error) : // defined in winerror.h
 	source(std::move(source)),
 	description(std::move(description)),
 	status_code(ERROR_SUCCESS),
@@ -103,7 +103,7 @@ namespace KAA
 		parse_error(error);
 	}
 
-	windows_api_failure::windows_api_failure(std::wstring source, std::wstring description, const DWORD error) : // returned by ::GetLastError()
+	windows_api_failure::windows_api_failure(std::string source, std::string description, const DWORD error) : // returned by ::GetLastError()
 	source(std::move(source)),
 	description(std::move(description)),
 	status_code(ERROR_SUCCESS),
@@ -114,7 +114,7 @@ namespace KAA
 		parse_error(error);
 	}
 
-	windows_api_failure::windows_api_failure(std::wstring source, std::wstring description, const WORD status_code, const WORD facility_code, const severity_t severity, const bool custom) :
+	windows_api_failure::windows_api_failure(std::string source, std::string description, const WORD status_code, const WORD facility_code, const severity_t severity, const bool custom) :
 	source(std::move(source)),
 	description(std::move(description)),
 	status_code(status_code),
@@ -150,12 +150,12 @@ namespace KAA
 
 	std::string windows_api_failure::iget_source(void) const
 	{
-		return to_UTF8(source);
+		return source;
 	}
 
 	std::string windows_api_failure::iget_description(void) const
 	{
-		return to_UTF8(description);
+		return description;
 	}
 
 	std::string windows_api_failure::iget_system_message(void) const
@@ -167,7 +167,7 @@ namespace KAA
 		if(0 == length)
 		{
 			const DWORD error = ::GetLastError();
-			throw windows_api_failure(__FUNCTIONW__, L"", error);
+			throw windows_api_failure { __FUNCTION__, "cannot format a message string", error };
 		}
 		return to_UTF8(std::wstring(buffer.data(), length - 2)); // FIX: KAA: remove trailing \r\n
 	}

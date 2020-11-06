@@ -19,7 +19,7 @@ namespace
 		const auto error = ::RegCloseKey(handle);
 		if (error != ERROR_SUCCESS) [[unlikely]]
 		{
-			throw KAA::windows_api_failure { __FUNCTIONW__, L"cannot close a handle to the specified registry key", error };
+			throw KAA::windows_api_failure { __FUNCTION__, "cannot close a handle to the specified registry key", error };
 		}
 	}
 }

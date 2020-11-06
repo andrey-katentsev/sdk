@@ -120,7 +120,7 @@ namespace KAA
 		if(0 == ::FormatMessageW(options, nullptr, status_code, predefined_language_order, reinterpret_cast<LPWSTR>(&buffer), 0, nullptr))
 		{
 			const DWORD error = ::GetLastError();
-			throw windows_api_failure(__FUNCTIONW__, L"Unable to format message.", error);
+			throw windows_api_failure { __FUNCTION__, "cannot format a message string", error };
 		}
 
 		const KAA::RAII::local_memory acquired_memory(buffer);

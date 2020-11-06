@@ -14,7 +14,7 @@ namespace KAA
 		if(raw_handle != handle)
 		{
 			const DWORD error = ::GetLastError();
-			throw windows_api_failure(__FUNCTIONW__, L"Unable to associate an I/O completion port with a specified device.", error);
+			throw windows_api_failure { __FUNCTION__, "cannot associate an I/O completion port with a specified device", error };
 		}
 	}
 
@@ -32,14 +32,14 @@ namespace KAA
 			{
 				if(WAIT_TIMEOUT == error)
 				{
-					throw wait_timeout(__FUNCTIONW__, L"There is no complete I/O operations.");
+					throw wait_timeout { __FUNCTION__, "there is no complete I/O operations" };
 				}
 				else
 				{
 					// Invalid ::GetQueuedCompletionStatus call.
 				}
 			}
-			throw windows_api_failure(__FUNCTIONW__, L"Unable to dequeue an I/O completion packet from the specified I/O completion port.", error);
+			throw windows_api_failure { __FUNCTION__, "cannot dequeue an I/O completion packet from the specified I/O completion port", error };
 		}
 		return packet;
 	}
@@ -49,7 +49,7 @@ namespace KAA
 		if(0 == ::PostQueuedCompletionStatus(handle, packet.bytes_transferred, packet.key, packet.status))
 		{
 			const DWORD error = ::GetLastError();
-			throw windows_api_failure(__FUNCTIONW__, L"Unable to post an I/O completion packet to an I/O completion port.", error);
+			throw windows_api_failure { __FUNCTION__, "cannot post an I/O completion packet to an I/O completion port", error };
 		}
 	}
 }

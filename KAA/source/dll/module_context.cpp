@@ -34,7 +34,7 @@ namespace KAA
 			if (0 == ::DisableThreadLibraryCalls(m_module))
 			{
 				const auto error = ::GetLastError();
-				throw windows_api_failure(__FUNCTIONW__, L"failed to disable the DLL_THREAD_ATTACH and DLL_THREAD_DETACH notifications for the dynamic-link library.", error);
+				throw windows_api_failure { __FUNCTION__, "cannot disable the DLL_THREAD_ATTACH and DLL_THREAD_DETACH notifications for the dynamic-link library", error };
 			}
 		}
 
@@ -48,7 +48,7 @@ namespace KAA
 			if(0 == name_length)
 			{
 				const DWORD error = ::GetLastError();
-				throw windows_api_failure(__FUNCTIONW__, L"Unable to retrieve the module base name.", error);
+				throw windows_api_failure { __FUNCTION__, "cannot retrieve the base name of the specified module", error };
 			}
 			return std::wstring(buffer.begin(), buffer.begin() + name_length);
 		}

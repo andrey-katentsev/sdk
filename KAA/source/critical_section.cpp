@@ -24,7 +24,7 @@ namespace KAA
 			if (0 == ::InitializeCriticalSectionEx(&mutex, spin_count, debug ? 0 : CRITICAL_SECTION_NO_DEBUG_INFO))
 			{
 				const auto code = ::GetLastError();
-				throw windows_api_failure(__FUNCTIONW__, L"failed to initialize a critical section object.", code);
+				throw windows_api_failure { __FUNCTION__, "cannot initialize a critical section object", code };
 			}
 		}
 		
