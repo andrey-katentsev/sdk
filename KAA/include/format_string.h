@@ -13,5 +13,6 @@
 
 namespace KAA
 {
+	std::string format_string(std::string format, ...);
 	std::wstring format_string(std::wstring format, ...);
 }
