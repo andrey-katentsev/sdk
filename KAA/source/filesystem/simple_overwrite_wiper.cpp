@@ -79,11 +79,11 @@ namespace KAA
 			return previous;
 		}
 
-		progress_state simple_owerwrite_wiper::chunk_processed(_fsize_t total_processed, _fsize_t total_size)
+		progress_state_t simple_owerwrite_wiper::chunk_processed(_fsize_t total_processed, _fsize_t total_size)
 		{
 			if(nullptr != progress_handler)
 				return progress_handler->chunk_processed(total_processed, total_size);
-			return progress_quiet;
+			return progress_state_t::quiet;
 		}
 	}
 }

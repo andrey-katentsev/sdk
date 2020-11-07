@@ -4,11 +4,11 @@
 
 namespace KAA
 {
-	enum progress_state
+	enum class progress_state_t
 	{
-		progress_continue, // PROGRESS_CONTINUE : ñontinue the operation
-		progress_cancel, // PROGRESS_CANCEL : ñancel the operation and rollback the changes
-		progress_stop, // PROGRESS_STOP : stop the operation, it can be restarted at a later time
-		progress_quiet, // PROGRESS_QUIET : continue the operation, but stop invoking callback to report progress
+		proceed, // PROGRESS_CONTINUE : ñontinue the operation
+		cancel, // PROGRESS_CANCEL : ñancel the operation and rollback the changes
+		stop, // PROGRESS_STOP : stop the operation, it can be restarted at a later time
+		quiet, // PROGRESS_QUIET : continue the operation, but stop invoking callback to report progress
 	};
 }
