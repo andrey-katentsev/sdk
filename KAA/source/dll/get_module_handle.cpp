@@ -1,5 +1,5 @@
 //
-// File: get_module_handle.h
+// File: get_module_handle.cpp
 // Description: dynamic-link library functions
 // Created: August 17, 2014
 // Author: Andrey A. Katentsev

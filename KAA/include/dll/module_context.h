@@ -1,4 +1,11 @@
-// 02/02/2014
+//
+// File: module_context.h
+// Description: dynamic-link library tools
+// Created: February 2, 2014
+// Author: Andrey A. Katentsev
+//
+// Copyright © Andrey A. Katentsev, 2014
+//
 
 #pragma once
 

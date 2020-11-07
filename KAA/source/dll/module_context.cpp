@@ -1,3 +1,12 @@
+//
+// File: module_context.cpp
+// Description: dynamic-link library tools
+// Created: February 2, 2014
+// Author: Andrey A. Katentsev
+//
+// Copyright © Andrey A. Katentsev, 2014
+//
+
 #include "../../include/dll/module_context.h"
 
 #include "../../include/unicode.h"
