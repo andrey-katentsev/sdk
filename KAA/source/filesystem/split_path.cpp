@@ -20,12 +20,12 @@ namespace KAA
 			KAA::RAII::invalid_parameter_handler session(allow_execution);
 			{
 				std::vector<wchar_t> drive(3, L'\0');
-				const errno_t code = _wsplitpath_s(path.c_str(), &drive[0], drive.size(), nullptr, 0, nullptr, 0, nullptr, 0);
+				const errno_t code = _wsplitpath_s(path.c_str(), drive.data(), drive.size(), nullptr, 0, nullptr, 0, nullptr, 0);
 				if(0 != code)
 				{
 					throw KAA::system_failure { __FUNCTION__, "cannot split the drive component from the path", code };
 				}
-				return std::wstring(&drive[0]);
+				return drive.data();
 			}
 		}
 
@@ -35,12 +35,12 @@ namespace KAA
 			{
 				std::vector<wchar_t> drive(3, L'\0');
 				std::vector<wchar_t> directory(path.length(), L'\0');
-				const errno_t code = _wsplitpath_s(path.c_str(), &drive[0], drive.size(), &directory[0], directory.size(), nullptr, 0, nullptr, 0);
+				const errno_t code = _wsplitpath_s(path.c_str(), drive.data(), drive.size(), directory.data(), directory.size(), nullptr, 0, nullptr, 0);
 				if(0 != code)
 				{
 					throw KAA::system_failure { __FUNCTION__, "cannot split the qualified directory path from the path", code };
 				}
-				return std::wstring(&drive[0]) + std::wstring(&directory[0]);
+				return std::wstring { drive.data() } + directory.data();
 			}
 		}
 
@@ -50,12 +50,12 @@ namespace KAA
 			{
 				std::vector<wchar_t> filename(path.length(), L'\0');
 				std::vector<wchar_t> extension(5, L'\0');
-				const errno_t code = _wsplitpath_s(path.c_str(), nullptr, 0, nullptr, 0, &filename[0], filename.size(), &extension[0], extension.size());
+				const errno_t code = _wsplitpath_s(path.c_str(), nullptr, 0, nullptr, 0, filename.data(), filename.size(), extension.data(), extension.size());
 				if(0 != code)
 				{
 					throw KAA::system_failure { __FUNCTION__, "cannot split the qualified filename from the path", code };
 				}
-				return std::wstring(&filename[0]) + std::wstring(&extension[0]);
+				return std::wstring { filename.data() } + extension.data();
 			}
 		}
 
@@ -64,12 +64,12 @@ namespace KAA
 			KAA::RAII::invalid_parameter_handler session(allow_execution);
 			{
 				std::vector<wchar_t> extension(5, L'\0');
-				const errno_t code = _wsplitpath_s(path.c_str(), nullptr, 0, nullptr, 0, nullptr, 0, &extension[0], extension.size());
+				const errno_t code = _wsplitpath_s(path.c_str(), nullptr, 0, nullptr, 0, nullptr, 0, extension.data(), extension.size());
 				if(0 != code)
 				{
 					throw KAA::system_failure { __FUNCTION__, "cannot split the extension component from the path", code };
 				}
-				return std::wstring(&extension[0]);
+				return extension.data();
 			}
 		}
 	}

@@ -39,13 +39,13 @@ namespace KAA
 						const unsigned total_chunks = file_size / chunk_size;
 						for(unsigned chunk = 0; chunk < total_chunks; ++chunk)
 						{
-							total_bytes_written += file_to_overwrite->write(&chunk_data[0], chunk_size);
+							total_bytes_written += file_to_overwrite->write(chunk_data.data(), chunk_size);
 							chunk_processed(total_bytes_written, file_size); // FUTURE: KAA: provide with progres_quiet support and etc.
 						}
 					}
 					{
 						const size_t last_chunk_size = file_size % chunk_size;
-						file_to_overwrite->write(&chunk_data[0], last_chunk_size);
+						file_to_overwrite->write(chunk_data.data(), last_chunk_size);
 						chunk_processed(file_size, file_size);
 					}
 				}

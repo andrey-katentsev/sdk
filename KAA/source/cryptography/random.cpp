@@ -68,7 +68,7 @@ namespace KAA
 		{
 			std::vector<uint8_t> data(bytes_to_generate);
 			if (0 < bytes_to_generate)
-				generate(bytes_to_generate, &data[0]);
+				generate(bytes_to_generate, data.data());
 			return data;
 		}
 
