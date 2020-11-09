@@ -36,18 +36,15 @@ namespace KAA
 				{
 					const _fsize_t file_size = file_to_overwrite->get_size();
 					{
-						size_t total_bytes_written = 0;
 						const unsigned total_chunks = file_size / chunk_size;
 						for(unsigned chunk = 0; chunk < total_chunks; ++chunk)
 						{
-							total_bytes_written += file_to_overwrite->write(chunk_data.data(), chunk_size);
-							chunk_processed(total_bytes_written); // FUTURE: KAA: provide with progres_quiet support and etc.
+							chunk_processed(file_to_overwrite->write(chunk_data.data(), chunk_size)); // FUTURE: KAA: provide with progres_quiet support and etc.
 						}
 					}
 					{
 						const size_t last_chunk_size = file_size % chunk_size;
-						file_to_overwrite->write(chunk_data.data(), last_chunk_size);
-						chunk_processed(file_size);
+						chunk_processed(file_to_overwrite->write(chunk_data.data(), last_chunk_size));
 					}
 				}
 			}
