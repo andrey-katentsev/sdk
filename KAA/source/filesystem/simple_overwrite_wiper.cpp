@@ -74,9 +74,8 @@ namespace KAA
 
 		std::shared_ptr<file_progress_handler> simple_owerwrite_wiper::iset_progress_handler(std::shared_ptr<file_progress_handler> handler)
 		{
-			auto previous = std::move(progress_handler);
-			progress_handler = std::move(handler);
-			return previous;
+			progress_handler.swap(handler);
+			return handler;
 		}
 
 		progress_state_t simple_owerwrite_wiper::chunk_processed(_fsize_t total_processed, _fsize_t total_size)
