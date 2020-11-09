@@ -25,6 +25,7 @@ namespace KAA
 				throw std::invalid_argument(__FUNCTION__);
 		}
 
+		// TODO: KAA: void simple_owerwrite_wiper::ioverwrite_file(std::unique_ptr<file>);
 		void simple_owerwrite_wiper::ioverwrite_file(const path::file& path)
 		{
 			const driver::mode binary_sequential_overwrite(true, false, true, false);
@@ -40,13 +41,13 @@ namespace KAA
 						for(unsigned chunk = 0; chunk < total_chunks; ++chunk)
 						{
 							total_bytes_written += file_to_overwrite->write(chunk_data.data(), chunk_size);
-							chunk_processed(total_bytes_written, file_size); // FUTURE: KAA: provide with progres_quiet support and etc.
+							chunk_processed(total_bytes_written); // FUTURE: KAA: provide with progres_quiet support and etc.
 						}
 					}
 					{
 						const size_t last_chunk_size = file_size % chunk_size;
 						file_to_overwrite->write(chunk_data.data(), last_chunk_size);
-						chunk_processed(file_size, file_size);
+						chunk_processed(file_size);
 					}
 				}
 			}
@@ -78,10 +79,10 @@ namespace KAA
 			return handler;
 		}
 
-		progress_state_t simple_owerwrite_wiper::chunk_processed(_fsize_t total_processed, _fsize_t total_size)
+		progress_state_t simple_owerwrite_wiper::chunk_processed(size_t bytes_processed)
 		{
 			if(nullptr != progress_handler)
-				return progress_handler->chunk_processed(total_processed, total_size);
+				return progress_handler->chunk_processed(bytes_processed);
 			return progress_state_t::quiet;
 		}
 	}

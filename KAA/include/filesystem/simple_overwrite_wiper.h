@@ -31,7 +31,7 @@ namespace KAA
 
 			std::shared_ptr<file_progress_handler> iset_progress_handler(std::shared_ptr<file_progress_handler>) override;
 
-			progress_state_t chunk_processed(_fsize_t total_processed, _fsize_t total_size);
+			progress_state_t chunk_processed(size_t bytes_processed);
 		};
 	}
 }

@@ -20,10 +20,10 @@ namespace KAA
 		class file_progress_handler
 		{
 		public:
-			progress_state_t chunk_processed(_fsize_t total_processed, _fsize_t total_size);
+			progress_state_t chunk_processed(size_t bytes_processed);
 
 		private:
-			virtual progress_state_t ichunk_processed(_fsize_t total_processed, _fsize_t total_size) = 0;
+			virtual progress_state_t ichunk_processed(size_t bytes_processed) = 0;
 		};
 	}
 }

@@ -13,9 +13,9 @@ namespace KAA
 {
 	namespace filesystem
 	{
-		progress_state_t file_progress_handler::chunk_processed(_fsize_t total_processed, _fsize_t total_size)
+		progress_state_t file_progress_handler::chunk_processed(size_t bytes_processed)
 		{
-			return ichunk_processed(total_processed, total_size);
+			return ichunk_processed(bytes_processed);
 		}
 	}
 }
